@@ -3,10 +3,10 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
+pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
 
 target 'RNTypescriptBoilerplate' do
   config = use_native_modules!
-
   # Flags change depending on the env values.
   flags = get_default_flags()
 

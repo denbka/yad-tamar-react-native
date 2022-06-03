@@ -1,8 +1,10 @@
 // ? Screens
 export const SCREENS = {
-  HOME: "Home",
-  SEARCH: "Search",
-  NOTIFICATION: "Notification",
-  PROFILE: "Profile",
-  DETAIL: "Detail",
-};
+  AUTH: 'auth',
+  HOME: 'home',
+  PROFILE: 'profile',
+  TODO: 'todo',
+  FAMILY_CREATE: 'family_create',
+  TODO_CREATE: 'todo_create',
+  VOLUNTEERS: 'volunteers',
+}

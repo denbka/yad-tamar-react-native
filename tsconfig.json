@@ -28,10 +28,11 @@
     // ? Babel Plugin Module Resolver
     "baseUrl": "./src",
     "paths": {
+      "*": ["./types/*.d.ts"],
       "@shared-components/*": ["./shared/components/*"],
       "@shared-constants": ["./shared/constants"],
       "@font-size": ["./shared/theme/font-size"],
-      "@api": ["./services/api/index"],
+      "@api": ["./api/index"],
       "@fonts": ["./shared/theme/fonts"],
       "@colors": ["./shared/theme/colors"],
       "@theme/*": ["./shared/theme/*"],
@@ -42,10 +43,5 @@
       "@local-storage": ["./services/local-storage"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
 }
