@@ -29,6 +29,8 @@
     "baseUrl": "./src",
     "paths": {
       "*": ["./types/*.d.ts"],
+      "@locales": ["./shared/localization/index"],
+      "@hooks": ["./hooks/index"],
       "@shared-components/*": ["./shared/components/*"],
       "@shared-constants": ["./shared/constants"],
       "@font-size": ["./shared/theme/font-size"],

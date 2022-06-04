@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native'
 import React, { FC, useMemo } from 'react'
 import { Text, TextInput as NativeInput, TextInputProps, View } from 'react-native'
-import { createStyles } from './style'
+import { createStyles } from './text_input.styles'
 import TextInputMask from 'react-native-text-input-mask'
 
 export const TextInput: FC<InputProps> = ({ style, prompt, textarea, keyboardType, ...props }) => {

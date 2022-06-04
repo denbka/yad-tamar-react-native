@@ -21,6 +21,17 @@ export const localStrings = new LocalizedStrings({
     logoutDesc: 'You are about to log out, confirm?',
     noInternet: 'No Internet Connection',
   },
+  ru: {
+    email: 'e-mail',
+    password: 'password',
+    login: 'login',
+  },
+  il: {
+    email: 'אימייל',
+    password: 'סיסמה',
+    login: 'התחברות',
+  },
 })
+
 // ? Set the language manually
-localStrings.setLanguage('tr')
+localStrings.setLanguage('il')

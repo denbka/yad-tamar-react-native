@@ -7,7 +7,6 @@ import { Formik } from 'formik'
 /**
  * ? Local Imports
  */
-import { Text } from 'react-native'
 import { TextInput } from '@shared-components/text_input'
 import { VolunteersList } from './components'
 import { Button } from '@shared-components/button'
@@ -17,6 +16,7 @@ import { Header } from '@shared-components/header'
 import { useMutation, useQueryClient } from 'react-query'
 import { familyApi } from '@api'
 import { Divider } from '@shared-components/divider'
+import { Text } from '@shared-components/text'
 
 const data = [
   { id: 1, title: 'Smith' },

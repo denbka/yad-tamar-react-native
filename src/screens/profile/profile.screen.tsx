@@ -2,18 +2,14 @@ import React, { useMemo } from 'react'
 import { View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
-import { Text } from 'react-native'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-/**
- * ? Local Imports
- */
+import { familyApi } from '@api'
 import { SCREENS } from '@shared-constants'
 import { Button } from '@shared-components/button'
 import { createStyles } from './profile.styles'
 import { Avatar, FamiliesList } from './components'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { familyApi } from '@api'
-interface ProfileScreenProps {}
+import { Text } from '@shared-components/text'
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const queryClient = useQueryClient()
@@ -57,3 +53,5 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     </View>
   )
 }
+
+type ProfileScreenProps = {}

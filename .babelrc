@@ -6,6 +6,8 @@
       {
         "root": ["./src"],
         "alias": [
+          { "@hooks": "./src/hooks" },
+          { "@locales": "./src/shared/localization" },
           { "@shared-components": "./src/shared/components" },
           { "@shared-constants": "./src/shared/constants" },
           { "@font-size": "./src/shared/theme/font-size" },

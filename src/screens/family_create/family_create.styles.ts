@@ -1,8 +1,11 @@
+import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 
 export const createStyles = (theme: ExtendedTheme) => {
+  const { isRtl } = useLocale()
   const { colors } = theme
+
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -13,7 +16,7 @@ export const createStyles = (theme: ExtendedTheme) => {
       paddingTop: 20,
     },
     input_title_container: {
-      flexDirection: 'row',
+      flexDirection: isRtl ? 'row-reverse' : 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
     },
@@ -52,7 +55,7 @@ export const createStyles = (theme: ExtendedTheme) => {
       borderRadius: 8,
       paddingVertical: 13,
       paddingHorizontal: 30,
-      flexDirection: 'row',
+      flexDirection: isRtl ? 'row-reverse' : 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
     },
