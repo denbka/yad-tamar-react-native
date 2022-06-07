@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { Keyboard, KeyboardAvoidingView, Pressable, Text, View } from 'react-native'
+import { Image, Keyboard, KeyboardAvoidingView, Pressable, Text, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './login.styles'
 import LinearGradient from 'react-native-linear-gradient'
@@ -10,6 +10,8 @@ import { SCREENS } from '@shared-constants'
 import { Bottomsheet } from '@shared-components/bottomsheet'
 import { useMutation } from 'react-query'
 import { authApi } from '@api'
+import LogoEnolaWhite from '@assets/logo_enola_white.svg'
+import { normalizeText } from '@freakycoder/react-native-helpers'
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
   const theme = useTheme()
@@ -34,13 +36,17 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
       <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
         <LinearGradient colors={theme.colors.loginGradient} style={{ flex: 1 }}>
           <View style={styles.container}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>Welcome to</Text>
-              <Text style={[styles.title, styles.enola]}>
-                Enola <Text style={styles.title}>!</Text>
-              </Text>
+            <View style={styles.title_container_reverse}>
+              <Text style={styles.title}>Yad Tamar</Text>
+              <Image style={styles.image_title} source={require('@assets/logo.png')} />
             </View>
-            <Picture style={styles.image} />
+            <View style={styles.title_container}>
+              <Text style={styles.title}>Welcome to</Text>
+              <LogoEnolaWhite width={normalizeText(170)} />
+            </View>
+            <View style={styles.image}>
+              <Picture height="100%" width="100%" />
+            </View>
           </View>
         </LinearGradient>
         <Bottomsheet>

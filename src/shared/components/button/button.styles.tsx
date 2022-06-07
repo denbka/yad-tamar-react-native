@@ -1,3 +1,4 @@
+import { normalizeText } from '@freakycoder/react-native-helpers'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 
@@ -6,13 +7,10 @@ export const createStyles = (theme: ExtendedTheme) => {
 
   return StyleSheet.create({
     text: {
-      color: '#fff',
-      fontSize: 18,
       fontWeight: 'bold',
     },
     whiteShadow: {
       width: '100%',
-      // height: 2,
     },
     button: {
       borderRadius: 14,
@@ -29,8 +27,9 @@ export const createStyles = (theme: ExtendedTheme) => {
       },
       shadowOpacity: 0.3,
       shadowRadius: 2,
+      elevation: 3,
       position: 'relative',
-      paddingVertical: 16,
+      height: 55,
     },
     inset_shadow_container: {
       overflow: 'hidden',
@@ -63,6 +62,9 @@ export const createStyles = (theme: ExtendedTheme) => {
     },
     inline: {
       backgroundColor: colors.blue,
+    },
+    flat: {
+      backgroundColor: colors.darkBlue,
     },
     orange: {
       backgroundColor: colors.darkBlue,

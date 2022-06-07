@@ -10,11 +10,30 @@ import { Header } from '@shared-components/header'
 import * as NavigationService from 'react-navigation-helpers'
 import { SCREENS } from '@shared-constants'
 import { Bottomsheet } from '@shared-components/bottomsheet'
+import { Text } from '@shared-components/text'
 
 const data = [
-  { id: 1, day_of_week: 'Monday', description: 'Take Dean from school', deadline: '23-05-2022', type: 'free' },
-  { id: 2, day_of_week: 'Tuesday', description: 'Take Dean from school', deadline: '23-05-2022', type: 'belonged' },
-  { id: 3, day_of_week: 'Wednesday', description: 'Take Dean from school', deadline: '23-05-2022', type: 'belonged' },
+  {
+    id: 1,
+    day_of_week: 'Monday',
+    description: 'Take Dean from school',
+    deadline: 'till 23 oct 2022',
+    type: 'free',
+  },
+  {
+    id: 2,
+    day_of_week: 'Tuesday',
+    description: 'Take Dean from school',
+    deadline: 'till 23 oct 2022',
+    type: 'belonged',
+  },
+  {
+    id: 3,
+    day_of_week: 'Wednesday',
+    description: 'Take Dean from school',
+    deadline: 'till 23 oct 2022',
+    type: 'belonged',
+  },
 ]
 
 export const TodoScreen: FC<TodoScreenProps> = ({ params }) => {
@@ -36,27 +55,29 @@ export const TodoScreen: FC<TodoScreenProps> = ({ params }) => {
     <>
       <Header>Smith family</Header>
       <View style={styles.container}>
-        <TodoSwitch onChange={handleSetActiveSection} />
+        <TodoSwitch onChange={handleSetActiveSection} activeSection={activeSection} />
         <Progress />
         <TodoList activeSectionValue={activeSectionValue} data={data} />
-        <Bottomsheet>
-          <Button
-            onPress={() => NavigationService.push(SCREENS.TODO_CREATE)}
-            style={styles.button_create}
-            variant="inline"
-          >
-            Create task
-          </Button>
-          <Button
-            onPress={() => NavigationService.push(SCREENS.VOLUNTEERS)}
-            variant="orange"
-            textColor={theme.colors.orange}
-          >
-            <MedalIcon style={styles.medal} />
-            My volunteers
-          </Button>
-        </Bottomsheet>
       </View>
+      <Bottomsheet>
+        <Button
+          onPress={() => NavigationService.push(SCREENS.TODO_CREATE)}
+          style={styles.button_create}
+          variant="inline"
+        >
+          Create task
+        </Button>
+        <Button
+          onPress={() => NavigationService.push(SCREENS.VOLUNTEERS)}
+          variant="orange"
+          textColor={theme.colors.orange}
+        >
+          <View style={styles.button_volunteers}>
+            <MedalIcon style={styles.medal} />
+            <Text style={styles.button_volunteers_text}>My volunteers</Text>
+          </View>
+        </Button>
+      </Bottomsheet>
     </>
   )
 }

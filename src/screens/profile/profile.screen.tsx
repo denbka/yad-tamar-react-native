@@ -10,6 +10,7 @@ import { Button } from '@shared-components/button'
 import { createStyles } from './profile.styles'
 import { Avatar, FamiliesList } from './components'
 import { Text } from '@shared-components/text'
+import { localStrings } from '@locales'
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const queryClient = useQueryClient()
@@ -17,7 +18,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
   const theme = useTheme()
   const styles = useMemo(() => createStyles(theme), [theme])
-
   const handlePushToFamilyCreate = () => {
     NavigationService.push(SCREENS.FAMILY_CREATE)
   }
@@ -46,7 +46,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         </View>
       </View>
       <Button onPress={handlePushToFamilyCreate} variant="inline" style={styles.button_create}>
-        Create family
+        {localStrings.create_family}
       </Button>
       <Text style={styles.title}>My families</Text>
       <FamiliesList data={data ?? []} onNavigateToFamily={handleNavigateToFamily} onRemoveFamily={handleRemoveFamily} />

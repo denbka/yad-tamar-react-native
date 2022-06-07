@@ -12,7 +12,15 @@ export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
 
   const animatedStyles = useAnimatedStyle(
     () => ({
-      transform: [{ translateX: interpolate(activeSectionValue.value, [0, 1], [0, -ScreenWidth + 70]) }],
+      transform: [
+        {
+          translateX: interpolate(
+            activeSectionValue.value,
+            [SectionValue.WEEK, SectionValue.TODO],
+            [0, -ScreenWidth + 70],
+          ),
+        },
+      ],
     }),
     [activeSectionValue],
   )

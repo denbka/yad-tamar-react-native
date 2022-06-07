@@ -1,38 +1,41 @@
-import { ScreenWidth } from '@freakycoder/react-native-helpers'
+import { normalizeText } from '@freakycoder/react-native-helpers'
 import { ExtendedTheme } from '@react-navigation/native'
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 
 export const createStyles = (theme: ExtendedTheme) => {
   const { colors } = theme
 
   return StyleSheet.create({
     container: {
-      marginTop: 'auto',
       flex: 1,
       position: 'relative',
     },
     title: {
-      fontWeight: 'bold',
-      fontSize: 31,
+      fontSize: normalizeText(16),
       color: '#fff',
     },
+    image_title: {},
     enola: {
       color: colors.orange,
     },
     text: {
-      color: colors.orange,
-      fontSize: 18,
+      fontSize: normalizeText(12),
     },
     image: {
       width: '100%',
-      height: 'auto',
-      marginTop: 'auto',
-      transform: [{ translateX: ScreenWidth * 0.03 }],
-      paddingHorizontal: 48,
+      flex: Platform.OS === 'ios' ? 1.5 : 2,
     },
-    titleContainer: {
-      paddingHorizontal: 48,
-      marginTop: 100,
+    title_container_reverse: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      marginBottom: normalizeText(10),
+      paddingTop: normalizeText(20),
+      paddingHorizontal: normalizeText(20),
+    },
+    title_container: {
+      flex: 1,
+      paddingHorizontal: normalizeText(20),
     },
     button: {
       color: '#000',

@@ -13,8 +13,8 @@ import { FamilyCreateScreen } from '@screens/family_create'
 import { TodoScreen } from '@screens/todo'
 import { TodoCreateScreen } from '@screens/todo_create'
 import { VolunteersScreen } from '@screens/volunteers'
+import { VolunteersCreateScreen } from '@screens/volunteers_create'
 
-// ? If you want to use stack or tab or both
 const Stack = createStackNavigator()
 
 const Navigation = () => {
@@ -39,6 +39,16 @@ const Navigation = () => {
         <Stack.Screen name={SCREENS.TODO} component={TodoScreen} />
         <Stack.Screen name={SCREENS.TODO_CREATE} component={TodoCreateScreen} />
         <Stack.Screen name={SCREENS.VOLUNTEERS} component={VolunteersScreen} />
+        <Stack.Group
+          screenOptions={{
+            presentation: 'transparentModal',
+            cardStyle: {
+              backgroundColor: 'transparent',
+            },
+          }}
+        >
+          <Stack.Screen name={SCREENS.VOLUNTEERS_CREATE} component={VolunteersCreateScreen} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   )

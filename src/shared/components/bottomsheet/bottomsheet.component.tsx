@@ -1,14 +1,17 @@
-import React, { useMemo } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 import type { FC } from 'react'
-import { View } from 'react-native'
+import { StyleProp, View, ViewStyle } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './bottomsheet.styles'
 
-export const Bottomsheet: FC = ({ children }) => {
+export const Bottomsheet: FC<BottomsheetProps> = ({ children, style }) => {
   const theme = useTheme()
   const styles = useMemo(() => createStyles(theme), [theme])
 
-  return <View style={styles.bottomsheet}>{children}</View>
+  return <View style={[styles.bottomsheet, style]}>{children}</View>
 }
 
-// type BottomsheetProps = {}
+type BottomsheetProps = {
+  children: ReactNode
+  style?: StyleProp<ViewStyle>
+}

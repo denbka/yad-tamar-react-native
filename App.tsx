@@ -1,15 +1,17 @@
 import 'react-native-gesture-handler'
+import 'intl'
+import 'intl/locale-data/jsonp/en-ZA'
 import React from 'react'
-import { StatusBar, useColorScheme, LogBox, SafeAreaView } from 'react-native'
+import { StatusBar, useColorScheme, LogBox } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { addEventListener, NetInfoState } from '@react-native-community/netinfo'
 import { onlineManager, QueryClient, QueryClientProvider } from 'react-query'
 
-/**
- * ? Local Imports
- */
 import Navigation from './src/navigation'
-import { isAndroid } from '@freakycoder/react-native-helpers'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { ModalProvider } from '@hooks'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import { useTheme } from '@react-navigation/native'
 
 LogBox.ignoreAllLogs()
 
@@ -23,31 +25,34 @@ const queryClient = new QueryClient()
 
 const App = () => {
   const scheme = useColorScheme()
-  const isDarkMode = scheme === 'dark'
+  const theme = useTheme()
   React.useEffect(() => {
-    StatusBar.setBarStyle(isDarkMode ? 'light-content' : 'dark-content')
-    if (isAndroid) {
-      StatusBar.setBackgroundColor('rgba(0,0,0,0)')
-      StatusBar.setTranslucent(true)
-    }
+    StatusBar.setBarStyle('dark-content')
 
     setTimeout(() => {
       SplashScreen.hide()
     }, 750)
-  }, [scheme, isDarkMode])
+  }, [scheme])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          position: 'relative',
-          backgroundColor: '#5678BC',
-        }}
-      >
-        <Navigation />
-      </SafeAreaView>
-    </QueryClientProvider>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <QueryClientProvider client={queryClient}>
+          <ModalProvider>
+            <SafeAreaView
+              edges={['top']}
+              style={{
+                flex: 1,
+                position: 'relative',
+                backgroundColor: '#fff',
+              }}
+            >
+              <Navigation />
+            </SafeAreaView>
+          </ModalProvider>
+        </QueryClientProvider>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   )
 }
 

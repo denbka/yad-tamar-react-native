@@ -1,9 +1,12 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import DatePickerNative from 'react-native-date-picker'
 import { DateTime } from 'luxon'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from '../todo_create.styles'
 import { Pressable, Text, View } from 'react-native'
+import { useLocale } from '@hooks'
+
+const prompts = ['no time', 'exact time', 'until']
 
 export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
   const [openDatePicker, setOpenDatePicker] = useState(false)
@@ -34,15 +37,16 @@ export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
         </View>
       </Pressable>
       <View style={styles.datepicker_prompts}>
-        <View style={styles.datepicker_prompts_item_container}>
-          <Text style={styles.datepicker_prompts_item}>until</Text>
-        </View>
-        <View style={styles.datepicker_prompts_item_container}>
-          <Text style={styles.datepicker_prompts_item}>exact time</Text>
-        </View>
-        <View style={[styles.datepicker_prompts_item_container, styles.datepicker_prompts_item_container_last]}>
-          <Text style={styles.datepicker_prompts_item}>no time</Text>
-        </View>
+        {prompts.map((prompt, index) => (
+          <View
+            style={[
+              styles.datepicker_prompts_item_container,
+              index === prompts.length - 1 && styles.datepicker_prompts_item_container_last,
+            ]}
+          >
+            <Text style={styles.datepicker_prompts_item}>{prompt}</Text>
+          </View>
+        ))}
       </View>
       <DatePickerNative
         modal

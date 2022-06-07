@@ -13,7 +13,6 @@ export const FamilyCard: FC<FamilyCardProps> = ({
 }) => {
   const theme = useTheme()
   const styles = useMemo(() => createStyles(theme), [theme])
-
   return (
     <Pressable onPress={() => onNavigateToFamily(family_id)}>
       <View style={styles.card}>

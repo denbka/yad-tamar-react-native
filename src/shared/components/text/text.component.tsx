@@ -4,14 +4,18 @@ import { useTheme } from '@react-navigation/native'
 
 import { createStyles } from './text.styles'
 
-export const Text: FC<TextProps> = ({ children, style }) => {
+export const Text: FC<TextProps> = ({ children, style, ...styleProps }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = useMemo(() => createStyles(theme, styleProps), [theme])
 
   return <NativeText style={[styles.initial, style]}>{children}</NativeText>
 }
 
 type TextProps = {
   children: ReactNode
-  style: StyleProp<TextStyle>
+  style?: StyleProp<TextStyle>
+} & TextProp
+
+export type TextProp = {
+  bold?: boolean
 }

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { useMutation, useQueryClient } from 'react-query'
 import { Formik } from 'formik'
@@ -14,6 +14,7 @@ import DeleteIcon from '@assets/delete.svg'
 
 import { createStyles } from './todo_create.styles'
 import { DatePicker, Prompts } from './components'
+import { Text } from '@shared-components/text'
 
 interface TodoCreateScreenProps {}
 

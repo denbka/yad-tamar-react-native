@@ -1,8 +1,11 @@
+import { normalizeText } from '@freakycoder/react-native-helpers'
+import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 
 export const createStyles = (theme: ExtendedTheme) => {
   const { colors } = theme
+  const { isRtl } = useLocale()
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -14,37 +17,18 @@ export const createStyles = (theme: ExtendedTheme) => {
       flex: 1,
       height: 'auto',
     },
-    input_title_container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    input_title: {
-      backgroundColor: 'transparent',
-      paddingHorizontal: 0,
-      paddingVertical: 0,
-      fontSize: 22,
+    section_title: {
+      fontSize: normalizeText(16),
       color: '#fff',
-    },
-    phone_title: {
-      fontSize: 18,
-      color: '#fff',
-      marginTop: 42,
       marginBottom: 13,
-    },
-    phone_input: {
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderColor: colors.softBlue,
-      color: '#fff',
-      fontSize: 14,
+      marginTop: 50,
     },
     list: {
       marginTop: 10,
     },
     list__title: {
       marginTop: 25,
-      fontSize: 22,
+      fontSize: normalizeText(16),
       color: '#fff',
     },
     card: {
@@ -52,33 +36,34 @@ export const createStyles = (theme: ExtendedTheme) => {
       backgroundColor: colors.darkBlue,
       marginBottom: 6.5,
       borderRadius: 8,
-      paddingVertical: 13,
-      paddingHorizontal: 30,
-      flexDirection: 'row',
+      paddingVertical: normalizeText(10),
+      paddingHorizontal: normalizeText(24),
+      flexDirection: isRtl ? 'row-reverse' : 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
     },
     card__content: {},
     card__title: {
       color: '#fff',
-      fontSize: 17,
+      fontSize: normalizeText(12),
     },
     card__members: {
       color: '#fff',
     },
     button_add: {
-      marginTop: 22,
+      marginTop: normalizeText(16),
     },
     button_create: {
-      marginTop: 'auto',
-      marginBottom: 50,
+      marginTop: normalizeText(80),
+      marginBottom: normalizeText(35),
     },
     card_title_container: {
-      flexDirection: 'row',
+      flexDirection: isRtl ? 'row-reverse' : 'row',
       alignItems: 'center',
     },
     medal: {
-      marginRight: 15,
+      marginRight: isRtl ? 0 : 15,
+      marginLeft: isRtl ? 15 : 0,
     },
   })
 }

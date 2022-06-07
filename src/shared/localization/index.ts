@@ -25,11 +25,13 @@ export const localStrings = new LocalizedStrings({
     email: 'e-mail',
     password: 'password',
     login: 'login',
+    create_family: 'Create family',
   },
   il: {
     email: 'אימייל',
     password: 'סיסמה',
     login: 'התחברות',
+    create_family: 'צור משפחה',
   },
 })
 

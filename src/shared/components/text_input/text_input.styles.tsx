@@ -1,3 +1,4 @@
+import { normalizeText } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
@@ -8,19 +9,20 @@ export const createStyles = (theme: ExtendedTheme) => {
 
   return StyleSheet.create({
     container: {
-      marginVertical: 10,
+      marginVertical: normalizeText(8),
     },
     input: {
       backgroundColor: '#fff',
-      borderRadius: 6,
+      borderRadius: 14,
       color: '#000',
-      paddingVertical: 16,
-      paddingHorizontal: 27,
-      fontSize: 20,
+      height: 55,
+      paddingHorizontal: normalizeText(20),
+      fontSize: normalizeText(13),
       textAlign: isRtl ? 'right' : 'left',
     },
     prompt: {
       color: colors.softBlue,
+      fontSize: normalizeText(10),
       textAlign: isRtl ? 'right' : 'left',
     },
   })

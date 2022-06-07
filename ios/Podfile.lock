@@ -75,7 +75,7 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
-  - InputMask (6.1.0)
+  - hermes-engine (0.11.0)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.06.28.00-v2):
@@ -89,6 +89,12 @@ PODS:
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
+  - RCT-Folly/Futures (2021.06.28.00-v2):
+    - boost
+    - DoubleConversion
+    - fmt (~> 6.2.1)
+    - glog
+    - libevent
   - RCTRequired (0.68.2)
   - RCTTypeSafety (0.68.2):
     - FBLazyVector (= 0.68.2)
@@ -264,6 +270,17 @@ PODS:
     - React-logger (= 0.68.2)
     - React-perflogger (= 0.68.2)
     - React-runtimeexecutor (= 0.68.2)
+  - React-hermes (0.68.2):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly/Futures (= 2021.06.28.00-v2)
+    - React-cxxreact (= 0.68.2)
+    - React-jsi (= 0.68.2)
+    - React-jsiexecutor (= 0.68.2)
+    - React-jsinspector (= 0.68.2)
+    - React-perflogger (= 0.68.2)
   - React-jsi (0.68.2):
     - boost (= 1.76.0)
     - DoubleConversion
@@ -285,11 +302,13 @@ PODS:
   - React-jsinspector (0.68.2)
   - React-logger (0.68.2):
     - glog
+  - react-native-contacts (7.0.4):
+    - React-Core
   - react-native-date-picker (4.2.2):
     - React-Core
   - react-native-netinfo (8.3.0):
     - React-Core
-  - react-native-safe-area-context (4.2.5):
+  - react-native-safe-area-context (4.3.1):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -297,10 +316,6 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-splash-screen (3.3.0):
     - React-Core
-  - react-native-text-input-mask (3.1.4):
-    - InputMask (~> 6.1.0)
-    - React-Core
-    - React-RCTText
   - React-perflogger (0.68.2)
   - React-RCTActionSheet (0.68.2):
     - React-Core/RCTActionSheetHeaders (= 0.68.2)
@@ -441,6 +456,8 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - hermes-engine (~> 0.11.0)
+  - libevent (~> 2.1.12)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -453,15 +470,16 @@ DEPENDENCIES:
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
+  - React-hermes (from `../node_modules/react-native/ReactCommon/hermes`)
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - react-native-contacts (from `../node_modules/react-native-contacts`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
-  - react-native-text-input-mask (from `../node_modules/react-native-text-input-mask`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -497,7 +515,7 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - fmt
-    - InputMask
+    - hermes-engine
     - libevent
     - OpenSSL-Universal
     - SocketRocket
@@ -534,6 +552,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/CoreModules"
   React-cxxreact:
     :path: "../node_modules/react-native/ReactCommon/cxxreact"
+  React-hermes:
+    :path: "../node_modules/react-native/ReactCommon/hermes"
   React-jsi:
     :path: "../node_modules/react-native/ReactCommon/jsi"
   React-jsiexecutor:
@@ -542,6 +562,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-contacts:
+    :path: "../node_modules/react-native-contacts"
   react-native-date-picker:
     :path: "../node_modules/react-native-date-picker"
   react-native-netinfo:
@@ -550,8 +572,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
-  react-native-text-input-mask:
-    :path: "../node_modules/react-native-text-input-mask"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -613,7 +633,7 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
-  InputMask: 71d291dc54d2deaeac6512afb6ec2304228c0bb7
+  hermes-engine: 84e3af1ea01dd7351ac5d8689cbbea1f9903ffc3
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -625,15 +645,16 @@ SPEC CHECKSUMS:
   React-Core: fdaa2916b1c893f39f02cff0476d1fb0cab1e352
   React-CoreModules: fd8705b80699ec36c2cdd635c2ce9d874b9cfdfc
   React-cxxreact: 1832d971f7b0cb2c7b943dc0ec962762c90c906e
+  React-hermes: 14e0ea3ce4b44bb3ac7663d96d0e3e28857f7b62
   React-jsi: 72af715135abe8c3f0dcf3b2548b71d048b69a7e
   React-jsiexecutor: b7b553412f2ec768fe6c8f27cd6bafdb9d8719e6
   React-jsinspector: c5989c77cb89ae6a69561095a61cce56a44ae8e8
   React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
+  react-native-contacts: 1bff4c47816d611f26b06fa8b3eaf2db4d1b2c86
   react-native-date-picker: 9088350e06918f7d842a34c171acadc66583cb94
   react-native-netinfo: 3671b091c4843fda5e153612866ef4024b8f5d62
-  react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
+  react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-text-input-mask: 36a546b378fadd2efe1b7484a859d34bc2c80395
   React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
   React-RCTActionSheet: 547fe42fdb4b6089598d79f8e1d855d7c23e2162
   React-RCTAnimation: bc9440a1c37b06ae9ebbb532d244f607805c6034
@@ -658,6 +679,6 @@ SPEC CHECKSUMS:
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d73bdf8cd3e9a8bf22839e8090147ebf61a539d3
+PODFILE CHECKSUM: 3793d5f12cf054685ba1d6703e78b5f168725c06
 
 COCOAPODS: 1.11.3

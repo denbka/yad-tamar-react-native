@@ -11,6 +11,10 @@ import { Header } from '@shared-components/header'
 
 import { VolunteersList } from './components'
 import { createStyles } from './volunteers.styles'
+import { Text } from '@shared-components/text'
+import { useModal } from '@hooks'
+import { Modal } from '@shared-components/modal'
+import { VolunteersForm } from './components/volunteers_form'
 
 interface VolunteersScreenProps {}
 
@@ -21,6 +25,8 @@ const data = [
 
 export const VolunteersScreen: React.FC<VolunteersScreenProps> = () => {
   const queryClient = useQueryClient()
+  const modal = useModal()
+
   const { mutate: addTask } = useMutation(taskApi.post)
   const theme = useTheme()
   const styles = useMemo(() => createStyles(theme), [theme])
@@ -31,12 +37,9 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = () => {
   })
 
   const handleSubmit = (data: TodoForm) => {
-    addTask(data, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(taskApi.queryKey)
-        NavigationService.goBack()
-      },
-    })
+    // modal.show(VolunteersForm)
+    NavigationService.navigate('volunteers_create') //TODO: MODAL scren
+    console.log('321')
   }
 
   return (
@@ -45,6 +48,9 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = () => {
         <View style={styles.container}>
           <Header>Smith family</Header>
           <View style={styles.body}>
+            <Text style={styles.section_title} bold>
+              My volunteers
+            </Text>
             <VolunteersList data={data} />
             <Button style={styles.button_create} onPress={handleSubmit} variant="inline">
               Create

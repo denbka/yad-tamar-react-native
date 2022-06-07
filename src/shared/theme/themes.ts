@@ -33,6 +33,7 @@ export const palette = {
   green: '#2DAAB2',
   loginGradient: ['#5B81CF', '#4968A6'],
   buttonGradient: ['rgba(0, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.29)'],
+  gray: '#909597',
 }
 
 export const LightTheme: ExtendedTheme = {

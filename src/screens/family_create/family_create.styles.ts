@@ -1,3 +1,4 @@
+import { normalizeText } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
@@ -12,8 +13,8 @@ export const createStyles = (theme: ExtendedTheme) => {
       backgroundColor: colors.blue,
     },
     body: {
-      paddingHorizontal: 40,
-      paddingTop: 20,
+      paddingHorizontal: normalizeText(30),
+      paddingTop: 10,
     },
     input_title_container: {
       flexDirection: isRtl ? 'row-reverse' : 'row',
@@ -24,28 +25,28 @@ export const createStyles = (theme: ExtendedTheme) => {
       backgroundColor: 'transparent',
       paddingHorizontal: 0,
       paddingVertical: 0,
-      fontSize: 22,
+      fontSize: normalizeText(16),
       color: '#fff',
     },
     phone_title: {
-      fontSize: 18,
+      fontSize: normalizeText(16),
       color: '#fff',
-      marginTop: 42,
-      marginBottom: 13,
+      marginTop: normalizeText(25),
+      marginBottom: normalizeText(3),
     },
     phone_input: {
       backgroundColor: 'transparent',
       borderWidth: 1,
       borderColor: colors.softBlue,
       color: '#fff',
-      fontSize: 14,
+      fontSize: normalizeText(11),
     },
     list: {
-      marginTop: 10,
+      marginTop: normalizeText(7),
     },
     list__title: {
-      marginTop: 25,
-      fontSize: 22,
+      marginTop: normalizeText(20),
+      fontSize: normalizeText(16),
       color: '#fff',
     },
     card: {
@@ -53,8 +54,8 @@ export const createStyles = (theme: ExtendedTheme) => {
       backgroundColor: colors.darkBlue,
       marginBottom: 6.5,
       borderRadius: 8,
-      paddingVertical: 13,
-      paddingHorizontal: 30,
+      paddingVertical: normalizeText(10),
+      paddingHorizontal: normalizeText(24),
       flexDirection: isRtl ? 'row-reverse' : 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -62,17 +63,17 @@ export const createStyles = (theme: ExtendedTheme) => {
     card__content: {},
     card__title: {
       color: '#fff',
-      fontSize: 17,
+      fontSize: normalizeText(12),
     },
     card__members: {
       color: '#fff',
     },
     button_add: {
-      marginTop: 22,
+      marginTop: normalizeText(16),
     },
     button_create: {
-      marginTop: 100,
-      marginBottom: 50,
+      marginTop: normalizeText(80),
+      marginBottom: normalizeText(35),
     },
   })
 }
