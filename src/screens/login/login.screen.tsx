@@ -12,10 +12,12 @@ import { useMutation } from 'react-query'
 import { authApi } from '@api'
 import LogoEnolaWhite from '@assets/logo_enola_white.svg'
 import { normalizeText } from '@freakycoder/react-native-helpers'
+import { useLocale } from '@hooks'
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
+  const { strings } = useLocale()
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
   const { mutate: login } = useMutation((form: ILoginForm) => authApi.login(form))
 
   const handleSubmitForm = () => {
@@ -41,7 +43,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               <Image style={styles.image_title} source={require('@assets/logo.png')} />
             </View>
             <View style={styles.title_container}>
-              <Text style={styles.title}>Welcome to</Text>
+              <Text style={styles.title}>{strings.welcome_text}</Text>
               <LogoEnolaWhite width={normalizeText(170)} />
             </View>
             <View style={styles.image}>

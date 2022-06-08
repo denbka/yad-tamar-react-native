@@ -54,7 +54,7 @@ export const createStyles = (theme: ExtendedTheme) => {
       marginTop: normalizeText(16),
     },
     button_create: {
-      marginTop: normalizeText(80),
+      marginTop: 'auto',
       marginBottom: normalizeText(35),
     },
     card_title_container: {

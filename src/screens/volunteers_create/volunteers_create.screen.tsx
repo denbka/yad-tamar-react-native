@@ -11,15 +11,17 @@ import { familyApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './volunteers_create.styles'
 import { Modal } from '@shared-components/modal'
+import { useLocale } from '@hooks'
 
 interface VolunteersCreateScreenProps {}
 
 export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = () => {
+  const { strings } = useLocale()
   const queryClient = useQueryClient()
   //  const { data } = useQuery<IFamily[]>(queryKey, familyApi.get)
   const { mutate: addFamily } = useMutation(familyApi.post)
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   const handleSubmit = async ({ name_of_family }: Pick<IFamily, 'name_of_family'>) => {
     const contacts = await Contacts.getAll()
@@ -38,10 +40,10 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = () 
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.container}>
             <Text style={styles.title} bold>
-              Add a new volunteer
+              {strings.modal_add_volunteer}
             </Text>
             <View style={styles.body}>
-              <Text style={styles.input_title}>Name</Text>
+              <Text style={styles.input_title}>{strings.name}</Text>
               <TextInput
                 onChangeText={handleChange('name_of_family')}
                 onBlur={handleBlur('name_of_family')}
@@ -51,7 +53,7 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = () 
               />
 
               <Button style={styles.button_create} onPress={handleSubmit} variant="green">
-                Choose from contact list
+                {strings.add_contacts}
               </Button>
               {/* <DeleteIcon /> */}
             </View>

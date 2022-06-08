@@ -2,8 +2,8 @@ import { request } from '@services/request'
 
 const queryKey = 'tasks'
 
-const get = async () => {
-  const response = await request.get<ITodo[]>(queryKey)
+const get = async (family_id: string) => {
+  const response = await request.get<ITodo[]>(`${queryKey}/tasks-for-family/${family_id}`)
   return response.data
 }
 

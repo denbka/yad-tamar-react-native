@@ -1,18 +1,37 @@
 import { localStrings } from '@locales'
+import React, { createContext, FC, ReactNode, useContext, useMemo, useState } from 'react'
 
 const rtlLanguages = ['il']
 
-export const useLocale = (): UseLocale => {
-  const locale = localStrings.getLanguage() as 'il' | 'ru'
-  const isRtl = rtlLanguages.includes(locale)
-
-  return {
-    locale,
-    isRtl,
-  }
+type ModalContext = {
+  isRtl: boolean
+  strings: typeof localStrings
+  toggleLanguage: () => void
+}
+type LocaleProviderProps = {
+  children: ReactNode
 }
 
-type UseLocale = {
-  locale: string
-  isRtl: boolean
+const context = createContext<ModalContext>({
+  isRtl: false,
+  strings: localStrings,
+  toggleLanguage: () => {},
+})
+
+export const useLocale = () => useContext(context)
+
+export const LocaleProvider: FC<LocaleProviderProps> = ({ children }) => {
+  const [currentLanguageIndex, setCurrentLanguageIndex] = useState(0)
+  const [currentLocale, setCurrentLocale] = useState(localStrings.getLanguage())
+  const isRtl = useMemo(() => rtlLanguages.includes(currentLocale), [currentLocale])
+  const strings = useMemo(() => localStrings, [currentLocale])
+
+  const toggleLanguage = () => {
+    const availableLanguages = localStrings.getAvailableLanguages()
+    localStrings.setLanguage(availableLanguages[currentLanguageIndex])
+    setCurrentLocale(availableLanguages[currentLanguageIndex])
+    setCurrentLanguageIndex(currentLanguageIndex >= availableLanguages.length - 1 ? 0 : currentLanguageIndex + 1)
+  }
+
+  return <context.Provider value={{ isRtl, strings, toggleLanguage }}>{children}</context.Provider>
 }

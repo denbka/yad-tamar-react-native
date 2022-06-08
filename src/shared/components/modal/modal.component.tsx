@@ -9,7 +9,7 @@ import { createStyles } from './modal.styles'
 
 export const Modal: FC<ModalProps> = ({ children, onClose }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
   const modal = useModal()
 
   const tapGestureHandler = Gesture.Tap().onEnd(() => (onClose ? runOnJS(onClose)() : runOnJS(modal.hide)()))

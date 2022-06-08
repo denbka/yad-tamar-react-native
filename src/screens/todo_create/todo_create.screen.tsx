@@ -15,14 +15,16 @@ import DeleteIcon from '@assets/delete.svg'
 import { createStyles } from './todo_create.styles'
 import { DatePicker, Prompts } from './components'
 import { Text } from '@shared-components/text'
+import { useLocale } from '@hooks'
 
 interface TodoCreateScreenProps {}
 
 export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
+  const { strings } = useLocale()
   const queryClient = useQueryClient()
   const { mutate: addTask } = useMutation(taskApi.post)
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
   const [form, setForm] = useState<TodoForm>({
     task_name: '',
     comments: '',
@@ -50,7 +52,7 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
     <Formik enableReinitialize initialValues={form} onSubmit={onSubmit}>
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <View style={styles.container}>
-          <Header>Create a new task</Header>
+          <Header>{strings.create_new_task}</Header>
           <ScrollView bounces={false} style={styles.body}>
             <View style={styles.input_title_container}>
               <TextInput
@@ -58,7 +60,7 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
                 onBlur={handleBlur('task_name')}
                 value={values.task_name}
                 style={styles.input_title}
-                placeholder="Name the task..."
+                placeholder={strings.name_the_task}
                 placeholderTextColor="#fff"
               />
               <DeleteIcon />
@@ -66,12 +68,12 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
             <Prompts onChange={handleChangePrompt} />
             <Divider style={{ marginBottom: 15, marginTop: 25 }} />
             <View>
-              <Text style={styles.section_title}>Time</Text>
+              <Text style={styles.section_title}>{strings.time}</Text>
               <DatePicker date={values.date} onChange={handleChangeDate} />
             </View>
             <Divider style={{ marginBottom: 15, marginTop: 25 }} />
             <View>
-              <Text style={styles.section_title}>Details</Text>
+              <Text style={styles.section_title}>{strings.details}</Text>
               <TextInput
                 onChangeText={handleChange('comments')}
                 onBlur={handleBlur('comments')}
@@ -79,11 +81,11 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
                 style={styles.input_comments}
                 textarea
                 placeholderTextColor="#fff"
-                placeholder="Start typing here..."
+                placeholder={strings.details_placeholder}
               />
             </View>
             <Button style={styles.button_create} onPress={handleSubmit} variant="inline">
-              Create
+              {strings.create_task}
             </Button>
           </ScrollView>
         </View>

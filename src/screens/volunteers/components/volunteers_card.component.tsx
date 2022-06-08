@@ -7,7 +7,7 @@ import MedalIcon from '@assets/medal.svg'
 
 export const VolunteersListCard: FC<IVolunteer> = ({ title }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return (
     <View style={styles.card}>

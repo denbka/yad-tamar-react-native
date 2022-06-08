@@ -8,7 +8,7 @@ const prompts = ['Take kids from school', 'Go to market', 'Shopping', 'Clean the
 
 export const Prompts: React.FC<PromptsProps> = ({ onChange }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return (
     <View style={styles.prompt_container}>

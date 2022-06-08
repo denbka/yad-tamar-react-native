@@ -6,7 +6,7 @@ import { createStyles } from './bottomsheet.styles'
 
 export const Bottomsheet: FC<BottomsheetProps> = ({ children, style }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return <View style={[styles.bottomsheet, style]}>{children}</View>
 }

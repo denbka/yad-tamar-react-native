@@ -5,15 +5,20 @@ import { View } from 'react-native'
 import { createStyles } from '../todo.styles'
 import { SharedValue, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated'
 import { normalizeText } from '@freakycoder/react-native-helpers'
-
-const switches: SwitchItem[] = [
-  { type: 'week', title: 'Week' },
-  { type: 'todo', title: 'To do list' },
-]
+import { useLocale } from '@hooks'
 
 export const TodoSwitch: FC<TodoSwitchProps> = ({ activeSection, onChange }) => {
+  const { strings } = useLocale()
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
+
+  const switches: SwitchItem[] = useMemo(
+    () => [
+      { type: 'week', title: strings.week },
+      { type: 'todo', title: strings.todo_list },
+    ],
+    [strings],
+  )
 
   return (
     <View style={styles.switch_container}>
@@ -26,7 +31,7 @@ export const TodoSwitch: FC<TodoSwitchProps> = ({ activeSection, onChange }) => 
 
 const TodoSwitchButton: FC<TodoSwitchButtonProps> = ({ type, title, activeSection, onChange }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   const activeSectionValue = useDerivedValue(() => {
     return withTiming(activeSection.value === type ? 0 : 1, { duration: 300 })

@@ -1,11 +1,11 @@
 import { useTheme } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { Text, TextInput as NativeInput, TextInputProps, View } from 'react-native'
 import { createStyles } from './text_input.styles'
 
 export const TextInput: FC<InputProps> = ({ style, prompt, textarea, keyboardType, ...props }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return (
     <View style={styles.container}>

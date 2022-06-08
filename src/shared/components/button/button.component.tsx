@@ -30,10 +30,9 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   const buttonVariant = useDerivedValue(() => {
-    console.log(typeof variant)
     return typeof variant === 'object' ? variant.value : variant
   }, [variant])
   const animatedShadowStyles = useAnimatedStyle(() => {

@@ -6,12 +6,12 @@ import { createStyles } from '../todo_create.styles'
 import { Pressable, Text, View } from 'react-native'
 import { useLocale } from '@hooks'
 
-const prompts = ['no time', 'exact time', 'until']
-
 export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
+  const { strings } = useLocale()
+  const prompts = useMemo(() => [strings.no_time, strings.exact_time, strings.until], [strings])
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   const parsedDate = useMemo(() => {
     const dt = DateTime.fromJSDate(date)

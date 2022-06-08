@@ -8,7 +8,7 @@ import { TodoCard } from './todo_card.component'
 
 export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   const animatedStyles = useAnimatedStyle(
     () => ({
@@ -32,7 +32,7 @@ export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
         data={data}
         style={styles.list}
         renderItem={({ item }) => (
-          <TodoCard {...item} sectionValue={SectionValue.WEEK} activeSectionValue={activeSectionValue} />
+          <TodoCard data={item} sectionValue={SectionValue.WEEK} activeSectionValue={activeSectionValue} />
         )}
       />
       <View style={{ width: 20 }} />
@@ -41,7 +41,7 @@ export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
         data={data}
         style={styles.list}
         renderItem={({ item }) => (
-          <TodoCard {...item} sectionValue={SectionValue.TODO} activeSectionValue={activeSectionValue} />
+          <TodoCard data={item} sectionValue={SectionValue.TODO} activeSectionValue={activeSectionValue} />
         )}
       />
     </Animated.View>
@@ -49,7 +49,7 @@ export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
 }
 
 type TodoListProps = {
-  data: any[]
+  data: ITask[]
   activeSectionValue: DerivedValue<number>
 }
 

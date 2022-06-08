@@ -6,7 +6,7 @@ import DeleteIcon from '@assets/delete.svg'
 
 export const VolunteersListCard: FC<VolunteersListCardProps> = ({ title }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return (
     <View style={styles.card}>

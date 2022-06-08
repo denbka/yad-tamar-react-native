@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { useTheme } from '@react-navigation/native'
@@ -18,6 +18,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { familyApi } from '@api'
 import { Divider } from '@shared-components/divider'
 import { Text } from '@shared-components/text'
+import { useLocale } from '@hooks'
 
 const data = [
   { id: 1, title: 'Smith' },
@@ -27,47 +28,48 @@ const data = [
 interface FamilyCreateScreenProps {}
 
 export const FamilyCreateScreen: React.FC<FamilyCreateScreenProps> = () => {
+  const { strings } = useLocale()
   const queryClient = useQueryClient()
   //  const { data } = useQuery<IFamily[]>(queryKey, familyApi.get)
   const { mutate: addFamily } = useMutation(familyApi.post)
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
-  const handleSubmit = ({ name_of_family }: Pick<IFamily, 'name_of_family'>) => {
-    addFamily(
-      { name_of_family },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries(familyApi.queryKey)
-          NavigationService.goBack()
-        },
+  const [initialValues, setInitialValues] = useState<IFamilyForm>({
+    first_name: '',
+    cell_phone: '',
+  })
+
+  const handleSubmit = () => {
+    addFamily(initialValues, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(familyApi.queryKey)
+        NavigationService.goBack()
       },
-    )
+    })
   }
-
-  const initialValues: IFamily = { name_of_family: '' }
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <View style={styles.container}>
-          <Header>Create family</Header>
+          <Header>{strings.create_family}</Header>
           <KeyboardAwareScrollView bounces={false} style={styles.body}>
             <View>
               <View style={styles.input_title_container}>
                 <TextInput
-                  onChangeText={handleChange('name_of_family')}
-                  onBlur={handleBlur('name_of_family')}
-                  value={values.name_of_family}
+                  onChangeText={handleChange('first_name')}
+                  onBlur={handleBlur('first_name')}
+                  value={values.first_name}
                   style={styles.input_title}
-                  placeholder="Name the family..."
+                  placeholder={strings.name_the_family}
                   placeholderTextColor="#fff"
-                  prompt="for example: Smith"
+                  prompt={strings?.prompt_the_family ?? ''}
                 />
                 <DeleteIcon />
               </View>
               <View>
-                <Text style={styles.phone_title}>Phone number</Text>
+                <Text style={styles.phone_title}>{strings.phone_number}</Text>
                 <TextInput
                   onChangeText={handleChange('phone')}
                   onBlur={handleBlur('phone')}
@@ -78,13 +80,13 @@ export const FamilyCreateScreen: React.FC<FamilyCreateScreenProps> = () => {
                 />
               </View>
               <Divider style={{ marginTop: 60 }} />
-              <Text style={styles.list__title}>Volunteers</Text>
+              <Text style={styles.list__title}>{strings.volunteers}</Text>
               <VolunteersList data={data} />
               <Button style={styles.button_add} variant="green">
-                Add volunteer
+                {strings.add_volunteer}
               </Button>
               <Button style={styles.button_create} onPress={handleSubmit} variant="inline">
-                Create
+                {strings.create}
               </Button>
             </View>
           </KeyboardAwareScrollView>

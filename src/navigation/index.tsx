@@ -1,11 +1,10 @@
 import React from 'react'
-import { useColorScheme } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { isReadyRef, navigationRef } from 'react-navigation-helpers'
 
 import { SCREENS } from '@shared-constants'
-import { LightTheme, DarkTheme } from '@theme/themes'
+import { LightTheme } from '@theme/themes'
 
 import { ProfileScreen } from '@screens/profile'
 import { LoginScreen } from '@screens/login'
@@ -18,21 +17,19 @@ import { VolunteersCreateScreen } from '@screens/volunteers_create'
 const Stack = createStackNavigator()
 
 const Navigation = () => {
-  const scheme = useColorScheme()
-  const isDarkMode = scheme === 'dark'
-
   React.useEffect((): any => {
     return () => (isReadyRef.current = false)
   }, [])
+
   return (
     <NavigationContainer
       ref={navigationRef}
       onReady={() => {
         isReadyRef.current = true
       }}
-      theme={isDarkMode ? DarkTheme : LightTheme}
+      theme={LightTheme}
     >
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName={SCREENS.AUTH} screenOptions={{ headerShown: false }}>
         <Stack.Screen name={SCREENS.AUTH} component={LoginScreen} />
         <Stack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
         <Stack.Screen name={SCREENS.FAMILY_CREATE} component={FamilyCreateScreen} />

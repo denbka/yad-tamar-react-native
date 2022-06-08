@@ -11,6 +11,9 @@ import * as NavigationService from 'react-navigation-helpers'
 import { SCREENS } from '@shared-constants'
 import { Bottomsheet } from '@shared-components/bottomsheet'
 import { Text } from '@shared-components/text'
+import { taskApi } from '@api'
+import { useQuery } from 'react-query'
+import { useLocale } from '@hooks'
 
 const data = [
   {
@@ -36,12 +39,13 @@ const data = [
   },
 ]
 
-export const TodoScreen: FC<TodoScreenProps> = ({ params }) => {
-  console.log(params)
-  // const { data } = useQuery<IFamily[]>(taskApi.queryKey, taskApi.get)
+export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
+  const familyId = route.params.familyId
+  const { data } = useQuery<ITask[]>(taskApi.queryKey, () => taskApi.get(familyId))
+  const { strings } = useLocale()
   // const { mutate: removeTask } = useMutation((id: number) => taskApi.remove(id))
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
   const activeSection = useSharedValue<SwitchValue>('week')
   const handleSetActiveSection = (value: SwitchValue) => {
     activeSection.value = value
@@ -65,16 +69,16 @@ export const TodoScreen: FC<TodoScreenProps> = ({ params }) => {
           style={styles.button_create}
           variant="inline"
         >
-          Create task
+          {strings.create_task}
         </Button>
         <Button
-          onPress={() => NavigationService.push(SCREENS.VOLUNTEERS)}
+          onPress={() => NavigationService.push(SCREENS.VOLUNTEERS, { familyId })}
           variant="orange"
           textColor={theme.colors.orange}
         >
           <View style={styles.button_volunteers}>
             <MedalIcon style={styles.medal} />
-            <Text style={styles.button_volunteers_text}>My volunteers</Text>
+            <Text style={styles.button_volunteers_text}>{strings.my_volunteers}</Text>
           </View>
         </Button>
       </Bottomsheet>

@@ -4,17 +4,18 @@ import { useTheme } from '@react-navigation/native'
 import { Button } from '@shared-components/button'
 import { TextInput } from '@shared-components/text_input'
 import { createStyles } from '../login.styles'
-import { localStrings } from '@locales'
+import { useLocale } from '@hooks'
 
 export const LoginForm: FC = ({ onSubmit }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
+  const { strings } = useLocale()
   return (
     <View>
-      <TextInput placeholder={localStrings.email} style={styles.text} />
-      <TextInput placeholder={localStrings.password} style={styles.text} />
+      <TextInput placeholder={strings.email} style={styles.text} />
+      <TextInput placeholder={strings.password} style={styles.text} />
       <Button style={styles.button} variant="inline" onPress={onSubmit}>
-        {localStrings.login}
+        {strings.login}
       </Button>
     </View>
   )

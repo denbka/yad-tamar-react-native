@@ -6,7 +6,7 @@ import { VolunteersListCard } from './volunteers_card.component'
 
 export const VolunteersList: FC<VolunteersListProps> = ({ data }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return (
     <FlatList

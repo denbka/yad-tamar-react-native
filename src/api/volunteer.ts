@@ -1,9 +1,9 @@
 import { request } from '@services/request'
 
-const queryKey = 'volunteer'
+const queryKey = 'volunteers'
 
-const get = async () => {
-  const response = await request.get<IVolunteer[]>(queryKey)
+const get = async (family_id: string) => {
+  const response = await request.get<IVolunteer[]>(`${queryKey}/volunteers-for-family/${family_id}`)
   return response.data
 }
 
@@ -17,7 +17,7 @@ const remove = async (id: number) => {
   return response.data
 }
 
-export const taskApi = {
+export const volunteerApi = {
   get,
   post,
   remove,

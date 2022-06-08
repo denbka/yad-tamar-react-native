@@ -5,6 +5,6 @@ import { createStyles } from './divider.styles'
 
 export const Divider: FC<{ style?: StyleProp<ViewStyle> }> = ({ style }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
   return <View style={[styles.divider, style]} />
 }

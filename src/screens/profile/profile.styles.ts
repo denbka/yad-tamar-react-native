@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native'
 export const createStyles = (theme: ExtendedTheme) => {
   const { isRtl } = useLocale()
   const { colors } = theme
-
+  // console.log(isRtl, 1)
   return StyleSheet.create({
     container: {
       flex: 1,

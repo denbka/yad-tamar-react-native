@@ -13,6 +13,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     title: {
       fontSize: normalizeText(16),
       color: '#fff',
+      textAlign: 'left',
     },
     image_title: {},
     enola: {

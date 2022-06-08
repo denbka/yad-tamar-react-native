@@ -5,7 +5,7 @@ import { createStyles } from '../profile.styles'
 
 export const Avatar: FC = () => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   return <View style={styles.avatar}></View>
 }

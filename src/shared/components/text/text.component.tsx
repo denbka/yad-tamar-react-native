@@ -6,7 +6,7 @@ import { createStyles } from './text.styles'
 
 export const Text: FC<TextProps> = ({ children, style, ...styleProps }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme, styleProps), [theme])
+  const styles = createStyles(theme, styleProps)
 
   return <NativeText style={[styles.initial, style]}>{children}</NativeText>
 }

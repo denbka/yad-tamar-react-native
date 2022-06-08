@@ -7,7 +7,7 @@ import { createStyles } from './header.styles'
 
 export const Header: FC<HeaderProps> = ({ children }) => {
   const theme = useTheme()
-  const styles = useMemo(() => createStyles(theme), [theme])
+  const styles = createStyles(theme)
 
   const handlePushBack = () => {
     NavigationService.goBack()

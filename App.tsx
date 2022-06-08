@@ -9,7 +9,7 @@ import { onlineManager, QueryClient, QueryClientProvider } from 'react-query'
 
 import Navigation from './src/navigation'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { ModalProvider } from '@hooks'
+import { LocaleProvider, ModalProvider } from '@hooks'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import { useTheme } from '@react-navigation/native'
 
@@ -38,18 +38,20 @@ const App = () => {
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <QueryClientProvider client={queryClient}>
-          <ModalProvider>
-            <SafeAreaView
-              edges={['top']}
-              style={{
-                flex: 1,
-                position: 'relative',
-                backgroundColor: '#fff',
-              }}
-            >
-              <Navigation />
-            </SafeAreaView>
-          </ModalProvider>
+          <LocaleProvider>
+            <ModalProvider>
+              <SafeAreaView
+                edges={['top']}
+                style={{
+                  flex: 1,
+                  position: 'relative',
+                  backgroundColor: '#fff',
+                }}
+              >
+                <Navigation />
+              </SafeAreaView>
+            </ModalProvider>
+          </LocaleProvider>
         </QueryClientProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
