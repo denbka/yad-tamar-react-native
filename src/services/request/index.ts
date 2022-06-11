@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const request = axios.create({
-  baseURL: 'http://18.197.147.245/api',
+  baseURL: 'https://tamar.project-babaev.ru/api',
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json',

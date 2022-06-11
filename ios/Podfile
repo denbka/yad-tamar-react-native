@@ -19,11 +19,8 @@ target 'RNTypescriptBoilerplate' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
-  pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
-  pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
 
   target 'RNTypescriptBoilerplateTests' do
     inherit! :complete

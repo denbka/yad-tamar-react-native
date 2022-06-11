@@ -28,6 +28,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
       },
       {
         onSettled: () => {
+          console.log('312321')
           NavigationService.push(SCREENS.PROFILE)
         },
       },
