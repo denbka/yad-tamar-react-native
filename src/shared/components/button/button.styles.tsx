@@ -71,5 +71,8 @@ export const createStyles = (theme: ExtendedTheme) => {
       borderColor: colors.orange,
       shadowOpacity: 0,
     },
+    loading: {
+      opacity: 0.5,
+    },
   })
 }

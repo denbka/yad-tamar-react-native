@@ -1,13 +1,14 @@
 import { Portal } from '@gorhom/portal'
 import { useModal } from '@hooks'
 import { useTheme } from '@react-navigation/native'
-import React, { FC, ReactNode, useMemo } from 'react'
-import { View } from 'react-native'
+import React, { FC, ReactNode } from 'react'
+import { StyleProp, View } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
+import { ViewStyle } from 'react-native-phone-input'
 import { runOnJS } from 'react-native-reanimated'
 import { createStyles } from './modal.styles'
 
-export const Modal: FC<ModalProps> = ({ children, onClose }) => {
+export const Modal: FC<ModalProps> = ({ children, style, onClose }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
   const modal = useModal()
@@ -20,7 +21,7 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
       <GestureDetector gesture={tapGestureHandler}>
         <View style={styles.overlay}>
           <GestureDetector gesture={tapGestureHandlerContent}>
-            <View style={styles.content}>{children}</View>
+            <View style={[styles.content, style]}>{children}</View>
           </GestureDetector>
         </View>
       </GestureDetector>
@@ -30,5 +31,6 @@ export const Modal: FC<ModalProps> = ({ children, onClose }) => {
 
 type ModalProps = {
   children: ReactNode
+  style?: StyleProp<ViewStyle>
   onClose: () => void
 }

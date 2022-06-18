@@ -1,15 +1,8 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { useTheme } from '@react-navigation/native'
-import { Text, View, ColorValue, StyleProp, ViewStyle } from 'react-native'
+import { Text, View, ColorValue, StyleProp, ViewStyle, ActivityIndicator } from 'react-native'
 import { createStyles } from './button.styles'
-import Animated, {
-  DerivedValue,
-  runOnJS,
-  SharedValue,
-  useAnimatedStyle,
-  useDerivedValue,
-  withTiming,
-} from 'react-native-reanimated'
+import Animated, { runOnJS, useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import {
   Gesture,
   GestureDetector,
@@ -27,16 +20,14 @@ export const Button: FC<ButtonProps> = ({
   textColor,
   fontSize,
   style,
+  loading,
   ...props
 }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
 
-  const buttonVariant = useDerivedValue(() => {
-    return typeof variant === 'object' ? variant.value : variant
-  }, [variant])
   const animatedShadowStyles = useAnimatedStyle(() => {
-    const withShadowVariant = !notShadowVariables.includes(buttonVariant.value)
+    const withShadowVariant = !notShadowVariables.includes(variant)
 
     return {
       opacity: withTiming(withShadowVariant ? 1 : 0),
@@ -47,15 +38,12 @@ export const Button: FC<ButtonProps> = ({
 
   return (
     <GestureDetector gesture={tapGestureHandler}>
-      <Animated.View
-        {...props}
-        style={[styles.button, styles[typeof variant === 'object' ? variant.value : variant], style]}
-      >
+      <Animated.View {...props} style={[styles.button, styles[variant], style, loading ? styles.loading : null]}>
         <Animated.View style={[styles.inset_shadow_container, animatedShadowStyles]}>
           <View style={styles.inset_shadow_top} />
         </Animated.View>
         <Text style={[{ color: textColor ?? '#fff', fontSize: fontSize ?? normalizeText(13) }, styles.text, textStyle]}>
-          {children}
+          {!loading ? children : <ActivityIndicator size="small" color="#fff" />}
         </Text>
       </Animated.View>
     </GestureDetector>
@@ -66,10 +54,11 @@ type ButtonVariant = 'white' | 'green' | 'inline' | 'orange' | 'flat'
 
 type ButtonProps = {
   children: React.ReactNode
-  variant?: SharedValue<ButtonVariant> | DerivedValue<ButtonVariant> | ButtonVariant
+  variant?: ButtonVariant
   style?: StyleProp<ViewStyle>
   textStyle?: StyleProp<ViewStyle>
   textColor?: ColorValue
   fontSize?: number
+  loading?: boolean
   onPress?: (event?: GestureStateChangeEvent<TapGestureHandlerEventPayload>) => void
 }

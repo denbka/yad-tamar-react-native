@@ -1,38 +1,29 @@
 import React, { FC } from 'react'
 import { Image, Keyboard, KeyboardAvoidingView, Pressable, Text, View } from 'react-native'
-import { Link, useTheme } from '@react-navigation/native'
+import { useTheme } from '@react-navigation/native'
 import { useKeyboard } from '@react-native-community/hooks'
-import { useAsyncStorage } from '@react-native-async-storage/async-storage'
-import { normalizeText } from '@freakycoder/react-native-helpers'
-import Animated, { interpolate, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated'
+import { createStyles } from './register.styles'
 import LinearGradient from 'react-native-linear-gradient'
-import { QueryClient, useMutation } from 'react-query'
-
-import { useLocale } from '@hooks'
-import { authApi } from '@api'
+import { RegisterForm } from './components/register_form.component'
 import Picture from '@assets/login.svg'
 import { Bottomsheet } from '@shared-components/bottomsheet'
+import { QueryClient, useMutation } from 'react-query'
+import { authApi } from '@api'
 import LogoEnolaWhite from '@assets/logo_enola_white.svg'
-import { LoginForm } from './components/login_form.component'
-import { createStyles } from './login.styles'
+import { normalizeText } from '@freakycoder/react-native-helpers'
+import { useLocale } from '@hooks'
+import Animated, { interpolate, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated'
+import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 
-export const LoginScreen: FC<LoginScreenProps> = () => {
-  const asyncStorage = useAsyncStorage('token')
-  const { mutate: login, isLoading } = useMutation((form: ICredentials) => authApi.login(form))
-
-  const handleSubmitForm = (values: ICredentials) =>
-    login(values, {
-      onSuccess: ({ token }) => {
-        const queryClient = new QueryClient()
-        asyncStorage.setItem(token, () => {
-          queryClient.invalidateQueries('user')
-        })
-      },
-    })
-
+export const RegisterScreen: FC<RegisterScreenProps> = () => {
   const { strings } = useLocale()
   const theme = useTheme()
   const styles = createStyles(theme)
+  const asyncStorage = useAsyncStorage('token')
+  const { mutate: register, isLoading: isRegisterLoading } = useMutation((form: IRegisterForm) =>
+    authApi.register(form),
+  )
+  const { mutate: login, isLoading: isLoginLoading } = useMutation((form: IRegisterForm) => authApi.login(form))
   const keyboard = useKeyboard()
 
   const animatedScale = useDerivedValue(() => withTiming(keyboard.keyboardShown ? 0.8 : 1), [keyboard.keyboardShown])
@@ -51,6 +42,21 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
     }),
     [animatedScale],
   )
+
+  const onLogin = (values: IRegisterForm) =>
+    login(values, {
+      onSuccess: ({ token }) => {
+        const queryClient = new QueryClient()
+        asyncStorage.setItem(token).then(() => queryClient.invalidateQueries('user'))
+      },
+    })
+
+  const handleSubmitForm = (values: IRegisterForm) => {
+    console.log(values)
+    register(values, {
+      onSuccess: () => onLogin(values),
+    })
+  }
 
   return (
     <KeyboardAvoidingView behavior="height" style={{ flex: 1 }}>
@@ -71,14 +77,11 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           </View>
         </LinearGradient>
         <Bottomsheet>
-          <LoginForm onSubmit={handleSubmitForm} isLoading={isLoading} />
-          <Link to="/register" style={styles.register_link}>
-            <Text>Нет аккаунта? Зарегистрируйтесь.</Text>
-          </Link>
+          <RegisterForm isLoading={isRegisterLoading || isLoginLoading} onSubmit={handleSubmitForm} />
         </Bottomsheet>
       </Pressable>
     </KeyboardAvoidingView>
   )
 }
 
-type LoginScreenProps = {}
+type RegisterScreenProps = {}

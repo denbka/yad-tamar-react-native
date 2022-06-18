@@ -19,7 +19,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     },
     content: {
       width: '90%',
-      minHeight: 300,
+      minHeight: 400,
       backgroundColor: '#fff',
       overflow: 'hidden',
       borderRadius: 16,

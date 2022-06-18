@@ -15,6 +15,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     body: {
       paddingHorizontal: normalizeText(30),
       paddingTop: 10,
+      flex: 1,
     },
     input_title_container: {
       flexDirection: isRtl ? 'row-reverse' : 'row',
@@ -52,7 +53,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     card: {
       width: '100%',
       backgroundColor: colors.darkBlue,
-      marginBottom: 6.5,
+      marginBottom: normalizeText(4),
       borderRadius: 8,
       paddingVertical: normalizeText(10),
       paddingHorizontal: normalizeText(24),
@@ -72,7 +73,7 @@ export const createStyles = (theme: ExtendedTheme) => {
       marginTop: normalizeText(16),
     },
     button_create: {
-      marginTop: normalizeText(80),
+      marginTop: 'auto',
       marginBottom: normalizeText(35),
     },
   })

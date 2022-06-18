@@ -10,3 +10,6 @@
 # Add any project specific keep options here:
 
 -keep public class com.horcrux.svg.** {*;}
+-keep class com.shopify.reactnative.skia.** { *; }
+-keep class com.rt2zz.reactnativecontacts.** {*;}
+-keepclassmembers class com.rt2zz.reactnativecontacts.** {*;}

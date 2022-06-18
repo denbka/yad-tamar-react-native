@@ -1,5 +1,6 @@
 export const SCREENS = {
-  AUTH: 'auth',
+  LOGIN: 'login',
+  REGISTER: 'register',
   HOME: 'home',
   PROFILE: 'profile',
   TODO: 'todo',
@@ -7,4 +8,5 @@ export const SCREENS = {
   TODO_CREATE: 'todo_create',
   VOLUNTEERS: 'volunteers',
   VOLUNTEERS_CREATE: 'volunteers_create',
+  CHOOSE_ACTION: 'choose_action',
 }

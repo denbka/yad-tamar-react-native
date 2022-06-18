@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { isReadyRef, navigationRef } from 'react-navigation-helpers'
@@ -13,10 +13,25 @@ import { TodoScreen } from '@screens/todo'
 import { TodoCreateScreen } from '@screens/todo_create'
 import { VolunteersScreen } from '@screens/volunteers'
 import { VolunteersCreateScreen } from '@screens/volunteers_create'
+import { RegisterScreen } from '@screens/register'
+import { useQuery } from 'react-query'
+import { authApi } from '@api'
+import { ShareScreen } from '@screens/share'
 
 const Stack = createStackNavigator()
 
-const Navigation = () => {
+const Navigation: FC = () => {
+  const [isAuth, setAuth] = useState(false)
+
+  useQuery('user', authApi.getUserData, {
+    onSuccess: (result) => {
+      console.log(result, 'result')
+      setAuth(JSON.stringify(result) === '{}' ? false : true)
+    },
+  })
+
+  navigationRef.isReady = () => true
+
   React.useEffect((): any => {
     return () => (isReadyRef.current = false)
   }, [])
@@ -29,24 +44,31 @@ const Navigation = () => {
       }}
       theme={LightTheme}
     >
-      <Stack.Navigator initialRouteName={SCREENS.AUTH} screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={SCREENS.AUTH} component={LoginScreen} />
-        <Stack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
-        <Stack.Screen name={SCREENS.FAMILY_CREATE} component={FamilyCreateScreen} />
-        <Stack.Screen name={SCREENS.TODO} component={TodoScreen} />
-        <Stack.Screen name={SCREENS.TODO_CREATE} component={TodoCreateScreen} />
-        <Stack.Screen name={SCREENS.VOLUNTEERS} component={VolunteersScreen} />
-        <Stack.Group
-          screenOptions={{
-            presentation: 'transparentModal',
-            cardStyle: {
-              backgroundColor: 'transparent',
-            },
-          }}
-        >
-          <Stack.Screen name={SCREENS.VOLUNTEERS_CREATE} component={VolunteersCreateScreen} />
-        </Stack.Group>
-      </Stack.Navigator>
+      {!isAuth ? (
+        <Stack.Navigator initialRouteName={SCREENS.LOGIN} screenOptions={{ headerShown: false }}>
+          <Stack.Screen name={SCREENS.LOGIN} component={LoginScreen} />
+          <Stack.Screen name={SCREENS.REGISTER} component={RegisterScreen} />
+        </Stack.Navigator>
+      ) : (
+        <Stack.Navigator initialRouteName={SCREENS.LOGIN} screenOptions={{ headerShown: false }}>
+          <Stack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
+          <Stack.Screen name={SCREENS.FAMILY_CREATE} component={FamilyCreateScreen} />
+          <Stack.Screen name={SCREENS.TODO} component={TodoScreen} />
+          <Stack.Screen name={SCREENS.TODO_CREATE} component={TodoCreateScreen} />
+          <Stack.Screen name={SCREENS.VOLUNTEERS} component={VolunteersScreen} />
+          <Stack.Group
+            screenOptions={{
+              presentation: 'transparentModal',
+              cardStyle: {
+                backgroundColor: 'transparent',
+              },
+            }}
+          >
+            <Stack.Screen name={SCREENS.VOLUNTEERS_CREATE} component={VolunteersCreateScreen} />
+            <Stack.Screen name={SCREENS.CHOOSE_ACTION} component={ShareScreen} />
+          </Stack.Group>
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   )
 }

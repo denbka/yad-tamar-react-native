@@ -46,9 +46,5 @@ export const createStyles = (theme: ExtendedTheme) => {
       borderColor: 'red',
       borderWidth: 1,
     },
-    register_link: {
-      marginTop: 10,
-      textAlign: 'center',
-    },
   })
 }

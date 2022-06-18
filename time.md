@@ -8,6 +8,23 @@
 
 ---
 
+Проверить иврит(ядтамар и энола поменять местами)
+Регистрация
+header change text
++name the family remove delete and prompt
++remove volunteers
++button create taskaws switch
+progress percent backend?
+active type time
+exact time its main
+
+add new volunteer modal
+add create button
+add add phone
+or choose contacts
+
+add web page with filtered task for volunteers
+
 2 июня - 1ч рефакторинг
 3 июня - 3ч рефакторинг и подготовка к локализации
 4 июня - 5ч полностью локализовал
@@ -16,3 +33,7 @@
 7 июня - 6ч адаптировал верстку под различные устройства, исправлял андройд ошибки, добавил запросы на получение задач, волонтеров, запрос на создание семьи
 8 июня - 6ч устранял баги с release билд для андройда, убрал баг со сменой локализации
 9 июля 2ч настройка ssl
+
+14 июня - 2ч авторизация регистрация, валидация, помогал мише
+16 июня - 2ч закончил авторизацию регистрацию
+17 июня - 2ч пообщался с олесей, из

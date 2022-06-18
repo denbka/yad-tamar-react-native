@@ -4,6 +4,8 @@ export const localStrings = new LocalizedStrings({
   ru: {
     email: 'e-mail',
     password: 'password',
+    password_confirmation: 'confirm password',
+    profile: 'Profile',
     login: 'login',
     create_family: 'Create family',
     welcome_text: 'Welcome to',
@@ -62,8 +64,9 @@ export const localStrings = new LocalizedStrings({
     exact_time: 'זמן מדויק',
     until: 'עד לתאריך',
     create_new_task: 'כהן',
+    profile: 'Profile',
   },
 })
 
 // ? Set the language manually
-localStrings.setLanguage('il')
+localStrings.setLanguage('ru')

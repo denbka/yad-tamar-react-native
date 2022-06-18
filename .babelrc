@@ -15,6 +15,7 @@
           { "@fonts": "./src/shared/theme/fonts" },
           { "@colors": "./src/shared/theme/colors" },
           { "@theme": "./src/shared/theme" },
+          { "@validation_schemes": "./src/shared/validation_schemes" },
           { "@models": "./src/services/models" },
           { "@services": "./src/services" },
           { "@screens": "./src/screens" },

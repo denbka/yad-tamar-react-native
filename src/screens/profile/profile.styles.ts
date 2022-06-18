@@ -6,7 +6,6 @@ import { StyleSheet } from 'react-native'
 export const createStyles = (theme: ExtendedTheme) => {
   const { isRtl } = useLocale()
   const { colors } = theme
-  // console.log(isRtl, 1)
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -75,6 +74,19 @@ export const createStyles = (theme: ExtendedTheme) => {
     card__members: {
       color: '#fff',
       textAlign: isRtl ? 'right' : 'left',
+    },
+    settings: {
+      padding: 40,
+    },
+    settings_title: {
+      fontSize: normalizeText(15),
+      marginBottom: normalizeText(15),
+    },
+    settings_item: {
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+      borderWidth: 1,
+      borderColor: colors.gray,
     },
   })
 }

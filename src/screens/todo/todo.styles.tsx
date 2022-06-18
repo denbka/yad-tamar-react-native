@@ -1,4 +1,4 @@
-import { normalizeText, ScreenHeight } from '@freakycoder/react-native-helpers'
+import { normalizeText, ScreenHeight, ScreenWidth } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
@@ -28,6 +28,26 @@ export const createStyles = (theme: ExtendedTheme) => {
     switch_button: {
       borderRadius: 9,
     },
+    switch_button_content: {
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: 'transparent',
+      width: 'auto',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: colors.blue,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.3,
+      shadowRadius: 2,
+      elevation: 3,
+      position: 'relative',
+      height: 55,
+    },
+    switch_button_content_text: {},
     switch_item_first: {
       marginRight: 15,
     },
@@ -161,8 +181,43 @@ export const createStyles = (theme: ExtendedTheme) => {
       marginRight: isRtl ? 0 : 10,
       marginLeft: isRtl ? 10 : 0,
     },
-    // switch_button: {
-    //   paddingVertical: 5,
-    // },
+    bottomsheet: {
+      backgroundColor: '#fff',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      position: 'relative',
+      height: 80,
+    },
+    bottomsheet_add: {
+      top: -50,
+      backgroundColor: '#fff',
+      borderRadius: 999,
+      padding: 10,
+    },
+    bottomsheet_add_icon: {
+      backgroundColor: colors.darkBlue,
+      borderRadius: 999,
+      padding: 20,
+    },
+    bottomsheet_item: {
+      position: 'relative',
+    },
+    bottomsheet_item_text: {
+      position: 'absolute',
+      bottom: 0,
+      left: -23,
+      right: 0,
+      width: 100,
+      fontSize: normalizeText(8),
+      color: '#828282',
+    },
+    share_text: {
+      left: 0,
+    },
+    add_text: {
+      left: 17,
+      bottom: -6,
+      color: colors.darkBlue,
+    },
   })
 }

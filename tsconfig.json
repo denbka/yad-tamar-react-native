@@ -37,6 +37,7 @@
       "@api": ["./api/index"],
       "@fonts": ["./shared/theme/fonts"],
       "@colors": ["./shared/theme/colors"],
+      "@validation_schemes": ["./shared/validation_schemes/index"],
       "@theme/*": ["./shared/theme/*"],
       "@services/*": ["./services/*"],
       "@screens/*": ["./screens/*"],

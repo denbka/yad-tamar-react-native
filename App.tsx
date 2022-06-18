@@ -25,7 +25,6 @@ const queryClient = new QueryClient()
 
 const App = () => {
   const scheme = useColorScheme()
-  const theme = useTheme()
   React.useEffect(() => {
     StatusBar.setBarStyle('dark-content')
 

@@ -7,7 +7,12 @@ const get = async (family_id: string) => {
   return response.data
 }
 
-const post = async (form: TodoForm) => {
+const getById = async (user_id?: number): Promise<IUser> => {
+  const response = await request.get<IUser>(`${queryKey}/volunteers/${user_id}`)
+  return response.data
+}
+
+const post = async (form: IVolunteerForm) => {
   const response = await request.post<IVolunteer[]>(queryKey, form)
   return response.data
 }
@@ -17,9 +22,16 @@ const remove = async (id: number) => {
   return response.data
 }
 
+const sendSMS = async (form: ISMSForm) => {
+  const response = await request.post<IVolunteer>(`${queryKey}/${id}`, form)
+  return response.data
+}
+
 export const volunteerApi = {
   get,
+  getById,
   post,
   remove,
   queryKey,
+  sendSMS,
 }

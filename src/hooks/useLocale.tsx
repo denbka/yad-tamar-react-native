@@ -5,6 +5,7 @@ const rtlLanguages = ['il']
 
 type ModalContext = {
   isRtl: boolean
+  currentLocale: string
   strings: typeof localStrings
   toggleLanguage: () => void
 }
@@ -14,6 +15,7 @@ type LocaleProviderProps = {
 
 const context = createContext<ModalContext>({
   isRtl: false,
+  currentLocale: 'en',
   strings: localStrings,
   toggleLanguage: () => {},
 })
@@ -23,6 +25,7 @@ export const useLocale = () => useContext(context)
 export const LocaleProvider: FC<LocaleProviderProps> = ({ children }) => {
   const [currentLanguageIndex, setCurrentLanguageIndex] = useState(0)
   const [currentLocale, setCurrentLocale] = useState(localStrings.getLanguage())
+
   const isRtl = useMemo(() => rtlLanguages.includes(currentLocale), [currentLocale])
   const strings = useMemo(() => localStrings, [currentLocale])
 
@@ -33,5 +36,5 @@ export const LocaleProvider: FC<LocaleProviderProps> = ({ children }) => {
     setCurrentLanguageIndex(currentLanguageIndex >= availableLanguages.length - 1 ? 0 : currentLanguageIndex + 1)
   }
 
-  return <context.Provider value={{ isRtl, strings, toggleLanguage }}>{children}</context.Provider>
+  return <context.Provider value={{ isRtl, currentLocale, strings, toggleLanguage }}>{children}</context.Provider>
 }

@@ -26,8 +26,8 @@ const data = [
 
 export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => {
   const queryClient = useQueryClient()
-  const familyId = route.params.familyId
-  const { data } = useQuery<ITask[]>(taskApi.queryKey, () => volunteerApi.get(familyId))
+  const family_id = route.params.familyId
+  const { data } = useQuery<ITask[]>(taskApi.queryKey, () => volunteerApi.get(family_id))
   console.log(data)
   const modal = useModal()
 
@@ -43,7 +43,7 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
 
   const handleSubmit = (data: TodoForm) => {
     // modal.show(VolunteersForm)
-    NavigationService.navigate('volunteers_create') //TODO: MODAL scren
+    NavigationService.navigate('volunteers_create', { family_id })
   }
 
   return (
