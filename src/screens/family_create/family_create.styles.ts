@@ -42,36 +42,6 @@ export const createStyles = (theme: ExtendedTheme) => {
       color: '#fff',
       fontSize: normalizeText(11),
     },
-    list: {
-      marginTop: normalizeText(7),
-    },
-    list__title: {
-      marginTop: normalizeText(20),
-      fontSize: normalizeText(16),
-      color: '#fff',
-    },
-    card: {
-      width: '100%',
-      backgroundColor: colors.darkBlue,
-      marginBottom: normalizeText(4),
-      borderRadius: 8,
-      paddingVertical: normalizeText(10),
-      paddingHorizontal: normalizeText(24),
-      flexDirection: isRtl ? 'row-reverse' : 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    card__content: {},
-    card__title: {
-      color: '#fff',
-      fontSize: normalizeText(12),
-    },
-    card__members: {
-      color: '#fff',
-    },
-    button_add: {
-      marginTop: normalizeText(16),
-    },
     button_create: {
       marginTop: 'auto',
       marginBottom: normalizeText(35),

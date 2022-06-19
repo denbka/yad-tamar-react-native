@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { Pressable, View } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -49,7 +49,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   console.log(availableLanguages)
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Avatar />
         <View>
@@ -78,7 +78,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         </Pressable>
         <Text style={styles.settings_item}>Logout</Text>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 

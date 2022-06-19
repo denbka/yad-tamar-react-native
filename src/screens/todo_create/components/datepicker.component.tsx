@@ -5,6 +5,7 @@ import { useTheme } from '@react-navigation/native'
 import { createStyles } from '../todo_create.styles'
 import { Pressable, Text, View } from 'react-native'
 import { useLocale } from '@hooks'
+import Animated from 'react-native-reanimated'
 
 export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
   const { strings } = useLocale()
@@ -12,8 +13,10 @@ export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
   const [openDatePicker, setOpenDatePicker] = useState(false)
   const theme = useTheme()
   const styles = createStyles(theme)
+  const [activeType, setActiveType] = useState(strings.exact_time)
 
   const parsedDate = useMemo(() => {
+    if (!date) return null
     const dt = DateTime.fromJSDate(date)
     if (!dt) return
     return {
@@ -22,30 +25,37 @@ export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
     }
   }, [date])
 
+  const handleChangeActiveType = (type: string) => {
+    setActiveType(type)
+    if (type === strings.no_time) {
+      onChange(null)
+    }
+  }
+
   return (
     <View style={styles.datepicker_container}>
       <Pressable onPress={() => setOpenDatePicker(true)}>
-        <View style={styles.datepicker}>
-          {!parsedDate ? (
-            <Text>dsadsa</Text>
-          ) : (
-            <>
-              <Text style={styles.datepicker_item}>{parsedDate.time}</Text>
-              <Text style={styles.datepicker_item}>{parsedDate.date}</Text>
-            </>
-          )}
-        </View>
+        {activeType !== strings.no_time && (
+          <View style={styles.datepicker}>
+            <Text style={styles.datepicker_item}>{parsedDate?.time}</Text>
+            <Text style={styles.datepicker_item}>{parsedDate?.date}</Text>
+          </View>
+        )}
       </Pressable>
       <View style={styles.datepicker_prompts}>
         {prompts.map((prompt, index) => (
-          <View
+          <Pressable
             style={[
               styles.datepicker_prompts_item_container,
               index === prompts.length - 1 && styles.datepicker_prompts_item_container_last,
+              prompt === activeType ? styles.active_datepicker_type : null,
             ]}
+            onPress={() => handleChangeActiveType(prompt)}
           >
-            <Text style={styles.datepicker_prompts_item}>{prompt}</Text>
-          </View>
+            <Animated.View>
+              <Text style={styles.datepicker_prompts_item}>{prompt}</Text>
+            </Animated.View>
+          </Pressable>
         ))}
       </View>
       <DatePickerNative

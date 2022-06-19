@@ -1,24 +1,22 @@
-import React, { useMemo } from 'react'
-import { ScrollView, Share, View } from 'react-native'
+import React from 'react'
+import { Share, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
-import { Formik } from 'formik'
-import Contacts from 'react-native-contacts'
-import { TextInput } from '@shared-components/text_input'
-import { Button } from '@shared-components/button'
-import { useMutation, useQueryClient } from 'react-query'
-import { familyApi, volunteerApi } from '@api'
+import { useMutation } from 'react-query'
+import {  volunteerApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './share.styles'
 import { Modal } from '@shared-components/modal'
-import { useLocale } from '@hooks'
+import { useLocale } from ы'@hooks'
 import { runOnJS } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { IconPeoples, IconVolunteer } from '@shared-components/icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 interface ShareScreenProps {}
 
-export const ShareScreen: React.FC<ShareScreenProps> = () => {
+export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
+  const family_id = route.params.familyId
   const { strings } = useLocale()
   const { mutateAsync: sendSMS } = useMutation(volunteerApi.sendSMS)
   const theme = useTheme()
@@ -26,16 +24,26 @@ export const ShareScreen: React.FC<ShareScreenProps> = () => {
 
   const handleShareToVolunteers = async () => {
     const volunteers = []
+    const token = await AsyncStorage.getItem('token')
     try {
-      await Promise.all(volunteers.map(({ name, phone }) => sendSMS({ to: phone, message: 'Ля ля ля' })))
+      await Promise.all(
+        volunteers.map(({ name, phone }) =>
+          sendSMS({
+            to: phone,
+            message: `Переходи в Play store по ссылке http://192.168.0.104:5500/index.html?token=${token}&family_id=${family_id} и получай задания`,
+          }),
+        ),
+      )
     } catch (e) {
       console.log(e)
     }
   }
 
-  const handleShareToFamily = () => {
+  const handleShareToFamily = async () => {
+    // const token = await AsyncStorage.getItem('token')
     Share.share({
-      message: 'Переходи в Play store по ссылке yadtamar:// и скачивай приложение',
+      // message: `Переходи в Play store по ссылке http://192.168.0.104:5500/index.html?token=${token}&family_id=${family_id} и получай задания`,
+      message: 'Переходи в Play store по ссылке yadtamar://profile и скачивай приложение',
       title: 'Share app',
     })
   }

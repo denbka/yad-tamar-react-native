@@ -1,4 +1,4 @@
-import { normalizeText, ScreenWidth } from '@freakycoder/react-native-helpers'
+import { normalizeText, ScreenHeight, ScreenWidth } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
@@ -8,7 +8,7 @@ export const createStyles = (theme: ExtendedTheme) => {
   const { colors } = theme
   return StyleSheet.create({
     container: {
-      flex: 1,
+      minHeight: ScreenHeight,
       backgroundColor: colors.blue,
     },
     header: {
@@ -55,6 +55,7 @@ export const createStyles = (theme: ExtendedTheme) => {
       fontWeight: 'bold',
     },
     list: {
+      flex: 1,
       paddingHorizontal: normalizeText(30),
     },
     card: {
@@ -85,8 +86,9 @@ export const createStyles = (theme: ExtendedTheme) => {
     settings_item: {
       paddingVertical: 10,
       paddingHorizontal: 30,
+      borderRadius: 6,
       borderWidth: 1,
-      borderColor: colors.gray,
+      borderColor: 'rgba(0,0,0,0.1)',
     },
   })
 }

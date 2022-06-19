@@ -10,7 +10,7 @@ declare type IFamily = {
 }
 
 declare type IFamilyForm = {
-  first_name: string
+  last_name: string
   cell_phone: string
 }
 
@@ -60,10 +60,11 @@ declare type ITodo = {
   family_id: number
   task_name: string
   comments: string
-  date: Date
+  date: number | Date
+  family_id: string
+  community_id?: number
+  was_completed: boolean
 }
-
-declare type TodoForm = Omit<ITodo, 'family_id'>
 
 declare type IVolunteer = {
   family_id: string

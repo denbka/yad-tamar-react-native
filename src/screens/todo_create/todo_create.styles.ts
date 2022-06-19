@@ -103,6 +103,8 @@ export const createStyles = (theme: ExtendedTheme) => {
       paddingVertical: 10,
       paddingHorizontal: 7,
       backgroundColor: colors.darkBlue,
+      borderWidth: 1,
+      borderColor: 'transparent',
       flex: 1,
     },
     datepicker_prompts_item_container_last: {
@@ -112,6 +114,9 @@ export const createStyles = (theme: ExtendedTheme) => {
       fontSize: normalizeText(11),
       color: '#fff',
       textAlign: 'center',
+    },
+    active_datepicker_type: {
+      borderColor: colors.orange,
     },
   })
 }

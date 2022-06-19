@@ -1,11 +1,9 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './todo.styles'
-import { Share, View } from 'react-native'
+import { View } from 'react-native'
 import { Bottomsheet, Progress, TodoList, TodoSwitch } from './components'
 import { useDerivedValue, useSharedValue, withTiming } from 'react-native-reanimated'
-import { Button } from '@shared-components/button'
-import MedalIcon from '@assets/medal.svg'
 import { Header } from '@shared-components/header'
 import * as NavigationService from 'react-navigation-helpers'
 import { SCREENS } from '@shared-constants'
@@ -57,7 +55,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   }, [activeSection])
 
   const handleShare = () => {
-    NavigationService.navigate(SCREENS.CHOOSE_ACTION)
+    NavigationService.navigate(SCREENS.CHOOSE_ACTION, { familyId })
   }
 
   return (

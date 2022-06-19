@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
@@ -13,14 +13,7 @@ import { familyApi } from '@api'
 import { useLocale } from '@hooks'
 import { SCREENS } from '@shared-constants'
 
-const data = [
-  { id: 1, title: 'Smith' },
-  { id: 2, title: 'Johnson' },
-] as IFamily[]
-
-interface FamilyCreateScreenProps {}
-
-export const FamilyCreateScreen: React.FC<FamilyCreateScreenProps> = () => {
+export const FamilyCreateScreen: React.FC = () => {
   const { strings } = useLocale()
   const queryClient = useQueryClient()
   const { mutate: addFamily } = useMutation(familyApi.post)
@@ -28,7 +21,7 @@ export const FamilyCreateScreen: React.FC<FamilyCreateScreenProps> = () => {
   const styles = createStyles(theme)
 
   const initialValues: IFamilyForm = {
-    name_of_family: '',
+    last_name: '',
     cell_phone: '',
   }
 
@@ -52,9 +45,9 @@ export const FamilyCreateScreen: React.FC<FamilyCreateScreenProps> = () => {
           <Header>{strings.profile}</Header>
           <View style={styles.body}>
             <TextInput
-              onChangeText={handleChange('name_of_family')}
-              onBlur={handleBlur('name_of_family')}
-              value={values.name_of_family}
+              onChangeText={handleChange('last_name')}
+              onBlur={handleBlur('last_name')}
+              value={values.last_name}
               style={styles.phone_input}
               placeholder={strings.name_the_family}
               placeholderTextColor="#fff"

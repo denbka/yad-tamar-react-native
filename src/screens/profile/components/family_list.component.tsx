@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native'
 import React, { FC } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { createStyles } from '../profile.styles'
 import { FamilyCard } from './family_card.component'
 
@@ -9,13 +9,11 @@ export const FamiliesList: FC<FamiliesListProps> = ({ data, onRemoveFamily, onNa
   const styles = createStyles(theme)
 
   return (
-    <FlatList
-      data={data}
-      style={styles.list}
-      renderItem={({ item }) => (
+    <View style={styles.list}>
+      {data.map(({ item }) => (
         <FamilyCard {...item} onRemoveFamily={onRemoveFamily} onNavigateToFamily={onNavigateToFamily} />
-      )}
-    />
+      ))}
+    </View>
   )
 }
 

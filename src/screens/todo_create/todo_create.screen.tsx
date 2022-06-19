@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Formik } from 'formik'
 import * as NavigationService from 'react-navigation-helpers'
 
-import { taskApi } from '@api'
+import { authApi, taskApi } from '@api'
 import { TextInput } from '@shared-components/text_input'
 import { Button } from '@shared-components/button'
 import { Header } from '@shared-components/header'
@@ -16,6 +16,7 @@ import { createStyles } from './todo_create.styles'
 import { DatePicker, Prompts } from './components'
 import { Text } from '@shared-components/text'
 import { useLocale } from '@hooks'
+import { DateTime } from 'luxon'
 
 interface TodoCreateScreenProps {}
 
@@ -23,21 +24,33 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
   const { strings } = useLocale()
   const queryClient = useQueryClient()
   const { mutate: addTask } = useMutation(taskApi.post)
+  const { data: userData } = useQuery('user', authApi.getUserData)
+  console.log(userData)
   const theme = useTheme()
   const styles = createStyles(theme)
-  const [form, setForm] = useState<TodoForm>({
+  const [form, setForm] = useState<ITodo>({
     task_name: '',
     comments: '',
     date: new Date(),
+    was_completed: false,
+    community_id: 45,
+    helper_id: userData?.user_id,
   })
 
-  const onSubmit = (data: TodoForm) => {
-    addTask(data, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(taskApi.queryKey)
-        NavigationService.goBack()
+  const onSubmit = (data: ITodo) => {
+    console.log(data, 'todo-form')
+    addTask(
+      {
+        ...data,
+        date: DateTime.fromJSDate(data.date).toUnixInteger(),
       },
-    })
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(taskApi.queryKey)
+          NavigationService.goBack()
+        },
+      },
+    )
   }
 
   const handleChangePrompt = (text: string) => {
