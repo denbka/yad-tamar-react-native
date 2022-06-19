@@ -1,5 +1,5 @@
-import React, { useMemo, useRef, useState } from 'react'
-import { PermissionsAndroid, ScrollView, View } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { PermissionsAndroid, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { Formik } from 'formik'
@@ -8,12 +8,11 @@ import { Picker } from '@react-native-picker/picker'
 import { TextInput } from '@shared-components/text_input'
 import { Button } from '@shared-components/button'
 import { useMutation, useQueryClient } from 'react-query'
-import { familyApi, volunteerApi } from '@api'
+import { volunteerApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './volunteers_create.styles'
 import { Modal } from '@shared-components/modal'
 import { useLocale } from '@hooks'
-import { SCREENS } from '@shared-constants'
 
 interface VolunteersCreateScreenProps {}
 
@@ -22,7 +21,6 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = ({ 
   console.log('family_di', family_id)
   const { strings } = useLocale()
   const queryClient = useQueryClient()
-  //  const { data } = useQuery<IFamily[]>(queryKey, familyApi.get)
   const { mutate: addVolunteer, isLoading } = useMutation(volunteerApi.post)
   const [contacts, setContacts] = useState<IContact[]>([])
   const theme = useTheme()

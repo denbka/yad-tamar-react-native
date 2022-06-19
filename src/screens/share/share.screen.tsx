@@ -3,11 +3,11 @@ import { Share, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { useMutation } from 'react-query'
-import {  volunteerApi } from '@api'
+import { volunteerApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './share.styles'
 import { Modal } from '@shared-components/modal'
-import { useLocale } from ы'@hooks'
+import { useLocale } from '@hooks'
 import { runOnJS } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { IconPeoples, IconVolunteer } from '@shared-components/icons'
@@ -30,7 +30,9 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
         volunteers.map(({ name, phone }) =>
           sendSMS({
             to: phone,
-            message: `Переходи в Play store по ссылке http://192.168.0.104:5500/index.html?token=${token}&family_id=${family_id} и получай задания`,
+            message: strings.to_volunteer_message(
+              `http://192.168.0.104:5500/index.html?token=${token}&family_id=${family_id}`,
+            ),
           }),
         ),
       )
@@ -40,10 +42,9 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
   }
 
   const handleShareToFamily = async () => {
-    // const token = await AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token')
     Share.share({
-      // message: `Переходи в Play store по ссылке http://192.168.0.104:5500/index.html?token=${token}&family_id=${family_id} и получай задания`,
-      message: 'Переходи в Play store по ссылке yadtamar://profile и скачивай приложение',
+      message: `http://192.168.0.104:5500/index.html?token=${token}&family_id=${family_id}`,
       title: 'Share app',
     })
   }
@@ -61,13 +62,13 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
         <GestureDetector gesture={tapOnShareToFamily}>
           <View style={[styles.item, { backgroundColor: theme.colors.green, marginBottom: 17 }]}>
             <IconPeoples fill="#fff" />
-            <Text style={styles.item_text}>Share with family</Text>
+            <Text style={styles.item_text}>{strings.share_with_family}</Text>
           </View>
         </GestureDetector>
         <GestureDetector gesture={tapOnShareToVolunteers}>
           <View style={[styles.item, { backgroundColor: theme.colors.softBlue }]}>
             <IconVolunteer />
-            <Text style={styles.item_text}>Share with a volunteer</Text>
+            <Text style={styles.item_text}>{strings.share_with_volunteer}</Text>
           </View>
         </GestureDetector>
       </View>

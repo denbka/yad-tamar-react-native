@@ -52,7 +52,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ isLoading, onSubmit }) => 
             style={[styles.text, !errors.password_confirmation ? null : styles.errorInput]}
           />
           <Button loading={isLoading} style={styles.button} variant="inline" onPress={() => handleSubmit(values)}>
-            {strings.login}
+            {strings.register}
           </Button>
         </View>
       )}

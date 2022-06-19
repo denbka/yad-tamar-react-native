@@ -4,8 +4,7 @@ import { StyleSheet } from 'react-native'
 
 export const createStyles = (theme: ExtendedTheme) => {
   const { colors } = theme
-  //   ScreenHeight
-  //   ScreenWidth
+
   return StyleSheet.create({
     overlay: {
       width: ScreenWidth,

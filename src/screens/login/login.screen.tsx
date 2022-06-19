@@ -58,7 +58,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         <LinearGradient colors={theme.colors.loginGradient} style={{ flex: 1 }}>
           <View style={styles.container}>
             <Animated.View style={[styles.title_container_reverse, animatedStyles]}>
-              <Text style={styles.title}>Yad Tamar</Text>
+              <Text style={styles.title}>{strings.login_title}</Text>
               <Image style={styles.image_title} source={require('@assets/logo.png')} />
             </Animated.View>
             <Animated.View style={[styles.title_container, animatedStyles]}>
@@ -73,7 +73,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         <Bottomsheet>
           <LoginForm onSubmit={handleSubmitForm} isLoading={isLoading} />
           <Link to="/register" style={styles.register_link}>
-            <Text>Нет аккаунта? Зарегистрируйтесь.</Text>
+            <Text>{strings.to_register}</Text>
           </Link>
         </Bottomsheet>
       </Pressable>

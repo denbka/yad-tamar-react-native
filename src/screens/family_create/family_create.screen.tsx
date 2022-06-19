@@ -59,7 +59,7 @@ export const FamilyCreateScreen: React.FC = () => {
               value={values.cell_phone}
               style={styles.phone_input}
               placeholderTextColor="#fff"
-              placeholder="Phone number"
+              placeholder={strings.phone_number}
             />
             <Button style={styles.button_create} onPress={handleSubmit} variant="inline">
               {strings.create}

@@ -5,27 +5,22 @@ import { createStyles } from '../profile.styles'
 import DeleteIcon from '@assets/delete.svg'
 import { useLocale } from '@hooks'
 
-export const FamilyCard: FC<FamilyCardProps> = ({
-  family_id,
-  name_of_family,
-  volunteersCount,
-  onRemoveFamily,
-  onNavigateToFamily,
-}) => {
+export const FamilyCard: FC<FamilyCardProps> = ({ onRemoveFamily, onNavigateToFamily, ...data }) => {
+  console.log(data)
   const { strings } = useLocale()
   const theme = useTheme()
   const styles = createStyles(theme)
 
   return (
-    <Pressable onPress={() => onNavigateToFamily(family_id)}>
+    <Pressable onPress={() => onNavigateToFamily(data.family_id)}>
       <View style={styles.card}>
         <View style={styles.card__content}>
-          <Text style={styles.card__title}>{name_of_family}</Text>
+          <Text style={styles.card__title}>{data.last_name}</Text>
           <Text style={styles.card__members}>
-            {volunteersCount} {strings.members_count}
+            {data.volunteersCount} {strings.members_count}
           </Text>
         </View>
-        <Pressable onPress={() => onRemoveFamily(family_id)}>
+        <Pressable onPress={() => onRemoveFamily(data.family_id)}>
           <DeleteIcon />
         </Pressable>
       </View>

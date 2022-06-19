@@ -12,7 +12,8 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
   const variant = styles[`card_body_${type}`]
   console.log(data)
   const parsedDate = useMemo(() => {
-    const dt = DateTime.fromMillis(Number(data.date) ?? 0)
+    console.log(data.date)
+    const dt = DateTime.fromSeconds(Number(data.date) ?? 0)
     if (!dt) return
     return {
       time: dt.toLocaleString(DateTime.TIME_SIMPLE),
@@ -39,7 +40,7 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
       </Animated.View>
       <Animated.View style={styles.card_body}>
         <Animated.View style={[styles.card_body_desciprtion, variant]}>
-          <Text style={styles.card_body_desciprtion_deadline}>{data.task_name}</Text>
+          {/* <Text style={styles.card_body_desciprtion_deadline}>{data.task_name}</Text> */}
           <Text style={styles.card_body_desciprtion_text}>{data.task_name}</Text>
         </Animated.View>
         <View style={[styles.card_body_volunteer, variant]}>

@@ -20,7 +20,8 @@ import { DateTime } from 'luxon'
 
 interface TodoCreateScreenProps {}
 
-export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
+export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => {
+  const family_id = route.params.familyId
   const { strings } = useLocale()
   const queryClient = useQueryClient()
   const { mutate: addTask } = useMutation(taskApi.post)
@@ -33,8 +34,8 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = () => {
     comments: '',
     date: new Date(),
     was_completed: false,
-    community_id: 45,
-    helper_id: userData?.user_id,
+    family_id: family_id,
+    helper_id: null,
   })
 
   const onSubmit = (data: ITodo) => {

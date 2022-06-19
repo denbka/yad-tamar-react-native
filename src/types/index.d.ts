@@ -5,7 +5,7 @@ declare module '*.svg' {
 
 declare type IFamily = {
   family_id: number
-  name_of_family: string
+  last_name: string
   volunteersCount: number
 }
 

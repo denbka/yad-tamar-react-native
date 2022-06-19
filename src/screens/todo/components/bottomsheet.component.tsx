@@ -22,7 +22,7 @@ export const Bottomsheet: FC<BottomsheetProps> = ({ onAdd, onShare, onVolunteers
       <GestureDetector gesture={tapOnMyVolunteers}>
         <View style={styles.bottomsheet_item}>
           <IconPeoples />
-          <Text style={styles.bottomsheet_item_text}>My volunteers</Text>
+          <Text style={styles.bottomsheet_item_text}>{strings.my_volunteers}</Text>
         </View>
       </GestureDetector>
       <GestureDetector gesture={tapOnAdd}>
@@ -39,7 +39,7 @@ export const Bottomsheet: FC<BottomsheetProps> = ({ onAdd, onShare, onVolunteers
       <GestureDetector gesture={tapOnShare}>
         <View style={styles.bottomsheet_item}>
           <ShareIcon />
-          <Text style={[styles.bottomsheet_item_text, styles.share_text]}>Share</Text>
+          <Text style={[styles.bottomsheet_item_text, styles.share_text]}>{strings.share}</Text>
         </View>
       </GestureDetector>
     </NativeBottomsheet>

@@ -38,7 +38,9 @@ const data = [
 
 export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   const familyId = route.params.familyId
+  console.log(familyId)
   const { data } = useQuery<ITask[]>(taskApi.queryKey, () => taskApi.get(familyId))
+  console.log(data, '231')
   const { data: progressData } = useQuery(taskApi.queryKey, () => taskApi.getProgress(familyId))
 
   const { strings } = useLocale()
@@ -73,7 +75,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
       <Bottomsheet
         onShare={handleShare}
         onVolunteers={() => NavigationService.push(SCREENS.VOLUNTEERS, { familyId })}
-        onAdd={() => NavigationService.push(SCREENS.TODO_CREATE)}
+        onAdd={() => NavigationService.push(SCREENS.TODO_CREATE, { familyId })}
       />
     </>
   )

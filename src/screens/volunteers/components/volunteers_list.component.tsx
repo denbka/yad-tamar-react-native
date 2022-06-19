@@ -1,5 +1,5 @@
 import { useTheme } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { FlatList } from 'react-native'
 import { createStyles } from '../volunteers.styles'
 import { VolunteersListCard } from './volunteers_card.component'

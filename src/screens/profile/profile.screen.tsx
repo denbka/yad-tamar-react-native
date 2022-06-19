@@ -22,6 +22,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   )
   const queryClient = useQueryClient()
   const { data } = useQuery<IFamily[]>(familyApi.queryKey, familyApi.get)
+  console.log(data, 'families')
   const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
   // const { data: userData } = useQuery<AxiosResponse<IUserShort>>('user', authApi.getUserData)
   // console.log(userData)
@@ -72,11 +73,13 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         <Text>{data}</Text>
       )}
       <View style={styles.settings}>
-        <Text style={styles.settings_title}>Settings</Text>
+        <Text style={styles.settings_title}>{strings.settings}</Text>
         <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
-          <Text style={styles.settings_item}>Language: {currentLocale}</Text>
+          <Text style={styles.settings_item}>
+            {strings.language}: {currentLocale}
+          </Text>
         </Pressable>
-        <Text style={styles.settings_item}>Logout</Text>
+        <Text style={styles.settings_item}>{strings.logout}</Text>
       </View>
     </ScrollView>
   )
