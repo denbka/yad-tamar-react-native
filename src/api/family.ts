@@ -7,12 +7,20 @@ const get = async () => {
   return response.data
 }
 
+const getById = async (family_id: string) => {
+  const response = await request.get<IFamily>(`${queryKey}/${family_id}`)
+  return {
+    token: response?.data?.token,
+  }
+}
+
 const post = async (form: IFamilyForm) => request.post<IFamily[]>(queryKey, form)
 
 const remove = async (id: number) => request.delete<IFamily>(`${queryKey}/${id}`)
 
 export const familyApi = {
   get,
+  getById,
   post,
   remove,
   queryKey,

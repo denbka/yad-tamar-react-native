@@ -18,7 +18,6 @@ interface VolunteersCreateScreenProps {}
 
 export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = ({ route }) => {
   const family_id = route.params.family_id
-  console.log('family_di', family_id)
   const { strings } = useLocale()
   const queryClient = useQueryClient()
   const { mutate: addVolunteer, isLoading } = useMutation(volunteerApi.post)
@@ -56,7 +55,6 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = ({ 
   }
 
   const handleSubmit = (values: IVolunteer) => {
-    console.log(values)
     addVolunteer(values, {
       onSuccess: () => {
         queryClient.invalidateQueries(volunteerApi.queryKey)

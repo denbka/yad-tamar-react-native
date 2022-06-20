@@ -26,7 +26,6 @@ export const FamilyCreateScreen: React.FC = () => {
   }
 
   const handleSubmit = (values: IFamilyForm) => {
-    console.log(values)
     addFamily(values, {
       onSuccess: () => {
         queryClient.invalidateQueries(familyApi.queryKey)

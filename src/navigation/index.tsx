@@ -1,7 +1,8 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { isReadyRef, navigationRef } from 'react-navigation-helpers'
+import qs, { ParsedQuery, ParsedUrl } from 'query-string'
 
 import { SCREENS } from '@shared-constants'
 import { LightTheme } from '@theme/themes'
@@ -14,20 +15,44 @@ import { TodoCreateScreen } from '@screens/todo_create'
 import { VolunteersScreen } from '@screens/volunteers'
 import { VolunteersCreateScreen } from '@screens/volunteers_create'
 import { RegisterScreen } from '@screens/register'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { authApi } from '@api'
 import { ShareScreen } from '@screens/share'
+import { Linking } from 'react-native'
+import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 
 const Stack = createStackNavigator()
 
+export const useLinkedParse = (cb: (params: ParsedQuery) => void): void => {
+  const parsedUrl = (e: { url: string }) => {
+    const { query }: ParsedUrl = qs.parseUrl(e.url)
+    const parsed: ParsedQuery = { token: query?.token }
+    if (!parsed?.token) return
+    cb(parsed)
+  }
+
+  useEffect(() => {
+    Linking.addEventListener('url', parsedUrl)
+    return () => Linking.removeEventListener('url', parsedUrl)
+  })
+}
+
 const Navigation: FC = () => {
+  const asyncStorage = useAsyncStorage('token')
+  const queryClient = useQueryClient()
   const [isAuth, setAuth] = useState(false)
 
   useQuery('user', authApi.getUserData, {
     onSuccess: (result) => {
-      console.log(result, 'result')
+      console.log(result, 'authApi.getUserData')
       setAuth(JSON.stringify(result) === '{}' ? false : true)
     },
+  })
+
+  useLinkedParse(({ token }) => {
+    if (!token) return
+    console.log('linked token', token.slice(1, 15))
+    asyncStorage.setItem(token).then(() => queryClient.invalidateQueries('user'))
   })
 
   navigationRef.isReady = () => true
@@ -50,7 +75,7 @@ const Navigation: FC = () => {
           <Stack.Screen name={SCREENS.REGISTER} component={RegisterScreen} />
         </Stack.Navigator>
       ) : (
-        <Stack.Navigator initialRouteName={SCREENS.LOGIN} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={SCREENS.PROFILE} screenOptions={{ headerShown: false }}>
           <Stack.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
           <Stack.Screen name={SCREENS.FAMILY_CREATE} component={FamilyCreateScreen} />
           <Stack.Screen name={SCREENS.TODO} component={TodoScreen} />

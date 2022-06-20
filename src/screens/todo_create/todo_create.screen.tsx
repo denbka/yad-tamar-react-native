@@ -25,8 +25,6 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
   const { strings } = useLocale()
   const queryClient = useQueryClient()
   const { mutate: addTask } = useMutation(taskApi.post)
-  const { data: userData } = useQuery('user', authApi.getUserData)
-  console.log(userData)
   const theme = useTheme()
   const styles = createStyles(theme)
   const [form, setForm] = useState<ITodo>({
@@ -39,7 +37,6 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
   })
 
   const onSubmit = (data: ITodo) => {
-    console.log(data, 'todo-form')
     addTask(
       {
         ...data,
@@ -77,7 +74,6 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
                 placeholder={strings.name_the_task}
                 placeholderTextColor="#fff"
               />
-              <DeleteIcon />
             </View>
             <Prompts onChange={handleChangePrompt} />
             <Divider style={{ marginBottom: 15, marginTop: 25 }} />

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './todo.styles'
 import { View } from 'react-native'
@@ -8,9 +8,10 @@ import { Header } from '@shared-components/header'
 import * as NavigationService from 'react-navigation-helpers'
 import { SCREENS } from '@shared-constants'
 import { Text } from '@shared-components/text'
-import { taskApi } from '@api'
+import { familyApi, taskApi, volunteerApi } from '@api'
 import { useQuery } from 'react-query'
 import { useLocale } from '@hooks'
+import { request } from '@services/request'
 
 const data = [
   {
@@ -38,12 +39,19 @@ const data = [
 
 export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   const familyId = route.params.familyId
-  console.log(familyId)
-  const { data } = useQuery<ITask[]>(taskApi.queryKey, () => taskApi.get(familyId))
-  console.log(data, '231')
+  const { data } = useQuery(taskApi.queryKey, () => taskApi.get(familyId))
+  const { data: volunteers } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(familyId))
+  // const { data: family } = useQuery(familyApi.queryKey, () => familyApi.getById(familyId))
   const { data: progressData } = useQuery(taskApi.queryKey, () => taskApi.getProgress(familyId))
 
-  const { strings } = useLocale()
+  const [familyToken, setFamilyToken] = useState(null)
+
+  useEffect(() => {
+    request.get<IFamily>(`families/${familyId}`).then((response) => {
+      setFamilyToken(response.data?.token)
+    })
+  }, [familyId])
+
   // const { mutate: removeTask } = useMutation((id: number) => taskApi.remove(id))
   const theme = useTheme()
   const styles = createStyles(theme)
@@ -57,7 +65,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   }, [activeSection])
 
   const handleShare = () => {
-    NavigationService.navigate(SCREENS.CHOOSE_ACTION, { familyId })
+    NavigationService.navigate(SCREENS.CHOOSE_ACTION, { familyId, volunteers, familyToken })
   }
 
   return (

@@ -1,12 +1,11 @@
 import { useTheme } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { createStyles } from '../profile.styles'
 import DeleteIcon from '@assets/delete.svg'
 import { useLocale } from '@hooks'
 
 export const FamilyCard: FC<FamilyCardProps> = ({ onRemoveFamily, onNavigateToFamily, ...data }) => {
-  console.log(data)
   const { strings } = useLocale()
   const theme = useTheme()
   const styles = createStyles(theme)

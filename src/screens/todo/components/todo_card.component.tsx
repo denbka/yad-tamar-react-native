@@ -10,9 +10,7 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
   const theme = useTheme()
   const styles = createStyles(theme)
   const variant = styles[`card_body_${type}`]
-  console.log(data)
   const parsedDate = useMemo(() => {
-    console.log(data.date)
     const dt = DateTime.fromSeconds(Number(data.date) ?? 0)
     if (!dt) return
     return {

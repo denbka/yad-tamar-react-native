@@ -3,7 +3,6 @@ import { request } from '@services/request'
 const queryKey = 'tasks'
 
 const get = async (family_id: string) => {
-  console.log('family_id', family_id)
   const response = await request.get<ITodo[]>(`${queryKey}/tasks-for-family/${family_id}`)
   return response.data
 }

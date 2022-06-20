@@ -3,7 +3,6 @@ import { request } from '@services/request'
 const queryKey = 'volunteers'
 
 const get = async (family_id: string) => {
-  console.log('dsadas', family_id)
   const response = await request.get<IVolunteer[]>(`${queryKey}/volunteers-for-family/${family_id}`)
   return response.data
 }
@@ -24,7 +23,7 @@ const remove = async (id: number) => {
 }
 
 const sendSMS = async (form: ISMSForm) => {
-  const response = await request.post<IVolunteer>(`${queryKey}/${id}`, form)
+  const response = await request.post<IVolunteer>(`${queryKey}/send-sms`, form)
   return response.data
 }
 

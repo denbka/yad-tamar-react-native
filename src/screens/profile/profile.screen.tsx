@@ -22,17 +22,11 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   )
   const queryClient = useQueryClient()
   const { data } = useQuery<IFamily[]>(familyApi.queryKey, familyApi.get)
-  console.log(data, 'families')
   const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
-  // const { data: userData } = useQuery<AxiosResponse<IUserShort>>('user', authApi.getUserData)
-  // console.log(userData)
-  // const { data: userInfo } = useQuery<IUser>('users', () => volunteerApi.getById(userData?.data?.user_id), {
-  //   enabled: !!userData?.data,
-  // })
+
   const theme = useTheme()
   const styles = createStyles(theme)
   const handlePushToFamilyCreate = () => {
-    console.log('SCREENS.FAMILY_CREATE')
     NavigationService.navigate(SCREENS.FAMILY_CREATE)
   }
 
@@ -48,7 +42,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     })
   }
 
-  console.log(availableLanguages)
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>

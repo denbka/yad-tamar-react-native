@@ -14,7 +14,6 @@ const register = async (form: ICredentials) => {
 
 const getUserData = async () => {
   const response = await request.get(`${queryKey}/get-user-data`)
-  console.log(response.data)
   return response.data ?? null
 }
 
