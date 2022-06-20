@@ -3,6 +3,7 @@ import { request } from '@services/request'
 const queryKey = 'volunteers'
 
 const get = async (family_id: string) => {
+  console.log('dsadas', family_id)
   const response = await request.get<IVolunteer[]>(`${queryKey}/volunteers-for-family/${family_id}`)
   return response.data
 }

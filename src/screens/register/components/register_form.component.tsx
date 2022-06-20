@@ -13,9 +13,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ isLoading, onSubmit }) => 
   const theme = useTheme()
   const initialValues: IRegisterForm = useMemo(
     () => ({
-      email: '',
-      password: '',
-      password_confirmation: '',
+      cell_phone: '',
+      last_name: '',
       role: 'coordinator',
       family_id: '272',
     }),
@@ -29,27 +28,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ isLoading, onSubmit }) => 
       {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
         <View>
           <TextInput
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
-            placeholder={strings.email}
-            keyboardType="email-address"
+            onChangeText={handleChange('cell_phone')}
+            onBlur={handleBlur('cell_phone')}
+            value={values.cell_phone}
+            placeholder={strings.phone_number}
+            keyboardType="phone-pad"
             returnKeyType="next"
-            style={[styles.text, !errors.email ? null : styles.errorInput]}
+            style={[styles.text, !errors.cell_phone ? null : styles.errorInput]}
           />
           <TextInput
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-            placeholder={strings.password}
-            style={[styles.text, !errors.password ? null : styles.errorInput]}
-          />
-          <TextInput
-            onChangeText={handleChange('password_confirmation')}
-            onBlur={handleBlur('password_confirmation')}
-            value={values.password_confirmation}
-            placeholder={strings.password_confirmation}
-            style={[styles.text, !errors.password_confirmation ? null : styles.errorInput]}
+            onChangeText={handleChange('last_name')}
+            onBlur={handleBlur('last_name')}
+            value={values.last_name}
+            placeholder={strings.last_name}
+            style={[styles.text, !errors.last_name ? null : styles.errorInput]}
           />
           <Button loading={isLoading} style={styles.button} variant="inline" onPress={() => handleSubmit(values)}>
             {strings.register}

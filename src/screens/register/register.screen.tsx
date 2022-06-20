@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Image, Keyboard, KeyboardAvoidingView, Pressable, Text, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { useKeyboard } from '@react-native-community/hooks'
@@ -23,7 +23,6 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
   const { mutate: register, isLoading: isRegisterLoading } = useMutation((form: IRegisterForm) =>
     authApi.register(form),
   )
-  const { mutate: login, isLoading: isLoginLoading } = useMutation((form: IRegisterForm) => authApi.login(form))
   const keyboard = useKeyboard()
 
   const animatedScale = useDerivedValue(() => withTiming(keyboard.keyboardShown ? 0.8 : 1), [keyboard.keyboardShown])
@@ -43,18 +42,17 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
     [animatedScale],
   )
 
-  const onLogin = (values: IRegisterForm) =>
-    login(values, {
+  const handleSubmitForm = (values: IRegisterForm) => {
+    register(values, {
       onSuccess: ({ token }) => {
+        console.log('dsadsasa', token)
         const queryClient = new QueryClient()
         asyncStorage.setItem(token).then(() => queryClient.invalidateQueries('user'))
       },
-    })
-
-  const handleSubmitForm = (values: IRegisterForm) => {
-    console.log(values)
-    register(values, {
-      onSuccess: () => onLogin(values),
+      onError: (error) => {
+        console.log('error')
+        console.log(error.response)
+      },
     })
   }
 
@@ -77,7 +75,7 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
           </View>
         </LinearGradient>
         <Bottomsheet>
-          <RegisterForm isLoading={isRegisterLoading || isLoginLoading} onSubmit={handleSubmitForm} />
+          <RegisterForm isLoading={isRegisterLoading} onSubmit={handleSubmitForm} />
         </Bottomsheet>
       </Pressable>
     </KeyboardAvoidingView>

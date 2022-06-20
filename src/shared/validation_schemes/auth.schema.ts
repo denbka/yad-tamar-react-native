@@ -1,8 +1,7 @@
 import * as Yup from 'yup'
 
-const email = Yup.string().email().required()
-const password = Yup.string().min(5).required()
-const password_confirmation = Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match')
+const cell_phone = Yup.string().required()
+const last_name = Yup.string().required()
 
-export const registerSchema = () => Yup.object({ email, password, password_confirmation })
-export const loginSchema = () => Yup.object().shape({ email, password })
+export const registerSchema = () => Yup.object({ cell_phone, last_name })
+export const loginSchema = () => Yup.object({ cell_phone, last_name })

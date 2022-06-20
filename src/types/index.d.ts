@@ -73,12 +73,11 @@ declare type IVolunteer = {
 }
 
 type ICredentials = {
-  email: string
-  password: string
+  cell_phone: string
+  last_name: string
 }
 
 declare type IRegisterForm = ICredentials & {
-  password_confirmation: string
   role: string
   family_id: string
 }

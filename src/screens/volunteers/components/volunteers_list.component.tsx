@@ -4,7 +4,7 @@ import { FlatList } from 'react-native'
 import { createStyles } from '../volunteers.styles'
 import { VolunteersListCard } from './volunteers_card.component'
 
-export const VolunteersList: FC<VolunteersListProps> = ({ data }) => {
+export const VolunteersList: FC<VolunteersListProps> = ({ data, onDeleteVolunteer }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
 
@@ -13,11 +13,12 @@ export const VolunteersList: FC<VolunteersListProps> = ({ data }) => {
       contentContainerStyle={styles.list}
       data={data}
       style={styles.list}
-      renderItem={({ item }) => <VolunteersListCard {...item} />}
+      renderItem={({ item }) => <VolunteersListCard {...item} onDeleteVolunteer={onDeleteVolunteer} />}
     />
   )
 }
 
 type VolunteersListProps = {
   data: IVolunteer[]
+  onDeleteVolunteer: (volunteer_id: number) => void
 }

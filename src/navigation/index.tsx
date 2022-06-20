@@ -45,7 +45,7 @@ const Navigation: FC = () => {
       theme={LightTheme}
     >
       {!isAuth ? (
-        <Stack.Navigator initialRouteName={SCREENS.LOGIN} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={SCREENS.REGISTER} screenOptions={{ headerShown: false }}>
           <Stack.Screen name={SCREENS.LOGIN} component={LoginScreen} />
           <Stack.Screen name={SCREENS.REGISTER} component={RegisterScreen} />
         </Stack.Navigator>

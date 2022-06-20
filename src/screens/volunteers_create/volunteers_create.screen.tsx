@@ -73,8 +73,7 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = ({ 
   }
 
   const setSelectedContact = (contact: IContact) => {
-    console.log(contact)
-    setInitialValues({ name: contact.label, phone: contact?.value })
+    setInitialValues({ family_id, name: contact.label, phone: contact?.value })
   }
   return (
     <Modal onClose={handleCloseForm} style={{ minHeight: 500 }}>

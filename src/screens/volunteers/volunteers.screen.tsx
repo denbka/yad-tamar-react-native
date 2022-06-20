@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Formik } from 'formik'
 import * as NavigationService from 'react-navigation-helpers'
 
@@ -18,13 +18,17 @@ interface VolunteersScreenProps {}
 
 export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => {
   const family_id = route.params.familyId
-  const { data } = useQuery<ITask[]>(taskApi.queryKey, () => volunteerApi.get(family_id))
-  console.log(data)
+  const queryClient = useQueryClient()
 
-  const { mutate: addTask } = useMutation(taskApi.post)
+  const { data } = useQuery<ITask[]>(volunteerApi.queryKey, () => volunteerApi.get(family_id))
+
+  const { mutate: removeVolunteer } = useMutation(volunteerApi.remove)
+
   const theme = useTheme()
   const { strings } = useLocale()
+
   const styles = createStyles(theme)
+
   const [values] = useState<TodoForm>({
     task_name: '',
     comments: '',
@@ -33,6 +37,14 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
 
   const handleSubmit = (data: TodoForm) => {
     NavigationService.navigate('volunteers_create', { family_id })
+  }
+
+  const handleDeleteVolunteer = (volunteer_id: number) => {
+    removeVolunteer(volunteer_id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(volunteerApi.queryKey)
+      },
+    })
   }
 
   return (
@@ -44,7 +56,11 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
             <Text style={styles.section_title} bold>
               {strings.volunteers}
             </Text>
-            {Array.isArray(data) ? <VolunteersList data={data} /> : <Text>{data}</Text>}
+            {Array.isArray(data) ? (
+              <VolunteersList data={data} onDeleteVolunteer={handleDeleteVolunteer} />
+            ) : (
+              <Text>{data}</Text>
+            )}
             <Button style={styles.button_create} onPress={handleSubmit} variant="inline">
               {strings.create}
             </Button>
