@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 import DatePickerNative from 'react-native-date-picker'
 import { DateTime } from 'luxon'
 import { useTheme } from '@react-navigation/native'
@@ -27,9 +27,6 @@ export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
 
   const handleChangeActiveType = (type: string) => {
     setActiveType(type)
-    if (type === strings.no_time) {
-      onChange(null)
-    }
   }
 
   return (
@@ -45,6 +42,7 @@ export const DatePicker: FC<DatePickerProps> = ({ date, onChange }) => {
       <View style={styles.datepicker_prompts}>
         {prompts.map((prompt, index) => (
           <Pressable
+            key={prompt}
             style={[
               styles.datepicker_prompts_item_container,
               index === prompts.length - 1 && styles.datepicker_prompts_item_container_last,

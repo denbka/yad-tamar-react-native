@@ -2,8 +2,8 @@ import React from 'react'
 import { Pressable, Share, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
-import { useMutation, useQuery } from 'react-query'
-import { familyApi, volunteerApi } from '@api'
+import { useMutation } from 'react-query'
+import { volunteerApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './share.styles'
 import { Modal } from '@shared-components/modal'
@@ -24,11 +24,11 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
     try {
       if (!volunteers?.length) return
       await Promise.all(
-        volunteers.map(({ name, cell_phone }) =>
+        volunteers.map(({ cell_phone, user_id }) =>
           sendSMS({
             to: cell_phone,
             message: strings.to_volunteer_message(
-              `http://192.168.0.104:5500/index.html?token=${familyToken}&family_id=${family_id}`, // TODO: change prod link
+              `https://tamar.project-babaev.ru/volunteers/?token=${familyToken}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
             ),
           }),
         ),
@@ -42,7 +42,10 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
   const handleShareToFamily = async () => {
     if (!familyToken) return
     Share.share({
-      message: strings.to_family_message(`yadtamar://register?token=${familyToken}`),
+      message: strings.to_family_message(
+        'https://tamar.project-babaev.ru/volunteers/app.html',
+        `yadtamar://register?token=${familyToken}`,
+      ),
       title: 'Share app',
     })
   }

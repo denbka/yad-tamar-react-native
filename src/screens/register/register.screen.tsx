@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Image, Keyboard, KeyboardAvoidingView, Pressable, Text, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { useKeyboard } from '@react-native-community/hooks'
@@ -7,7 +7,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { RegisterForm } from './components/register_form.component'
 import Picture from '@assets/login.svg'
 import { Bottomsheet } from '@shared-components/bottomsheet'
-import { QueryClient, useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { authApi } from '@api'
 import LogoEnolaWhite from '@assets/logo_enola_white.svg'
 import { normalizeText } from '@freakycoder/react-native-helpers'
@@ -16,6 +16,7 @@ import Animated, { interpolate, useAnimatedStyle, useDerivedValue, withTiming } 
 import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 
 export const RegisterScreen: FC<RegisterScreenProps> = () => {
+  const queryClient = useQueryClient()
   const { strings } = useLocale()
   const theme = useTheme()
   const styles = createStyles(theme)
@@ -44,10 +45,10 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
 
   const handleSubmitForm = (values: IRegisterForm) => {
     register(values, {
-      onSuccess: ({ token }) => {
-        console.log('dsadsasa', token)
-        const queryClient = new QueryClient()
-        asyncStorage.setItem(token).then(() => queryClient.invalidateQueries('user'))
+      onSuccess: async (token) => {
+        console.log(values)
+        await asyncStorage.setItem(token)
+        queryClient.invalidateQueries('user')
       },
       onError: (error) => {
         console.log('error')

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { isReadyRef, navigationRef } from 'react-navigation-helpers'
@@ -33,8 +33,7 @@ export const useLinkedParse = (cb: (params: ParsedQuery) => void): void => {
 
   useEffect(() => {
     Linking.addEventListener('url', parsedUrl)
-    return () => Linking.removeEventListener('url', parsedUrl)
-  })
+  }, [])
 }
 
 const Navigation: FC = () => {

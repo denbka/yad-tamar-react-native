@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Text, TextInput as NativeInput, TextInputProps, View } from 'react-native'
 import { createStyles } from './text_input.styles'
 
-export const TextInput: FC<InputProps> = ({ style, prompt, textarea, keyboardType, ...props }) => {
+export const TextInput: FC<InputProps> = ({ style, prompt, textarea, ...props }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
 

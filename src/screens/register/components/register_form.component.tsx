@@ -16,7 +16,7 @@ export const RegisterForm: FC<RegisterFormProps> = ({ isLoading, onSubmit }) => 
       cell_phone: '',
       last_name: '',
       role: 'coordinator',
-      family_id: '272',
+      family_id: '299',
     }),
     [],
   )

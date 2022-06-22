@@ -11,7 +11,12 @@ export const FamiliesList: FC<FamiliesListProps> = ({ data, onRemoveFamily, onNa
   return (
     <View style={styles.list}>
       {data.map((item) => (
-        <FamilyCard {...item} onRemoveFamily={onRemoveFamily} onNavigateToFamily={onNavigateToFamily} />
+        <FamilyCard
+          key={item.family_id}
+          {...item}
+          onRemoveFamily={onRemoveFamily}
+          onNavigateToFamily={onNavigateToFamily}
+        />
       ))}
     </View>
   )

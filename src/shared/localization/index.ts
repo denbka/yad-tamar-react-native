@@ -44,7 +44,9 @@ export const localStrings = new LocalizedStrings({
     register: 'Register',
     share: 'Share',
     to_volunteer_message: (link: string) => `Enola. Посмотри свои задания по ссылке: ${link}`,
-    to_family_message: (link: string) => `Переходи в Play store по ссылке ${link} и cкачивай приложение`,
+    to_family_message: (web_link: string, app_link: string) => `
+    1. Переходи по ссылке ${web_link} и скачивай приложение
+    2. После скачивания нажимай на эту ссылку ${app_link} и присоединяйся к семье`,
   },
   il: {
     email: 'אימייל',

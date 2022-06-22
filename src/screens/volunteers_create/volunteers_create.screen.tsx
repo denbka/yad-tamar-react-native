@@ -32,7 +32,7 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = ({ 
     pickerRef.current?.focus()
   }
 
-  const chooseFromContacts = async ({ name_of_family }: Pick<IFamily, 'name_of_family'>) => {
+  const chooseFromContacts = async () => {
     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
       title: 'Contacts',
       message: 'This app would like to view your contacts.',

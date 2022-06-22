@@ -1,6 +1,6 @@
 import { ScreenWidth } from '@freakycoder/react-native-helpers'
 import { useTheme } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { FlatList, View } from 'react-native'
 import Animated, { DerivedValue, interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import { createStyles } from '../todo.styles'

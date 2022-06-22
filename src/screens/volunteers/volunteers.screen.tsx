@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { Formik } from 'formik'
 import * as NavigationService from 'react-navigation-helpers'
 
-import { taskApi, volunteerApi } from '@api'
+import { volunteerApi } from '@api'
 import { Button } from '@shared-components/button'
 import { Header } from '@shared-components/header'
 
@@ -20,7 +20,7 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
   const family_id = route.params.familyId
   const queryClient = useQueryClient()
 
-  const { data } = useQuery<ITask[]>(volunteerApi.queryKey, () => volunteerApi.get(family_id))
+  const { data } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(family_id))
 
   const { mutate: removeVolunteer } = useMutation(volunteerApi.remove)
 
@@ -29,13 +29,13 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
 
   const styles = createStyles(theme)
 
-  const [values] = useState<TodoForm>({
+  const [values] = useState<ITask>({
     task_name: '',
     comments: '',
     date: new Date(),
   })
 
-  const handleSubmit = (data: TodoForm) => {
+  const handleSubmit = () => {
     NavigationService.navigate('volunteers_create', { family_id })
   }
 

@@ -16,7 +16,7 @@ import LogoEnolaWhite from '@assets/logo_enola_white.svg'
 import { LoginForm } from './components/login_form.component'
 import { createStyles } from './login.styles'
 
-export const LoginScreen: FC<LoginScreenProps> = () => {
+export const LoginScreen: FC = () => {
   const asyncStorage = useAsyncStorage('token')
   const { mutate: login, isLoading } = useMutation((form: ICredentials) => authApi.login(form))
 
@@ -80,5 +80,3 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
     </KeyboardAvoidingView>
   )
 }
-
-type LoginScreenProps = {}

@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Pressable, ScrollView, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import RNPickerSelect from 'react-native-picker-select'
 
-import { authApi, familyApi, volunteerApi } from '@api'
+import { familyApi } from '@api'
 import { SCREENS } from '@shared-constants'
 import { Button } from '@shared-components/button'
 import { createStyles } from './profile.styles'

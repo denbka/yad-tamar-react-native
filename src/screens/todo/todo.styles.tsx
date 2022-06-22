@@ -1,4 +1,4 @@
-import { normalizeText, ScreenHeight, ScreenWidth } from '@freakycoder/react-native-helpers'
+import { normalizeText, ScreenHeight } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'

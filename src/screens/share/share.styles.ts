@@ -1,11 +1,9 @@
 import { normalizeText } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
-import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 
-export const createStyles = (theme: ExtendedTheme) => {
+export const createStyles = () => {
   const { isRtl } = useLocale()
-  const { colors } = theme
 
   return StyleSheet.create({
     container: {

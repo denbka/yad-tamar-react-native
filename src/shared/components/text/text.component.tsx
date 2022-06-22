@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useMemo } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { StyleProp, Text as NativeText, TextStyle } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 

@@ -1,5 +1,5 @@
 import { useTheme } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { View } from 'react-native'
 import { createStyles } from '../profile.styles'
 

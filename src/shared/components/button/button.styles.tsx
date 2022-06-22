@@ -1,4 +1,3 @@
-import { normalizeText } from '@freakycoder/react-native-helpers'
 import { ExtendedTheme } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 

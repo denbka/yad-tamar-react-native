@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { StyleProp, View, ViewStyle } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './divider.styles'

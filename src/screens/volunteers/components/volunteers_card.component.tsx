@@ -1,5 +1,5 @@
 import { useTheme } from '@react-navigation/native'
-import React, { FC, useMemo } from 'react'
+import React, { FC } from 'react'
 import { Pressable, Text, View } from 'react-native'
 import DeleteIcon from '@assets/delete.svg'
 import { createStyles } from '../volunteers.styles'
