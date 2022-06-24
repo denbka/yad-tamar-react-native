@@ -43,6 +43,9 @@ export const localStrings = new LocalizedStrings({
     logout: 'Logout',
     register: 'Register',
     share: 'Share',
+    volunteer_create: 'Create volunteer',
+    success: 'Success',
+    toast_volunteer: 'Message sent to volunteers',
     to_volunteer_message: (link: string) => `Enola. Посмотри свои задания по ссылке: ${link}`,
     to_family_message: (web_link: string, app_link: string) => `
     1. Переходи по ссылке ${web_link} и скачивай приложение
@@ -51,6 +54,7 @@ export const localStrings = new LocalizedStrings({
   il: {
     email: 'אימייל',
     login_title: 'יד תמר',
+    volunteer_create: 'צור מתנדב',
     password: 'סיסמה',
     login: 'התחברות',
     create_family: 'צור משפחה',
@@ -89,6 +93,8 @@ export const localStrings = new LocalizedStrings({
     logout: 'להתנתק',
     register: 'הירשם',
     share: 'לשתף',
+    toast_volunteer: 'הודעה נשלחה למתנדבים',
+    success: 'הַצלָחָה',
     to_volunteer_message: (link: string) => `Enola. Посмотри свои задания по ссылке: ${link}`,
     to_family_message: (link: string) => `Переходи в Play store по ссылке ${link} и cкачивай приложение`,
   },

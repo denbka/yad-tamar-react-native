@@ -5,6 +5,7 @@ import { StatusBar, useColorScheme, LogBox } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { addEventListener, NetInfoState } from '@react-native-community/netinfo'
 import { onlineManager, QueryClient, QueryClientProvider } from 'react-query'
+import Toast from 'react-native-toast-message'
 
 import Navigation from './src/navigation'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -48,6 +49,7 @@ const App = () => {
                 <Navigation />
               </SafeAreaView>
             </ModalProvider>
+            <Toast />
           </LocaleProvider>
         </QueryClientProvider>
       </GestureHandlerRootView>

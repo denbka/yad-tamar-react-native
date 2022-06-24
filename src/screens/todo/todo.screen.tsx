@@ -43,7 +43,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
 
   return (
     <>
-      <Header>Smith family</Header>
+      <Header>Back</Header>
       <View style={styles.container}>
         <TodoSwitch onChange={handleSetActiveSection} activeSection={activeSection} />
         <Progress value={Number(progressData) || 0} />

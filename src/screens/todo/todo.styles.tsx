@@ -205,17 +205,17 @@ export const createStyles = (theme: ExtendedTheme) => {
     bottomsheet_item_text: {
       position: 'absolute',
       bottom: 0,
-      left: -23,
+      left: isRtl ? -47 : -20,
       right: 0,
       width: 100,
       fontSize: normalizeText(8),
       color: '#828282',
     },
     share_text: {
-      left: 0,
+      left: isRtl ? -70 : 0,
     },
     add_text: {
-      left: 17,
+      left: isRtl ? -26 : 18,
       bottom: -6,
       color: colors.darkBlue,
     },

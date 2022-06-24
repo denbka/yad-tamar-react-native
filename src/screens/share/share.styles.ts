@@ -15,15 +15,16 @@ export const createStyles = () => {
     },
     body: {},
     item: {
+      flexDirection: isRtl ? 'row-reverse' : 'row',
       width: '100%',
-      flexDirection: isRtl ? 'row-reverse ' : 'row',
       paddingVertical: normalizeText(15),
       paddingHorizontal: normalizeText(29),
       borderRadius: 5,
       alignItems: 'center',
     },
     item_text: {
-      marginLeft: normalizeText(29),
+      marginLeft: isRtl ? 0 : normalizeText(29),
+      marginRight: isRtl ? normalizeText(29) : 0,
       fontSize: normalizeText(12),
     },
   })

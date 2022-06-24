@@ -1,8 +1,9 @@
 import React from 'react'
 import { Pressable, Share, View } from 'react-native'
-import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { useMutation } from 'react-query'
+import { useTheme } from '@react-navigation/native'
+import Toast from 'react-native-toast-message'
 import { volunteerApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './share.styles'
@@ -10,15 +11,20 @@ import { Modal } from '@shared-components/modal'
 import { useLocale } from '@hooks'
 import { IconPeoples, IconVolunteer } from '@shared-components/icons'
 
-interface ShareScreenProps {}
-
-export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
+export const ShareScreen: React.FC = ({ route }) => {
   const { familyId: family_id, volunteers, familyToken } = route.params
-
+  const theme = useTheme()
   const { strings } = useLocale()
   const { mutateAsync: sendSMS } = useMutation(volunteerApi.sendSMS)
-  const theme = useTheme()
-  const styles = createStyles(theme)
+  const styles = createStyles()
+
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: strings.success,
+      text2: strings.toast_volunteer,
+    })
+  }
 
   const handleShareToVolunteers = async () => {
     try {
@@ -33,6 +39,7 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
           }),
         ),
       )
+      showToast()
       NavigationService.goBack()
     } catch (e) {
       console.log('ERORRORORR', e)
@@ -55,7 +62,7 @@ export const ShareScreen: React.FC<ShareScreenProps> = ({ route }) => {
   }
 
   return (
-    <Modal onClose={handleCloseForm} style={{ width: '70%', minHeight: 300 }}>
+    <Modal onClose={handleCloseForm} style={{ width: '80%', minHeight: 300 }}>
       <View style={styles.container}>
         <Pressable onPress={handleShareToFamily}>
           <View style={[styles.item, { backgroundColor: theme.colors.green, marginBottom: 17 }]}>

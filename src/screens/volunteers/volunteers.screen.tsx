@@ -51,7 +51,7 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
     <Formik enableReinitialize initialValues={values} onSubmit={handleSubmit}>
       {({ handleSubmit }) => (
         <View style={styles.container}>
-          <Header>Smith family</Header>
+          <Header>Back</Header>
           <View style={styles.body}>
             <Text style={styles.section_title} bold>
               {strings.volunteers}
@@ -62,7 +62,7 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
               <Text>{data}</Text>
             )}
             <Button style={styles.button_create} onPress={handleSubmit} variant="inline">
-              {strings.create}
+              {strings.volunteer_create}
             </Button>
           </View>
         </View>
