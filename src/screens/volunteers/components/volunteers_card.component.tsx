@@ -5,7 +5,7 @@ import DeleteIcon from '@assets/delete.svg'
 import { createStyles } from '../volunteers.styles'
 import MedalIcon from '@assets/medal.svg'
 
-export const VolunteersListCard: FC<VolunteerListCardProps> = ({ user_id, cell_phone, onDeleteVolunteer }) => {
+export const VolunteersListCard: FC<VolunteerListCardProps> = ({ user_id, first_name, onDeleteVolunteer }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
 
@@ -13,7 +13,7 @@ export const VolunteersListCard: FC<VolunteerListCardProps> = ({ user_id, cell_p
     <View style={styles.card}>
       <View style={styles.card_title_container}>
         <MedalIcon style={styles.medal} />
-        <Text style={styles.card__title}>{cell_phone}</Text>
+        <Text style={styles.card__title}>{first_name}</Text>
       </View>
       <Pressable onPress={() => onDeleteVolunteer(user_id)}>
         <DeleteIcon />

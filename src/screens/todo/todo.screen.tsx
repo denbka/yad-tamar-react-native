@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './todo.styles'
 import { View } from 'react-native'
@@ -11,12 +11,32 @@ import { Text } from '@shared-components/text'
 import { taskApi, volunteerApi } from '@api'
 import { useQuery } from 'react-query'
 import { request } from '@services/request'
+import { DateTime } from 'luxon'
+
+const currentWeekLastTime = DateTime.now().endOf('week').toMillis()
+
+const toWeek = (task: ITodo) =>
+  DateTime.fromSeconds(Number(task.date) ?? 0)
+    .minus({ milliseconds: currentWeekLastTime })
+    .toMillis() < 0
+const toTodo = (task: ITodo) =>
+  DateTime.fromSeconds(Number(task.date) ?? 0)
+    .minus({ milliseconds: currentWeekLastTime })
+    .toMillis() > 0
 
 export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   const familyId = route.params.familyId
   const { data } = useQuery(taskApi.queryKey, () => taskApi.get(familyId))
   const { data: volunteers } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(familyId))
   const { data: progressData } = useQuery(taskApi.queryKey, () => taskApi.getProgress(familyId))
+
+  const { week, todo } = useMemo(
+    () => ({
+      week: data?.filter(toWeek) ?? 'nothing',
+      todo: data?.filter(toTodo) ?? 'nothing',
+    }),
+    [data],
+  )
 
   const [familyToken, setFamilyToken] = useState(null)
 
@@ -48,7 +68,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
         <TodoSwitch onChange={handleSetActiveSection} activeSection={activeSection} />
         <Progress value={Number(progressData) || 0} />
         {Array.isArray(data) ? (
-          <TodoList activeSectionValue={activeSectionValue} data={Array.isArray(data) ? data : []} />
+          <TodoList activeSectionValue={activeSectionValue} week={week} todo={todo} />
         ) : (
           <Text>{data}</Text>
         )}

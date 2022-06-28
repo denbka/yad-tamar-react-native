@@ -1,7 +1,7 @@
 import LocalizedStrings from 'react-native-localization'
 
 export const localStrings = new LocalizedStrings({
-  ru: {
+  en: {
     email: 'e-mail',
     login_title: 'Yad Tamar',
     password: 'password',
@@ -46,12 +46,16 @@ export const localStrings = new LocalizedStrings({
     volunteer_create: 'Create volunteer',
     success: 'Success',
     toast_volunteer: 'Message sent to volunteers',
-    to_volunteer_message: (link: string) => `Enola. Посмотри свои задания по ссылке: ${link}`,
+    will_do_this: 'will do this',
+    free: 'free',
+    to_take: 'to take',
+    task_completed: 'Task completed',
+    to_volunteer_message: (link: string) => `Enola. View your tasks on the link: ${link}`,
     to_family_message: (web_link: string, app_link: string) => `
-    1. Переходи по ссылке ${web_link} и скачивай приложение
-    2. После скачивания нажимай на эту ссылку ${app_link} и присоединяйся к семье`,
+    1. Follow the link ${web_link} and download the app
+    2. After downloading click on this link: ${app_link} . Join the family!`,
   },
-  il: {
+  heb: {
     email: 'אימייל',
     login_title: 'יד תמר',
     volunteer_create: 'צור מתנדב',
@@ -95,10 +99,17 @@ export const localStrings = new LocalizedStrings({
     share: 'לשתף',
     toast_volunteer: 'הודעה נשלחה למתנדבים',
     success: 'הַצלָחָה',
-    to_volunteer_message: (link: string) => `Enola. Посмотри свои задания по ссылке: ${link}`,
-    to_family_message: (link: string) => `Переходи в Play store по ссылке ${link} и cкачивай приложение`,
+    password_confirmation: 'אשר סיסמה',
+    will_do_this: 'יעשה את זה',
+    free: 'חינם',
+    to_take: 'לקחת',
+    task_completed: 'משימה הושלמה',
+    to_volunteer_message: (link: string) => `Enola. View your tasks on the link: ${link}`,
+    to_family_message: (web_link: string, app_link: string) => `
+    1. Follow the link ${web_link} and download the app
+    2. After downloading click on this link: ${app_link} . Join the family!`,
   },
 })
 
 // ? Set the language manually
-localStrings.setLanguage('ru')
+localStrings.setLanguage('heb')

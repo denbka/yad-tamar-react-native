@@ -1,3 +1,4 @@
+import { localStrings } from '@locales'
 import { useTheme } from '@react-navigation/native'
 import { Text } from '@shared-components/text'
 import { DateTime } from 'luxon'
@@ -42,10 +43,18 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
           <Text style={styles.card_body_desciprtion_text}>{data.task_name}</Text>
         </Animated.View>
         <View style={[styles.card_body_volunteer, variant]}>
-          <Text bold style={styles.card_body_volunteer_first_status}>
-            Free
-          </Text>
-          <Text style={styles.card_body_volunteer_second_status}>to take</Text>
+          {data.was_completed ? (
+            <Text style={styles.card_body_volunteer_second_status}>{localStrings.task_completed}</Text>
+          ) : (
+            <>
+              <Text bold style={styles.card_body_volunteer_first_status}>
+                {data.helper_id ? data.helper_id : localStrings.free}
+              </Text>
+              <Text style={styles.card_body_volunteer_second_status}>
+                {data.helper_id ? localStrings.will_do_this : localStrings.to_take}
+              </Text>
+            </>
+          )}
         </View>
       </Animated.View>
     </Animated.View>

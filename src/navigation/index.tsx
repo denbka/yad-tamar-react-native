@@ -33,7 +33,7 @@ export const useLinkedParse = (cb: (params: ParsedQuery) => void): void => {
 
   useEffect(() => {
     Linking.addEventListener('url', parsedUrl)
-  }, [])
+  })
 }
 
 const Navigation: FC = () => {
@@ -48,10 +48,10 @@ const Navigation: FC = () => {
     },
   })
 
-  useLinkedParse(({ token }) => {
+  useLinkedParse(async ({ token }) => {
     if (!token) return
-    console.log('linked token', token.slice(1, 15))
-    asyncStorage.setItem(token).then(() => queryClient.invalidateQueries('user'))
+    await asyncStorage.setItem(token)
+    queryClient.invalidateQueries('user')
   })
 
   navigationRef.isReady = () => true

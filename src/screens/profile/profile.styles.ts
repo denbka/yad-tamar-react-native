@@ -21,6 +21,8 @@ export const createStyles = (theme: ExtendedTheme) => {
     avatar: {
       width: normalizeText(70),
       height: normalizeText(70),
+      justifyContent: 'center',
+      alignItems: 'center',
       borderRadius: 99999,
       backgroundColor: 'white',
       marginRight: isRtl ? 0 : 20,
@@ -42,11 +44,6 @@ export const createStyles = (theme: ExtendedTheme) => {
       fontSize: normalizeText(11),
       textAlign: isRtl ? 'right' : 'left',
     },
-    button_create: {
-      width: ScreenWidth - 160,
-      marginLeft: 80,
-      marginTop: 30,
-    },
     title: {
       paddingVertical: normalizeText(20),
       paddingHorizontal: normalizeText(30),
@@ -57,6 +54,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     list: {
       flex: 1,
       paddingHorizontal: normalizeText(30),
+      marginBottom: normalizeText(40),
     },
     card: {
       backgroundColor: colors.darkBlue,

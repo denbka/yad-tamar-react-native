@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 
-import { familyApi } from '@api'
+import { authApi, familyApi } from '@api'
 import { SCREENS } from '@shared-constants'
 import { Button } from '@shared-components/button'
 import { createStyles } from './profile.styles'
@@ -12,6 +12,7 @@ import { Avatar, FamiliesList } from './components'
 import { Text } from '@shared-components/text'
 import { useLocale } from '@hooks'
 import { localStrings } from '@locales'
+import { IconVolunteer } from '@shared-components/icons'
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const { toggleLanguage, strings, currentLocale } = useLocale()
@@ -20,9 +21,12 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     [],
   )
   const queryClient = useQueryClient()
-  const { data } = useQuery<IFamily[]>(familyApi.queryKey, familyApi.get)
-  const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
+  const { data: userInfo } = useQuery<IFamily[]>('user', authApi.getUserData)
+  const { data } = useQuery<IFamily[]>(familyApi.queryKey, () => familyApi.get(userInfo?.role), {
+    enabled: !!userInfo?.role,
+  })
 
+  const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
   const theme = useTheme()
   const styles = createStyles(theme)
   const handlePushToFamilyCreate = () => {
@@ -44,16 +48,26 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Avatar />
+        <Avatar>
+          <IconVolunteer fill={theme.colors.darkBlue} />
+        </Avatar>
         <View>
-          {/* <Text style={styles.name}>{userInfo?.mail}</Text> */}
-          <Text style={styles.role}>coordinator</Text>
-          <Text style={styles.job}>Volunteer Society</Text>
+          <Text style={styles.name}>{userInfo?.name}</Text>
+          <Text style={styles.role}>{userInfo?.role === 'coordinator' ? 'coordinator' : 'helper'}</Text>
+          {userInfo?.role === 'coordinator' && <Text style={styles.job}>Volunteer Society</Text>}
         </View>
       </View>
-      <Button onPress={handlePushToFamilyCreate} variant="inline" style={styles.button_create}>
-        {strings.create_family}
-      </Button>
+      <View style={styles.settings}>
+        <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
+          <Text style={styles.settings_item}>
+            {strings.language}: {currentLocale}
+          </Text>
+        </Pressable>
+        <Button onPress={handlePushToFamilyCreate} variant="inline" style={styles.button_create}>
+          {strings.create_family}
+        </Button>
+      </View>
+
       <Text style={styles.title}>{strings.my_families}</Text>
       {Array.isArray(data) ? (
         <FamiliesList
@@ -64,15 +78,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       ) : (
         <Text>{data}</Text>
       )}
-      <View style={styles.settings}>
-        <Text style={styles.settings_title}>{strings.settings}</Text>
-        <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
-          <Text style={styles.settings_item}>
-            {strings.language}: {currentLocale}
-          </Text>
-        </Pressable>
-        <Text style={styles.settings_item}>{strings.logout}</Text>
-      </View>
     </ScrollView>
   )
 }

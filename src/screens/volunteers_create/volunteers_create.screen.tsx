@@ -8,7 +8,7 @@ import { Picker } from '@react-native-picker/picker'
 import { TextInput } from '@shared-components/text_input'
 import { Button } from '@shared-components/button'
 import { useMutation, useQueryClient } from 'react-query'
-import { volunteerApi } from '@api'
+import { familyApi, volunteerApi } from '@api'
 import { Text } from '@shared-components/text'
 import { createStyles } from './volunteers_create.styles'
 import { Modal } from '@shared-components/modal'
@@ -58,6 +58,7 @@ export const VolunteersCreateScreen: React.FC<VolunteersCreateScreenProps> = ({ 
     addVolunteer(values, {
       onSuccess: () => {
         queryClient.invalidateQueries(volunteerApi.queryKey)
+        queryClient.invalidateQueries(familyApi.queryKey)
         NavigationService.goBack()
       },
       onError: (error) => {

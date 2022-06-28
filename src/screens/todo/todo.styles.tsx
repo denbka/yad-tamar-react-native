@@ -85,7 +85,9 @@ export const createStyles = (theme: ExtendedTheme) => {
       borderBottomRightRadius: 6,
       height: '100%',
     },
-    list: {},
+    list: {
+      width: '100%',
+    },
     list_container: {
       flexDirection: 'row',
       flex: 1,
@@ -155,6 +157,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     },
     card_body_belonged: {
       backgroundColor: colors.lightBlue,
+      fontSize: normalizeText(9),
     },
     card_body_volunteer_first_status: {
       color: '#000',
@@ -162,7 +165,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     },
     card_body_volunteer_second_status: {
       color: '#000',
-      fontSize: normalizeText(11),
+      fontSize: normalizeText(9),
     },
     button_create: {
       marginBottom: 10,

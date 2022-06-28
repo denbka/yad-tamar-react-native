@@ -7,8 +7,7 @@ export const request = axios.create({
 
 request.interceptors.request.use(async (config) => {
   const token = await AsyncStorage.getItem('token')
-  console.log(token, 'token')
-  console.log(config.url)
+  console.log(config.url, token, 'request.interceptors.request')
   if (token) {
     config.headers.common['Authorization'] = token
   }

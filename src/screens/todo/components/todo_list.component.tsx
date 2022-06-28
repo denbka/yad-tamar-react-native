@@ -1,12 +1,13 @@
 import { ScreenWidth } from '@freakycoder/react-native-helpers'
 import { useTheme } from '@react-navigation/native'
+import { Text } from '@shared-components/text'
 import React, { FC } from 'react'
 import { FlatList, View } from 'react-native'
 import Animated, { DerivedValue, interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import { createStyles } from '../todo.styles'
 import { TodoCard } from './todo_card.component'
 
-export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
+export const TodoList: FC<TodoListProps> = ({ week, todo, activeSectionValue }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
 
@@ -27,29 +28,42 @@ export const TodoList: FC<TodoListProps> = ({ data, activeSectionValue }) => {
 
   return (
     <Animated.View style={[animatedStyles, styles.list_container]}>
-      <FlatList
-        contentContainerStyle={styles.list}
-        data={data}
-        style={styles.list}
-        renderItem={({ item }) => (
-          <TodoCard data={item} sectionValue={SectionValue.WEEK} activeSectionValue={activeSectionValue} />
-        )}
-      />
+      {!Array.isArray(week) ? (
+        <View style={styles.list}>
+          <Text>{week}</Text>
+        </View>
+      ) : (
+        <FlatList
+          contentContainerStyle={styles.list}
+          data={week}
+          style={styles.list}
+          renderItem={({ item }) => (
+            <TodoCard data={item} sectionValue={SectionValue.WEEK} activeSectionValue={activeSectionValue} />
+          )}
+        />
+      )}
       <View style={{ width: 20 }} />
-      <FlatList
-        contentContainerStyle={styles.list}
-        data={data}
-        style={styles.list}
-        renderItem={({ item }) => (
-          <TodoCard data={item} sectionValue={SectionValue.TODO} activeSectionValue={activeSectionValue} />
-        )}
-      />
+      {!Array.isArray(todo) ? (
+        <View style={styles.list}>
+          <Text>{todo}</Text>
+        </View>
+      ) : (
+        <FlatList
+          contentContainerStyle={styles.list}
+          data={todo}
+          style={styles.list}
+          renderItem={({ item }) => (
+            <TodoCard data={item} sectionValue={SectionValue.TODO} activeSectionValue={activeSectionValue} />
+          )}
+        />
+      )}
     </Animated.View>
   )
 }
 
 type TodoListProps = {
-  data: ITask[]
+  week: string | ITodo[]
+  todo: string | ITodo[]
   activeSectionValue: DerivedValue<number>
 }
 

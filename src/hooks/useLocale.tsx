@@ -1,7 +1,7 @@
 import { localStrings } from '@locales'
 import React, { createContext, FC, ReactNode, useContext, useMemo, useState } from 'react'
 
-const rtlLanguages = ['il']
+const rtlLanguages = ['heb']
 
 type ModalContext = {
   isRtl: boolean
@@ -15,7 +15,7 @@ type LocaleProviderProps = {
 
 const context = createContext<ModalContext>({
   isRtl: false,
-  currentLocale: 'en',
+  currentLocale: 'heb',
   strings: localStrings,
   toggleLanguage: () => {},
 })

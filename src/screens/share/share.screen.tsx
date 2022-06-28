@@ -51,7 +51,7 @@ export const ShareScreen: React.FC = ({ route }) => {
     Share.share({
       message: strings.to_family_message(
         'https://tamar.project-babaev.ru/volunteers/app.html',
-        `yadtamar://register?token=${familyToken}`,
+        `https://tamar.project-babaev.ru/volunteers/join.html?token=${familyToken}`,
       ),
       title: 'Share app',
     })
