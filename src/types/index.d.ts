@@ -62,6 +62,7 @@ declare type ITodo = {
   comments: string
   date: number | Date
   family_id: string
+  time_type: string | null
   community_id?: number
   was_completed: boolean
 }

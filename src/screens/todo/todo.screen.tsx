@@ -9,34 +9,39 @@ import * as NavigationService from 'react-navigation-helpers'
 import { SCREENS } from '@shared-constants'
 import { Text } from '@shared-components/text'
 import { taskApi, volunteerApi } from '@api'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { request } from '@services/request'
 import { DateTime } from 'luxon'
+import { localStrings } from '@locales'
+import Toast from 'react-native-toast-message'
 
 const currentWeekLastTime = DateTime.now().endOf('week').toMillis()
 
-const toWeek = (task: ITodo) =>
-  DateTime.fromSeconds(Number(task.date) ?? 0)
-    .minus({ milliseconds: currentWeekLastTime })
-    .toMillis() < 0
-const toTodo = (task: ITodo) =>
-  DateTime.fromSeconds(Number(task.date) ?? 0)
-    .minus({ milliseconds: currentWeekLastTime })
-    .toMillis() > 0
+// const toWeek = (task: ITodo) =>
+//   DateTime.fromSeconds(Number(task.date) ?? 0)
+//     .minus({ milliseconds: currentWeekLastTime })
+//     .toMillis() < 0
+// const toTodo = (task: ITodo) =>
+//   DateTime.fromSeconds(Number(task.date) ?? 0)
+//     .minus({ milliseconds: currentWeekLastTime })
+//     .toMillis() > 0
 
 export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   const familyId = route.params.familyId
+  const queryClient = useQueryClient()
   const { data } = useQuery(taskApi.queryKey, () => taskApi.get(familyId))
   const { data: volunteers } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(familyId))
-  const { data: progressData } = useQuery(taskApi.queryKey, () => taskApi.getProgress(familyId))
-
+  const { data: progressData } = useQuery('progress', () => taskApi.getProgress(familyId))
+  console.log(`Progress" `, progressData)
   const { week, todo } = useMemo(
     () => ({
-      week: data?.filter(toWeek) ?? 'nothing',
-      todo: data?.filter(toTodo) ?? 'nothing',
+      week: data?.filter ? data?.filter((todo) => todo.time_type !== 'no_time') : 'nothing',
+      todo: data?.filter ? data?.filter((todo) => todo.time_type === 'no_time') : 'nothing',
     }),
     [data],
   )
+
+  const { mutate: onDelete } = useMutation(taskApi.queryKey, taskApi.remove)
 
   const [familyToken, setFamilyToken] = useState(null)
 
@@ -61,16 +66,29 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
     NavigationService.navigate(SCREENS.CHOOSE_ACTION, { familyId, volunteers, familyToken })
   }
 
+  const handleDeleteTask = (task_id: number) => {
+    onDelete(task_id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(taskApi.queryKey)
+        Toast.show({
+          type: 'success',
+          text1: localStrings.success,
+          text2: localStrings.delete_success,
+        })
+      },
+    })
+  }
+
   return (
     <>
-      <Header>Back</Header>
+      <Header>{localStrings.back}</Header>
       <View style={styles.container}>
         <TodoSwitch onChange={handleSetActiveSection} activeSection={activeSection} />
         <Progress value={Number(progressData) || 0} />
         {Array.isArray(data) ? (
-          <TodoList activeSectionValue={activeSectionValue} week={week} todo={todo} />
+          <TodoList onDelete={handleDeleteTask} activeSectionValue={activeSectionValue} week={week} todo={todo} />
         ) : (
-          <Text>{data}</Text>
+          <Text style={{ textAlign: 'center' }}>{data}</Text>
         )}
       </View>
       <Bottomsheet

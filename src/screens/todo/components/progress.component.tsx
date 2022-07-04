@@ -12,7 +12,7 @@ export const Progress: FC<ProgressProps> = ({ value }) => {
 
   const animatedProgress = useAnimatedStyle(
     () => ({
-      width: value,
+      width: value + '%',
     }),
     [value],
   )

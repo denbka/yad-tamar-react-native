@@ -13,6 +13,7 @@ import { VolunteersList } from './components'
 import { createStyles } from './volunteers.styles'
 import { Text } from '@shared-components/text'
 import { useLocale } from '@hooks'
+import { localStrings } from '@locales'
 
 interface VolunteersScreenProps {}
 
@@ -51,7 +52,7 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
     <Formik enableReinitialize initialValues={values} onSubmit={handleSubmit}>
       {({ handleSubmit }) => (
         <View style={styles.container}>
-          <Header>Back</Header>
+          <Header>{localStrings.back}</Header>
           <View style={styles.body}>
             <Text style={styles.section_title} bold>
               {strings.volunteers}

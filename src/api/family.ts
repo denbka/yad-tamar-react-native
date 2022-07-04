@@ -3,7 +3,7 @@ import { request } from '@services/request'
 const queryKey = 'families'
 
 const get = async (role) => {
-  if (role === 'coordinator') {
+  if (role === 'coordunator' || role === 'coordinator') {
     const response = await request.get<IFamily[]>(`/${queryKey}/coordinator`)
     return response.data
   }

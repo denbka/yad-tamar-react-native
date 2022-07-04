@@ -29,6 +29,7 @@
     "react-native-date-picker": "^4.2.2",
     "react-native-dynamic-vector-icons": "^1.1.6",
     "react-native-gesture-handler": "^2.4.2",
+    "react-native-haptic-feedback": "^1.14.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-localization": "^2.3.1",

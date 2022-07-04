@@ -48,8 +48,10 @@ export const localStrings = new LocalizedStrings({
     toast_volunteer: 'Message sent to volunteers',
     will_do_this: 'will do this',
     free: 'free',
+    back: 'Back',
     to_take: 'to take',
     task_completed: 'Task completed',
+    delete_success: 'Delete was successful',
     to_volunteer_message: (link: string) => `Enola. View your tasks on the link: ${link}`,
     to_family_message: (web_link: string, app_link: string) => `
     1. Follow the link ${web_link} and download the app
@@ -103,7 +105,9 @@ export const localStrings = new LocalizedStrings({
     will_do_this: 'יעשה את זה',
     free: 'חינם',
     to_take: 'לקחת',
+    back: 'חזור',
     task_completed: 'משימה הושלמה',
+    delete_success: 'ההסרה הצליחה',
     to_volunteer_message: (link: string) => `Enola. View your tasks on the link: ${link}`,
     to_family_message: (web_link: string, app_link: string) => `
     1. Follow the link ${web_link} and download the app

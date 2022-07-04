@@ -53,8 +53,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         </Avatar>
         <View>
           <Text style={styles.name}>{userInfo?.name}</Text>
-          <Text style={styles.role}>{userInfo?.role === 'coordinator' ? 'coordinator' : 'helper'}</Text>
-          {userInfo?.role === 'coordinator' && <Text style={styles.job}>Volunteer Society</Text>}
+          <Text style={styles.role}>{userInfo?.role}</Text>
+          <Text style={styles.job}>Volunteer Society</Text>
         </View>
       </View>
       <View style={styles.settings}>
@@ -76,7 +76,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           onRemoveFamily={handleRemoveFamily}
         />
       ) : (
-        <Text>{data}</Text>
+        <Text style={{ textAlign: 'center' }}>{data}</Text>
       )}
     </ScrollView>
   )

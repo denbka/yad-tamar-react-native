@@ -32,6 +32,7 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
     date: new Date(),
     was_completed: false,
     family_id: family_id,
+    time_type: 'no_time',
     helper_id: null,
   })
 
@@ -58,6 +59,10 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
     setForm({ ...form, date })
   }
 
+  const handleChangeType = (time_type: string) => {
+    setForm({ ...form, time_type })
+  }
+
   return (
     <Formik enableReinitialize initialValues={form} onSubmit={onSubmit}>
       {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -78,7 +83,12 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
             <Divider style={{ marginBottom: 15, marginTop: 25 }} />
             <View>
               <Text style={styles.section_title}>{strings.time}</Text>
-              <DatePicker date={values.date} onChange={handleChangeDate} />
+              <DatePicker
+                activeType={values.time_type}
+                date={values.date}
+                onChange={handleChangeDate}
+                onChangeType={handleChangeType}
+              />
             </View>
             <Divider style={{ marginBottom: 15, marginTop: 25 }} />
             <View>

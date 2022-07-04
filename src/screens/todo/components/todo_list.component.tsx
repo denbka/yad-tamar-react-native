@@ -7,7 +7,7 @@ import Animated, { DerivedValue, interpolate, useAnimatedStyle } from 'react-nat
 import { createStyles } from '../todo.styles'
 import { TodoCard } from './todo_card.component'
 
-export const TodoList: FC<TodoListProps> = ({ week, todo, activeSectionValue }) => {
+export const TodoList: FC<TodoListProps> = ({ week, todo, activeSectionValue, onDelete }) => {
   const theme = useTheme()
   const styles = createStyles(theme)
 
@@ -38,7 +38,12 @@ export const TodoList: FC<TodoListProps> = ({ week, todo, activeSectionValue }) 
           data={week}
           style={styles.list}
           renderItem={({ item }) => (
-            <TodoCard data={item} sectionValue={SectionValue.WEEK} activeSectionValue={activeSectionValue} />
+            <TodoCard
+              data={item}
+              onDelete={onDelete}
+              sectionValue={SectionValue.WEEK}
+              activeSectionValue={activeSectionValue}
+            />
           )}
         />
       )}
@@ -53,7 +58,12 @@ export const TodoList: FC<TodoListProps> = ({ week, todo, activeSectionValue }) 
           data={todo}
           style={styles.list}
           renderItem={({ item }) => (
-            <TodoCard data={item} sectionValue={SectionValue.TODO} activeSectionValue={activeSectionValue} />
+            <TodoCard
+              onDelete={onDelete}
+              data={item}
+              sectionValue={SectionValue.TODO}
+              activeSectionValue={activeSectionValue}
+            />
           )}
         />
       )}
@@ -64,6 +74,7 @@ export const TodoList: FC<TodoListProps> = ({ week, todo, activeSectionValue }) 
 type TodoListProps = {
   week: string | ITodo[]
   todo: string | ITodo[]
+  onDelete: (task_id: number) => void
   activeSectionValue: DerivedValue<number>
 }
 
