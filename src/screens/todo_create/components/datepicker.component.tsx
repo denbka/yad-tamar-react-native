@@ -8,7 +8,7 @@ import { useLocale } from '@hooks'
 import Animated from 'react-native-reanimated'
 
 export const DatePicker: FC<DatePickerProps> = ({ date, activeType, onChange, onChangeType }) => {
-  const { strings } = useLocale()
+  const { strings, currentLocale } = useLocale()
   const prompts = useMemo(
     () => [
       { key: 'no_time', label: strings.no_time },
@@ -26,8 +26,8 @@ export const DatePicker: FC<DatePickerProps> = ({ date, activeType, onChange, on
     const dt = DateTime.fromJSDate(date)
     if (!dt) return
     return {
-      time: dt.toLocaleString(DateTime.TIME_SIMPLE),
-      date: dt.toLocaleString(DateTime.DATE_MED),
+      time: dt.setLocale(currentLocale).toLocaleString(DateTime.TIME_SIMPLE),
+      date: dt.setLocale(currentLocale).toLocaleString(DateTime.DATE_MED),
     }
   }, [date])
 

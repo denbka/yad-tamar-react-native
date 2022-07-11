@@ -14,6 +14,7 @@ import { normalizeText } from '@freakycoder/react-native-helpers'
 import { useLocale } from '@hooks'
 import Animated, { interpolate, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated'
 import { useAsyncStorage } from '@react-native-async-storage/async-storage'
+import Toast from 'react-native-toast-message'
 
 export const RegisterScreen: FC<RegisterScreenProps> = () => {
   const queryClient = useQueryClient()
@@ -45,13 +46,17 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
 
   const handleSubmitForm = (values: IRegisterForm) => {
     register(values, {
-      onSuccess: async (token) => {
-        console.log(values)
+      onSuccess: async ({ token }) => {
         await asyncStorage.setItem(token)
         queryClient.invalidateQueries('user')
       },
       onError: (error) => {
         console.log('error')
+        Toast.show({
+          type: 'error',
+          text1: 'Error',
+          text2: 'Validation error',
+        })
         console.log(error.response)
       },
     })
@@ -70,9 +75,9 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
               <Text style={styles.title}>{strings.welcome_text}</Text>
               <LogoEnolaWhite width={normalizeText(170)} />
             </Animated.View>
-            <Animated.View style={[styles.image, animatedImage]}>
+            {/* <Animated.View style={[styles.image, animatedImage]}>
               <Picture height="100%" width="100%" />
-            </Animated.View>
+            </Animated.View> */}
           </View>
         </LinearGradient>
         <Bottomsheet>

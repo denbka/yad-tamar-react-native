@@ -217,6 +217,9 @@ export const createStyles = (theme: ExtendedTheme) => {
     share_text: {
       left: isRtl ? -70 : 0,
     },
+    share_icon: {
+      transform: [{ rotateY: isRtl ? '-180deg' : '0deg' }],
+    },
     add_text: {
       left: isRtl ? -26 : 18,
       bottom: -6,

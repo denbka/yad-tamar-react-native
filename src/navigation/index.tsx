@@ -57,6 +57,10 @@ const Navigation: FC = () => {
   navigationRef.isReady = () => true
 
   React.useEffect((): any => {
+    // asyncStorage.removeItem()
+    // asyncStorage.setItem(
+    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMDExLCJjZWxsX3Bob25lIjoiMjQ4NTg1NiIsImlhdCI6MTY1NzU1MTI5NywiZXhwIjoxOTcyOTExMjk3fQ.-KnOs2ZLpfiSL-O66Y9fFV_GNCM3rERFXkU66h5FoLM',
+    // )
     return () => (isReadyRef.current = false)
   }, [])
 
@@ -69,7 +73,7 @@ const Navigation: FC = () => {
       theme={LightTheme}
     >
       {!isAuth ? (
-        <Stack.Navigator initialRouteName={SCREENS.REGISTER} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName={SCREENS.LOGIN} screenOptions={{ headerShown: false }}>
           <Stack.Screen name={SCREENS.LOGIN} component={LoginScreen} />
           <Stack.Screen name={SCREENS.REGISTER} component={RegisterScreen} />
         </Stack.Navigator>

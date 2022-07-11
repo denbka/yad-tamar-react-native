@@ -23,6 +23,7 @@ const remove = async (id: number) => {
 }
 
 const sendSMS = async (form: ISMSForm) => {
+  // return Promise.resolve('aaaa')
   const response = await request.post<IVolunteer>(`${queryKey}/send-sms`, form)
   return response.data
 }

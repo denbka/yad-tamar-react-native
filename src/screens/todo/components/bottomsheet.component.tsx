@@ -38,7 +38,9 @@ export const Bottomsheet: FC<BottomsheetProps> = ({ onAdd, onShare, onVolunteers
 
       <GestureDetector gesture={tapOnShare}>
         <View style={styles.bottomsheet_item}>
-          <ShareIcon />
+          <View style={styles.share_icon}>
+            <ShareIcon />
+          </View>
           <Text style={[styles.bottomsheet_item_text, styles.share_text]}>{strings.share}</Text>
         </View>
       </GestureDetector>

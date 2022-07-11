@@ -33,10 +33,10 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
     was_completed: false,
     family_id: family_id,
     time_type: 'no_time',
-    helper_id: null,
   })
 
   const onSubmit = (data: ITodo) => {
+    console.log(data)
     addTask(
       {
         ...data,

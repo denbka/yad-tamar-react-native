@@ -34,7 +34,9 @@ export const Button: FC<ButtonProps> = ({
     }
   }, [variant])
 
-  const tapGestureHandler = Gesture.Tap().onEnd((event) => props.onPress && runOnJS(props.onPress)(event))
+  const tapGestureHandler = Gesture.Tap().onEnd((event) => {
+    props.onPress && runOnJS(props.onPress)(event)
+  })
 
   return (
     <GestureDetector gesture={tapGestureHandler}>

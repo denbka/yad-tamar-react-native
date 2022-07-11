@@ -14,7 +14,7 @@ const register = async (form: ICredentials) => {
 
 const getUserData = async () => {
   const response = await request.get(`${queryKey}/get-user-data`)
-  return response.data ?? null
+  return !response.data ? null : { ...response.data.foundUser, role: response.data.role }
 }
 
 export const authApi = {

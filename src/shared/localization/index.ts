@@ -4,8 +4,8 @@ export const localStrings = new LocalizedStrings({
   en: {
     email: 'e-mail',
     login_title: 'Yad Tamar',
-    password: 'password',
-    password_confirmation: 'confirm password',
+    password: 'Password',
+    password_confirmation: 'Confirm password',
     profile: 'Profile',
     login: 'login',
     create_family: 'Create family',
@@ -35,7 +35,7 @@ export const localStrings = new LocalizedStrings({
     exact_time: 'exact time',
     until: 'until',
     create_new_task: 'Create a new task',
-    to_register: 'Don`t have an account? Sign up.',
+    to_register: 'I want to register as a coordinator',
     share_with_family: 'Share with family',
     share_with_volunteer: 'Share with a volunteer',
     settings: 'Settings',
@@ -52,12 +52,20 @@ export const localStrings = new LocalizedStrings({
     to_take: 'to take',
     task_completed: 'Task completed',
     delete_success: 'Delete was successful',
-    to_volunteer_message: (link: string) => `Enola. View your tasks on the link: ${link}`,
-    to_family_message: (web_link: string, app_link: string) => `
+    username: 'Username',
+    username_prompt: 'Login with which you can join the family',
+    success_create_family: 'Family successfully created',
+    profile_prompt: 'profile',
+    main: 'main',
+    coordinator: 'coordinator',
+    to_volunteer_message: (family_name: string, link: string) =>
+      `כידוע לכם משפחת ${family_name} צריכה עזרה בתקופה זו. ליחצו על הקישור, וביחרו את המשימות שבכוחכם לקחת  - ${link}
+תודה רבה!`,
+    to_family_message: (web_link: string, last_name: string, user_name: string, password: string) => `
     1. Follow the link ${web_link} and download the app
-    2. After downloading click on this link: ${app_link} . Join the family!`,
+    2. Credentials to login: Username: ${user_name}. Password: ${password}. Join the family ${last_name}!`,
   },
-  heb: {
+  'he-IL': {
     email: 'אימייל',
     login_title: 'יד תמר',
     volunteer_create: 'צור מתנדב',
@@ -66,17 +74,17 @@ export const localStrings = new LocalizedStrings({
     create_family: 'צור משפחה',
     welcome_text: 'ברוכים הבאים ל',
     my_families: 'המשפחות שלי',
-    members_count: 'חברים',
-    last_name: 'שֵׁם מִשׁפָּחָה',
+    members_count: 'מתנדבים',
+    last_name: 'שם משפחה',
     name_the_family: 'בחירת שם משפחה...',
-    prompt_the_family: 'למשל: סמית',
+    prompt_the_family: 'למשל: כהן',
     phone_number: 'מספר טלפון',
     volunteers: 'מתנדבים',
     add_volunteer: 'הוסף מתנדב',
-    create: 'צור משפחה',
+    create: 'צור',
     week: 'השבוע',
     todo_list: 'רשימת מטלות',
-    completed: 'רשימת מטלות',
+    completed: 'בוצע',
     create_task: 'צור משימה',
     my_volunteers: 'המתנדבים שלי',
     name: 'שם',
@@ -89,31 +97,47 @@ export const localStrings = new LocalizedStrings({
     no_time: 'ללא ציון זמן',
     exact_time: 'זמן מדויק',
     until: 'עד לתאריך',
-    create_new_task: 'כהן',
-    profile: 'פּרוֹפִיל',
-    to_register: 'אין לך חשבון? הירשם.',
+    create_new_task: 'צור משימה',
+    profile: 'פרופיל',
+    to_register: 'אני רוצה להירשם כרכז',
     share_with_family: 'שתף עם המשפחה',
     share_with_volunteer: 'שתף עם מתנדב',
     settings: 'הגדרות',
     language: 'שפה',
-    logout: 'להתנתק',
+    logout: 'היתנתק',
     register: 'הירשם',
     share: 'לשתף',
     toast_volunteer: 'הודעה נשלחה למתנדבים',
-    success: 'הַצלָחָה',
+    success: 'הצלחה',
     password_confirmation: 'אשר סיסמה',
-    will_do_this: 'יעשה את זה',
+    will_do_this: 'יעשה זאת',
     free: 'חינם',
     to_take: 'לקחת',
     back: 'חזור',
-    task_completed: 'משימה הושלמה',
+    task_completed: 'המשימה הושלמה',
     delete_success: 'ההסרה הצליחה',
-    to_volunteer_message: (link: string) => `Enola. View your tasks on the link: ${link}`,
-    to_family_message: (web_link: string, app_link: string) => `
-    1. Follow the link ${web_link} and download the app
-    2. After downloading click on this link: ${app_link} . Join the family!`,
+    username: 'שם משתמש',
+    username_prompt: 'בשם משתמש זה תוכל לבצע כניסה למשפחה',
+    success_create_family: 'המשפחה נוצרה בהצלחה',
+    profile_prompt: 'מסך ראשי',
+    main: 'מלווה משפחה',
+    coordinator: 'רכז',
+    to_volunteer_message: (family_name: string, link: string) =>
+      `כידוע לכם משפחת ${family_name} צריכה עזרה בתקופה זו. ליחצו על הקישור, וביחרו את המשימות שבכוחכם לקחת  - ${link}
+תודה רבה!`,
+    to_family_message: (web_link: string, last_name: string, user_name: string, password: string) => `
+      שלום 
+      כפי שידוע לך, משפחת ${last_name} תצטרך עזרה מיוחדת בצליחת התקופה הזו. 
+      יש הרבה מאוד צרכים, וקל מאוד לטבוע במשימות. 
+      מה שצריך עכשיו זה למפות את הצרכים, ואז לגייס את המשפחה המורחבת והקהילה לתת כתף. 
+      יצרנו את Enola כדי להרחיב לתקופה קצרה את המשפחה. זו מערכת שהמטרה שלה היא למפות ולזהות את הצרכים המרובים של המשפחה ולאפשר למשפחה ולקהילה לתת כתף באופן יעיל.    
+      לחיצה על הלינק תכניס אתכם למערכת ותאפשר לכם להתחיל במיפוי הצרכים. ככל שתהיו יותר ספצפיים, כך יהיה יותר קל למעגל המשפחתי לתת כתף.
+      בכניסה הראשונית יש להזין את הפרטים הבאים:
+      עקוב אחר הקישור: ${web_link} 
+      שם משתמש: ${user_name}
+      סיסמה: ${password}`,
   },
 })
 
 // ? Set the language manually
-localStrings.setLanguage('heb')
+localStrings.setLanguage('he-IL')

@@ -29,8 +29,10 @@ const currentWeekLastTime = DateTime.now().endOf('week').toMillis()
 export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   const familyId = route.params.familyId
   const queryClient = useQueryClient()
-  const { data } = useQuery(taskApi.queryKey, () => taskApi.get(familyId))
-  const { data: volunteers } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(familyId))
+  const { data } = useQuery(taskApi.queryKey, () => taskApi.get(familyId), {
+    refetchInterval: 10000,
+  })
+  // const { data: volunteers } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(familyId))
   const { data: progressData } = useQuery('progress', () => taskApi.getProgress(familyId))
   console.log(`Progress" `, progressData)
   const { week, todo } = useMemo(
@@ -43,11 +45,11 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
 
   const { mutate: onDelete } = useMutation(taskApi.queryKey, taskApi.remove)
 
-  const [familyToken, setFamilyToken] = useState(null)
+  const [familyData, setFamilyData] = useState(null)
 
   useEffect(() => {
     request.get<IFamily>(`families/${familyId}`).then((response) => {
-      setFamilyToken(response.data?.token)
+      setFamilyData(response.data)
     })
   }, [familyId])
 
@@ -63,7 +65,8 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   }, [activeSection])
 
   const handleShare = () => {
-    NavigationService.navigate(SCREENS.CHOOSE_ACTION, { familyId, volunteers, familyToken })
+    console.log(familyData)
+    NavigationService.navigate(SCREENS.CHOOSE_ACTION, { ...(familyData ?? {}), family_id: familyId })
   }
 
   const handleDeleteTask = (task_id: number) => {
@@ -81,7 +84,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
 
   return (
     <>
-      <Header>{localStrings.back}</Header>
+      <Header>{familyData?.name}</Header>
       <View style={styles.container}>
         <TodoSwitch onChange={handleSetActiveSection} activeSection={activeSection} />
         <Progress value={Number(progressData) || 0} />

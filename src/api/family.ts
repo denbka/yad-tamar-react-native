@@ -7,6 +7,7 @@ const get = async (role) => {
     const response = await request.get<IFamily[]>(`/${queryKey}/coordinator`)
     return response.data
   }
+  console.log(role)
   const response = await request.get<IFamily[]>(queryKey)
   return response.data
 }

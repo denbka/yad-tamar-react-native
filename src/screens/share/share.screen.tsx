@@ -12,7 +12,7 @@ import { useLocale } from '@hooks'
 import { IconPeoples, IconVolunteer } from '@shared-components/icons'
 
 export const ShareScreen: React.FC = ({ route }) => {
-  const { familyId: family_id, volunteers, familyToken } = route.params
+  const { family_id, name: last_name, volunteers, token, user_name, password } = route.params
   const theme = useTheme()
   const { strings } = useLocale()
   const { mutateAsync: sendSMS } = useMutation(volunteerApi.sendSMS)
@@ -34,7 +34,8 @@ export const ShareScreen: React.FC = ({ route }) => {
           sendSMS({
             to: cell_phone,
             message: strings.to_volunteer_message(
-              `https://tamar.project-babaev.ru/volunteers/?token=${familyToken}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
+              last_name,
+              `https://tamar.project-babaev.ru?token=${token}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
             ),
           }),
         ),
@@ -47,11 +48,12 @@ export const ShareScreen: React.FC = ({ route }) => {
   }
 
   const handleShareToFamily = async () => {
-    if (!familyToken) return
     Share.share({
       message: strings.to_family_message(
-        'https://tamar.project-babaev.ru/volunteers/app.html',
-        `https://tamar.project-babaev.ru/volunteers/join.html?token=${familyToken}`,
+        'https://tamar.project-babaev.ru/app/app.html',
+        last_name,
+        user_name,
+        password,
       ),
       title: 'Share app',
     })

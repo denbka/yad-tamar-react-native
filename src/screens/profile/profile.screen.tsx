@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Pressable, ScrollView, View } from 'react-native'
+import { Image, Pressable, ScrollView, View } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import * as NavigationService from 'react-navigation-helpers'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
@@ -12,23 +12,22 @@ import { Avatar, FamiliesList } from './components'
 import { Text } from '@shared-components/text'
 import { useLocale } from '@hooks'
 import { localStrings } from '@locales'
-import { IconVolunteer } from '@shared-components/icons'
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
-  const { toggleLanguage, strings, currentLocale } = useLocale()
-  const availableLanguages = useMemo(
-    () => localStrings.getAvailableLanguages().map((item) => ({ label: item, value: item })),
-    [],
-  )
+  const { strings } = useLocale()
+  // const availableLanguages = useMemo(
+  //   () => localStrings.getAvailableLanguages().map((item) => ({ label: item, value: item })),
+  //   [],
+  // )
   const queryClient = useQueryClient()
   const { data: userInfo } = useQuery<IFamily[]>('user', authApi.getUserData)
   const { data } = useQuery<IFamily[]>(familyApi.queryKey, () => familyApi.get(userInfo?.role), {
     enabled: !!userInfo?.role,
   })
-
   const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
   const theme = useTheme()
   const styles = createStyles(theme)
+
   const handlePushToFamilyCreate = () => {
     NavigationService.navigate(SCREENS.FAMILY_CREATE)
   }
@@ -49,20 +48,20 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Avatar>
-          <IconVolunteer fill={theme.colors.darkBlue} />
+          <Image source={require('@assets/logo.png')} />
         </Avatar>
         <View>
-          <Text style={styles.name}>{userInfo?.name}</Text>
-          <Text style={styles.role}>{userInfo?.role}</Text>
-          <Text style={styles.job}>Volunteer Society</Text>
+          <Text style={styles.name}>{userInfo?.last_name}</Text>
+          <Text style={styles.role}>{userInfo?.role.includes('coord') ? strings.coordinator : strings.main}</Text>
+          <Text style={styles.job}>{strings.profile_prompt}</Text>
         </View>
       </View>
       <View style={styles.settings}>
-        <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
+        {/* <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
           <Text style={styles.settings_item}>
             {strings.language}: {currentLocale}
           </Text>
-        </Pressable>
+        </Pressable> */}
         <Button onPress={handlePushToFamilyCreate} variant="inline" style={styles.button_create}>
           {strings.create_family}
         </Button>

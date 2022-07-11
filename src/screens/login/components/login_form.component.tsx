@@ -11,9 +11,9 @@ import { createStyles } from '../login.styles'
 
 export const LoginForm: FC<LoginFormProps> = ({ isLoading, onSubmit }) => {
   const theme = useTheme()
-  const initialValues: ICredentials = useMemo(
+  const initialValues: ILoginForm = useMemo(
     () => ({
-      email: '',
+      cell_phone: '',
       password: '',
     }),
     [],
@@ -26,13 +26,12 @@ export const LoginForm: FC<LoginFormProps> = ({ isLoading, onSubmit }) => {
       {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
         <View>
           <TextInput
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
-            placeholder={strings.email}
-            keyboardType="email-address"
+            onChangeText={handleChange('cell_phone')}
+            onBlur={handleBlur('cell_phone')}
+            value={values.cell_phone}
+            placeholder={strings.username}
             returnKeyType="next"
-            style={[styles.text, !errors.email ? null : styles.errorInput]}
+            style={[styles.text, !errors.cell_phone ? null : styles.errorInput]}
           />
           <TextInput
             onChangeText={handleChange('password')}
@@ -52,5 +51,5 @@ export const LoginForm: FC<LoginFormProps> = ({ isLoading, onSubmit }) => {
 
 type LoginFormProps = {
   isLoading: boolean
-  onSubmit: (values: ICredentials) => void
+  onSubmit: (values: ILoginForm) => void
 }

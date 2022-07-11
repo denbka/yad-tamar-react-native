@@ -22,7 +22,7 @@ export const createStyles = (theme: ExtendedTheme) => {
     },
     prompt: {
       color: colors.softBlue,
-      fontSize: normalizeText(10),
+      fontSize: normalizeText(8),
       textAlign: isRtl ? 'right' : 'left',
     },
   })

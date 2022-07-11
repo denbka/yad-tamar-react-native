@@ -1,5 +1,7 @@
 import 'intl'
 import 'intl/locale-data/jsonp/en-ZA'
+import 'intl/locale-data/jsonp/he-IL'
+
 import React from 'react'
 import { StatusBar, useColorScheme, LogBox } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'

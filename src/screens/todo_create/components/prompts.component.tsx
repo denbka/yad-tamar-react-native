@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native'
 import { Button } from '@shared-components/button'
 import { createStyles } from '../todo_create.styles'
 
-const prompts = ['Take kids from school', 'Go to market', 'Shopping', 'Clean the house', 'more...']
+const prompts = ['קח ילדים מבית הספר', 'ללכת לשוק', 'קניות', 'תנקה את הבית']
 
 export const Prompts: React.FC<PromptsProps> = ({ onChange }) => {
   const theme = useTheme()

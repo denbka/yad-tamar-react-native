@@ -15,6 +15,8 @@ export const RegisterForm: FC<RegisterFormProps> = ({ isLoading, onSubmit }) => 
     () => ({
       cell_phone: '',
       last_name: '',
+      password: '',
+      password_confirmation: '',
       role: 'coordinator',
     }),
     [],
@@ -41,6 +43,20 @@ export const RegisterForm: FC<RegisterFormProps> = ({ isLoading, onSubmit }) => 
             value={values.last_name}
             placeholder={strings.last_name}
             style={[styles.text, !errors.last_name ? null : styles.errorInput]}
+          />
+          <TextInput
+            onChangeText={handleChange('password')}
+            onBlur={handleBlur('password')}
+            value={values.password}
+            placeholder={strings.password}
+            style={[styles.text, !errors.password ? null : styles.errorInput]}
+          />
+          <TextInput
+            onChangeText={handleChange('password_confirmation')}
+            onBlur={handleBlur('password_confirmation')}
+            value={values.password_confirmation}
+            placeholder={strings.password_confirmation}
+            style={[styles.text, !errors.password_confirmation ? null : styles.errorInput]}
           />
           <Button loading={isLoading} style={styles.button} variant="inline" onPress={() => handleSubmit(values)}>
             {strings.register}

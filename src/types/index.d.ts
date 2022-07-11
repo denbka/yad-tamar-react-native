@@ -11,6 +11,7 @@ declare type IFamily = {
 
 declare type IFamilyForm = {
   last_name: string
+  user_name: string
   cell_phone: string
 }
 
@@ -73,6 +74,11 @@ declare type IVolunteer = {
   phone: string | null
 }
 
+declare type ILoginForm = {
+  cell_phone: string
+  password: string
+}
+
 type ICredentials = {
   cell_phone: string
   last_name: string
@@ -80,7 +86,8 @@ type ICredentials = {
 
 declare type IRegisterForm = ICredentials & {
   role: string
-  family_id: string
+  password: string
+  password_confirmation: string
 }
 
 declare type SwitchValue = 'week' | 'todo'

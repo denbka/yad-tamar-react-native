@@ -1,3 +1,4 @@
+import { useLocale } from '@hooks'
 import { localStrings } from '@locales'
 import { useTheme } from '@react-navigation/native'
 import { Text } from '@shared-components/text'
@@ -19,12 +20,14 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
   const theme = useTheme()
   const styles = createStyles(theme)
   const variant = styles[`card_body_${type}`]
+  const { currentLocale } = useLocale()
+
   const parsedDate = useMemo(() => {
     const dt = DateTime.fromSeconds(Number(data.date) ?? 0)
     if (!dt) return
     return {
-      time: dt.toLocaleString(DateTime.TIME_SIMPLE),
-      date: dt.toLocaleString(DateTime.DATE_MED),
+      time: dt.setLocale(currentLocale).toLocaleString(DateTime.TIME_SIMPLE),
+      date: dt.setLocale(currentLocale).toLocaleString(DateTime.DATE_MED),
     }
   }, [data])
 
@@ -44,6 +47,7 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
     runOnJS(ReactNativeHapticFeedback.trigger)('impactMedium', options)
     runOnJS(onDelete)(data.task_id)
   })
+  console.log(data)
 
   return (
     <GestureDetector gesture={longTap}>
@@ -63,7 +67,7 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
             ) : (
               <>
                 <Text bold style={styles.card_body_volunteer_first_status}>
-                  {data.helper_id ? data.helper_id : localStrings.free}
+                  {data.helper_id ? data.helper_name : localStrings.free}
                 </Text>
                 <Text style={styles.card_body_volunteer_second_status}>
                   {data.helper_id ? localStrings.will_do_this : localStrings.to_take}
