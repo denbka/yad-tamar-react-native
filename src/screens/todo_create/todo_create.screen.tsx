@@ -36,7 +36,6 @@ export const TodoCreateScreen: React.FC<TodoCreateScreenProps> = ({ route }) => 
   })
 
   const onSubmit = (data: ITodo) => {
-    console.log(data)
     addTask(
       {
         ...data,

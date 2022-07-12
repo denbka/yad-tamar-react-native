@@ -43,7 +43,6 @@ const Navigation: FC = () => {
 
   useQuery('user', authApi.getUserData, {
     onSuccess: (result) => {
-      console.log(result, 'authApi.getUserData')
       setAuth(JSON.stringify(result) === '{}' ? false : true)
     },
   })

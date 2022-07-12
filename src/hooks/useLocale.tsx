@@ -28,7 +28,6 @@ export const LocaleProvider: FC<LocaleProviderProps> = ({ children }) => {
 
   const isRtl = useMemo(() => rtlLanguages.includes(currentLocale), [currentLocale])
   const strings = useMemo(() => localStrings, [currentLocale])
-  console.log(isRtl)
   const toggleLanguage = () => {
     const availableLanguages = localStrings.getAvailableLanguages()
     localStrings.setLanguage(availableLanguages[currentLanguageIndex])

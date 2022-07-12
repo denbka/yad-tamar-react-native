@@ -2,14 +2,13 @@ import { request } from '@services/request'
 
 const queryKey = 'families'
 
-const get = async (role) => {
+const get = async (role?: string, family_id?: number) => {
   if (role === 'coordunator' || role === 'coordinator') {
     const response = await request.get<IFamily[]>(`/${queryKey}/coordinator`)
     return response.data
   }
-  console.log(role)
-  const response = await request.get<IFamily[]>(queryKey)
-  return response.data
+  const response = await request.get<IFamily>(`${queryKey}/${family_id}`)
+  return [response.data]
 }
 
 const getById = async (family_id: string) => {

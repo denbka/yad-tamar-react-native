@@ -34,7 +34,7 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   })
   // const { data: volunteers } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(familyId))
   const { data: progressData } = useQuery('progress', () => taskApi.getProgress(familyId))
-  console.log(`Progress" `, progressData)
+
   const { week, todo } = useMemo(
     () => ({
       week: data?.filter ? data?.filter((todo) => todo.time_type !== 'no_time') : 'nothing',
@@ -65,7 +65,6 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
   }, [activeSection])
 
   const handleShare = () => {
-    console.log(familyData)
     NavigationService.navigate(SCREENS.CHOOSE_ACTION, { ...(familyData ?? {}), family_id: familyId })
   }
 

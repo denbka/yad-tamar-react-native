@@ -30,15 +30,15 @@ export const ShareScreen: React.FC = ({ route }) => {
     try {
       if (!volunteers?.length) return
       await Promise.all(
-        volunteers.map(({ cell_phone, user_id }) =>
+        volunteers.map(({ cell_phone, user_id, user_token }) => {
           sendSMS({
             to: cell_phone,
             message: strings.to_volunteer_message(
               last_name,
-              `https://tamar.project-babaev.ru?token=${token}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
+              `https://tamar.project-babaev.ru?token=${user_token}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
             ),
-          }),
-        ),
+          })
+        }),
       )
       showToast()
       NavigationService.goBack()

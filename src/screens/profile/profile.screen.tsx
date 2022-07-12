@@ -11,7 +11,6 @@ import { createStyles } from './profile.styles'
 import { Avatar, FamiliesList } from './components'
 import { Text } from '@shared-components/text'
 import { useLocale } from '@hooks'
-import { localStrings } from '@locales'
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   const { strings } = useLocale()
@@ -20,8 +19,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   //   [],
   // )
   const queryClient = useQueryClient()
-  const { data: userInfo } = useQuery<IFamily[]>('user', authApi.getUserData)
-  const { data } = useQuery<IFamily[]>(familyApi.queryKey, () => familyApi.get(userInfo?.role), {
+  const { data: userInfo } = useQuery('user', authApi.getUserData)
+  const { data } = useQuery(familyApi.queryKey, () => familyApi.get(userInfo?.role, userInfo?.family_id), {
     enabled: !!userInfo?.role,
   })
   const { mutate: removeFamily } = useMutation((id: number) => familyApi.remove(id))
@@ -33,7 +32,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   }
 
   const handleNavigateToFamily = (familyId: number) => {
-    NavigationService.push(SCREENS.TODO, { familyId })
+    NavigationService.push(SCREENS.TODO, { familyId: familyId ?? userInfo?.family_id })
   }
 
   const handleRemoveFamily = (id: number) => {
@@ -44,6 +43,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     })
   }
 
+  console.log(data)
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -52,7 +53,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         </Avatar>
         <View>
           <Text style={styles.name}>{userInfo?.last_name}</Text>
-          <Text style={styles.role}>{userInfo?.role.includes('coord') ? strings.coordinator : strings.main}</Text>
+          <Text style={styles.role}>{userInfo?.role?.includes('coord') ? strings.coordinator : strings.main}</Text>
           <Text style={styles.job}>{strings.profile_prompt}</Text>
         </View>
       </View>

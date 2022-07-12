@@ -21,10 +21,8 @@ export const LoginScreen: FC = () => {
   const { mutate: login, isLoading } = useMutation((form: ICredentials) => authApi.login(form))
 
   const handleSubmitForm = (values: ICredentials) => {
-    console.log(values, 12321312)
     login(values, {
       onSuccess: ({ user_token }) => {
-        console.log(user_token)
         const queryClient = new QueryClient()
         asyncStorage.setItem(user_token, () => {
           queryClient.invalidateQueries('user')

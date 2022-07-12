@@ -43,11 +43,9 @@ export const TodoCard: FC<TodoCardProps> = ({ data, type, sectionValue, activeSe
   )
 
   const longTap = Gesture.LongPress().onStart(() => {
-    console.log(123132)
     runOnJS(ReactNativeHapticFeedback.trigger)('impactMedium', options)
     runOnJS(onDelete)(data.task_id)
   })
-  console.log(data)
 
   return (
     <GestureDetector gesture={longTap}>

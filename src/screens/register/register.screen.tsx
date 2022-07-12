@@ -47,6 +47,7 @@ export const RegisterScreen: FC<RegisterScreenProps> = () => {
   const handleSubmitForm = (values: IRegisterForm) => {
     register(values, {
       onSuccess: async ({ token }) => {
+        console.log(321312312321)
         await asyncStorage.setItem(token)
         queryClient.invalidateQueries('user')
       },

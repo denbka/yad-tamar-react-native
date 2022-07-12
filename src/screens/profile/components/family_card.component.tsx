@@ -14,9 +14,9 @@ export const FamilyCard: FC<FamilyCardProps> = ({ onRemoveFamily, onNavigateToFa
     <Pressable onPress={() => onNavigateToFamily(data.family_id)}>
       <View style={styles.card}>
         <View style={styles.card__content}>
-          <Text style={styles.card__title}>{data.last_name}</Text>
+          <Text style={styles.card__title}>{data?.last_name ?? data?.name}</Text>
           <Text style={styles.card__members}>
-            {data.volunteersCount} {strings.members_count}
+            {data?.volunteersCount ?? data?.volunteers?.length} {strings.members_count}
           </Text>
         </View>
         <Pressable onPress={() => onRemoveFamily(data.family_id)}>

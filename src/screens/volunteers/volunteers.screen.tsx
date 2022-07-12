@@ -22,7 +22,6 @@ export const VolunteersScreen: React.FC<VolunteersScreenProps> = ({ route }) => 
   const queryClient = useQueryClient()
 
   const { data } = useQuery(volunteerApi.queryKey, () => volunteerApi.get(family_id))
-  console.log(data)
   const { mutate: removeVolunteer } = useMutation(volunteerApi.remove)
 
   const theme = useTheme()
