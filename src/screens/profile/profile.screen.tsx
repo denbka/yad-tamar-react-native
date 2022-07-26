@@ -57,16 +57,19 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           <Text style={styles.job}>{strings.profile_prompt}</Text>
         </View>
       </View>
-      <View style={styles.settings}>
-        {/* <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
+      {userInfo?.role?.includes('coord') && (
+        <View style={styles.settings}>
+          {/* <Pressable onPress={toggleLanguage} style={{ marginBottom: 15 }}>
           <Text style={styles.settings_item}>
             {strings.language}: {currentLocale}
           </Text>
         </Pressable> */}
-        <Button onPress={handlePushToFamilyCreate} variant="inline" style={styles.button_create}>
-          {strings.create_family}
-        </Button>
-      </View>
+
+          <Button onPress={handlePushToFamilyCreate} variant="inline" style={styles.button_create}>
+            {strings.create_family}
+          </Button>
+        </View>
+      )}
 
       <Text style={styles.title}>{strings.my_families}</Text>
       {Array.isArray(data) ? (
