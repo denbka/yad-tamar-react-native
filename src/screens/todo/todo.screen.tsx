@@ -37,8 +37,8 @@ export const TodoScreen: FC<TodoScreenProps> = ({ route }) => {
 
   const { week, todo } = useMemo(
     () => ({
-      week: data?.filter ? data?.filter((todo) => todo.time_type !== 'no_time') : 'nothing',
-      todo: data?.filter ? data?.filter((todo) => todo.time_type === 'no_time') : 'nothing',
+      week: data?.filter ? data?.filter((todo) => todo.time_type !== 'no_time' && todo.user_id === null) : 'nothing',
+      todo: data?.filter ? data?.filter((todo) => todo.time_type === 'no_time' && todo.user_id === null) : 'nothing',
     }),
     [data],
   )
