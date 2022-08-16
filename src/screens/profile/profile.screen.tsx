@@ -49,7 +49,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Avatar>
-          <Image source={require('@assets/logo.png')} />
+          <Image style={{ width: 41, height: 41 }} source={require('@assets/logo.png')} />
         </Avatar>
         <View>
           <Text style={styles.name}>{userInfo?.last_name}</Text>

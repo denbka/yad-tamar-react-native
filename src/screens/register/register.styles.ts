@@ -15,7 +15,10 @@ export const createStyles = (theme: ExtendedTheme) => {
       color: '#fff',
       textAlign: 'left',
     },
-    image_title: {},
+    image_title: {
+      width: 41,
+      height: 41,
+    },
     enola: {
       color: colors.orange,
     },
