@@ -32,7 +32,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.rntypescriptboilerplate"
+        applicationId "he.yadtamar.enola"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

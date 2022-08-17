@@ -1,22 +1,21 @@
-package com.rntypescriptboilerplate;
+package he.yadtamar.enola;
 
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
-import com.horcrux.svg.SvgPackage;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
-import com.rntypescriptboilerplate.newarchitecture.MainApplicationReactNativeHost;
+
+import he.yadtamar.enola.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
+import he.yadtamar.enola.BuildConfig;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -83,7 +82,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.rntypescriptboilerplate.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("he.yadtamar.enola.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

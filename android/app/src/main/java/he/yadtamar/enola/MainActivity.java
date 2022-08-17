@@ -1,10 +1,11 @@
-package com.rntypescriptboilerplate;
+package he.yadtamar.enola;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
-import org.devio.rn.splashscreen.SplashScreen;
 
+import org.devio.rn.splashscreen.SplashScreen;
+import he.yadtamar.enola.BuildConfig;
 public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
