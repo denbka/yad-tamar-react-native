@@ -35,7 +35,7 @@ export const ShareScreen: React.FC = ({ route }) => {
             to: cell_phone,
             message: strings.to_volunteer_message(
               last_name,
-              `https://enolaapp.com?token=${user_token}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
+              `https://enola.co.il?token=${user_token}&family_id=${family_id}&user_id=${user_id}`, // TODO: change prod link
             ),
           })
         }),
@@ -50,7 +50,7 @@ export const ShareScreen: React.FC = ({ route }) => {
   const handleShareToFamily = async () => {
     Share.share({
       message: strings.to_family_message(
-        'https://enolaapp.com/app/app.html',
+        'https://enola.co.il/app/app.html',
         last_name,
         user_name,
         password,

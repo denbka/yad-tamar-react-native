@@ -2,7 +2,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const request = axios.create({
-  baseURL: 'https://enolaapp.com/api',
+  baseURL: 'https://enola.co.il /api',
 })
 
 request.interceptors.request.use(async (config) => {
